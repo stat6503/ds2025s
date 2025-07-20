@@ -220,7 +220,7 @@ data2015_verybad
 
 ```{python}
 # 막대 그래프1
-plt.figure(figsize=(20, 5))
+plt.figure(figsize=(22, 4))
 plt.bar(data2015_verybad.index, data2015_verybad, color='g')
 plt.xlabel('Area')
 plt.ylabel('Count')
@@ -239,7 +239,7 @@ data6
 # 막대 그래프2
 index = np.arange(7)
 
-plt.figure(figsize=(20, 5))
+plt.figure(figsize=(22, 4))
 for year in data6.columns:
     plt.bar(index, data6[year], width=0.15, label=year)
     index = index + 0.15
@@ -310,9 +310,8 @@ plt.show()
 ```{python}
 # 산점도2
 plt.figure(figsize=(4, 4))
-plt.scatter(data['PetalLength'], data['PetalWidth'],
-            c=data['Species'].map({'setosa': 'red', 'versicolor': 'green', 'virginica': 'blue'}),
-            alpha = 0.5)
+plt.scatter(data['PetalLength'], data['PetalWidth'], alpha = 0.5,
+            c=data['Species'].map({'setosa': 'red', 'versicolor': 'green', 'virginica': 'blue'}))
 plt.xlabel('Petal Length')
 plt.ylabel('Petal Width')
 plt.title('Iris Petal Scatter Plot')
