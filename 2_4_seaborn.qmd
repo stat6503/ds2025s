@@ -1,0 +1,238 @@
+---
+jupyter: python3
+---
+
+<h1>6. Seaborn</h1>
+
+### 6.1. Seaborn 
++ Seaborn
+  + Matplotlib 라이브러리를 기반으로 개발된 고급 통계 데이터 시각화 라이브러리
+  + 다양한 테마와 통계 그래프를 지원하며, 시각적으로 세련된 그래프를 쉽게 생성할 수 있음
+  + Matplotlib 라이브러리에 의존하므로, 사용 시 함께 불어와야 함
+
+<br>
+
+|주요 특징|시각화 단계|
+|:---------------|:---------------|
+|- 뛰어난 시각화 효과 <br>- 간결한 구문 제공 <br>- Pandas 데이터프레임에 최적화 <br>- 쉬운 데이터프레임 집계 및 그래프 요약|- 데이터 준비 <br>- 배경 설정 <br>- 시각화 <br>- 개별 그래프 상세 설정|
+
+<br>
+
+![](./images/fig2-5.jpg){width=40%}
+
+<br>
+
+<br>
+
+## 6.2. 기본 시각화 유형
++ \[데이터\] 공공데이터포털에서 제공하는 2020년 국민건강보험공단 건강검진 정보
+  + gender, height, weight, waist, smoking, drinking 등 18개 변수
+  + \[실습파일\] [05_data1.csv](./data/05_data1.csv)
+
+<br>
+
+```{python}
+# Seaborn 라이브러리 설치
+#!pip install seaborn
+```
+
+```{python}
+# Seaborn 라이브러리 불러오기
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+```{python}
+import numpy as np
+import pandas as pd
+```
+
+```{python}
+# 데이터 불러오기
+data = pd.read_csv('./data/05_data1.csv')
+data.head()
+```
+
+```{python}
+# 데이터 전처리 : 라벨 매핑(label mapping)
+data6 = data.copy()
+data6 = data6.loc[:, ['gender', 'height', 'weight', 'waist', 'drinking', 'smoking']]
+data6['gender'] = data['gender'].replace({1: 'M', 2: 'F'})
+data6['drinking'] = data['drinking'].replace({0: 'Non-drinking', 1: 'Drinking'})
+data6['smoking'] = data['smoking'].replace({1: 'Non-smoking', 2: 'Quit-smoking', 3: 'Smoking'})
+data6.head()
+```
+
+```{python}
+# 데이터 집계 :성별 음주 여부별 빈도
+drinking = data6.groupby(['gender', 'drinking'])['drinking'].count()
+drinking = drinking.to_frame(name='count')
+drinking = drinking.reset_index()
+drinking
+```
+
+```{python}
+# 데이터 집계 :성별 흡연 상태별 빈도
+smoking = data6.groupby(['gender', 'smoking'])['smoking'].count()
+smoking = smoking.to_frame(name='count')
+smoking = smoking.reset_index()
+smoking
+```
+
+```{python}
+# 막대 그래프 : 성별에 따른 음주 여부, 흡연 상태 분포
+fig = plt.figure(figsize=(10, 4))
+area1 = fig.add_subplot(1, 2, 1)
+area2 = fig.add_subplot(1, 2, 2)
+
+ax1 = sns.barplot(x='gender', y='count', hue='drinking', data=drinking, ax=area1)
+ax2 = sns.barplot(x='gender', y='count', hue='smoking', data=smoking, ax=area2)
+
+fig.suptitle('2020 Health Check Drinking & Smoking Type by Gender', fontweight='bold')
+area1.set_title('Drinking Type')
+area2.set_title('Smoking Type')
+plt.tight_layout(rect=[0, 0, 1, 0.99])
+plt.show()
+```
+
+```{python}
+# 데이터 전처리
+maledata = data6.copy()
+maledata = maledata.loc[maledata['gender']=='M',:]
+
+femaledata = data6.copy()
+femaledata = femaledata.loc[femaledata['gender']=='F',:]
+```
+
+```{python}
+# 히스토그램 : 성별에 따른 몸무게 분포
+plt.figure(figsize=(5, 3))
+sns.histplot(maledata['weight'], bins=8, alpha=0.5, label='Male')
+sns.histplot(femaledata['weight'], bins=8, alpha=0.5, label='Female', color='r')
+plt.xlim(20, 130)
+plt.xlabel('Weight')
+plt.ylabel('Count')
+plt.title('Weight Histogram')
+plt.legend()
+plt.show()
+```
+
+```{python}
+# 히스토그램 & 커널 밀도 추정(KDE) : 성별에 따른 허리둘레 분포
+plt.figure(figsize=(5, 3))
+sns.histplot(maledata['waist'], bins=7, alpha=0.5, label='Male', kde=True)
+sns.histplot(femaledata['waist'], bins=7, alpha=0.5, label='Female', color='r', kde=True)
+plt.xlim(40,130)
+plt.xlabel('Waist')
+plt.ylabel('Count')
+plt.title('Waist  Histogram wieh KDE(Kernel Density Estimator)')
+plt.legend()
+plt.show()
+```
+
+```{python}
+# 상자수염 그래프 : 성별 및 음주 여부에 따른 몸무게 분포
+plt.figure(figsize=(8, 4))
+plt.title('Weight By Gender and Drinking')
+sns.boxplot(x='drinking', y='weight', hue='gender', data=data6)
+plt.show()
+```
+
+```{python}
+# 상자수염 그래프 : 성별 및 흡연 상태에 따른 몸무게 분포
+plt.figure(figsize=(8, 4))
+plt.title('Weight By Gender and Drinking')
+sns.boxplot(x='weight', y='smoking', hue='gender', data=data6, orient='h')
+plt.show()
+```
+
+<br>
+
+## 6.3. 고급 시각화 유형
+
+|시각화 유형|설명|
+|:------:|:------------------------|
+|스트립 플롯 <br>(strip plot)|- 데이터 분포를 요약하여 간략히 띠 형태로 시각화함 <br>- 일반적으로 x축에는 범주형 변수, y축에는 수치형 변수를 지정함 <br>- 주로 데이터 수가 적을 때 사용됨|
+|스웜 플롯 <br>(swarm plot)|- 스트립 플롯과 유사하지만, 점들을 겹치지 않도록 자동으로 위치를 조정함 <br>- 분포를 보여줄 때 효과적이나, 데이터 수가 많을 때에는 개수를 대략적으로 파악하기 어려움|
+|카운트 플롯 <br>(count plot)|- 범주형 변수의 각 항목별 빈도를 막대 그래프로 표현함 <br>- 데이터의 범주별 분포를 직관적으로 파악할 수 있음|
+|바이올린 플롯 <br>(violin plot)|- 커널 밀도 추정(KDE)을 이용하여 데이터의 분포를 시각화함 <br>- 상자수염 그래프와 KDE를 결합한 형태로 중앙값, 사분위수, 전체 분포를 동시에 보여줌 <br>- 분포를 비교하는 데 효과적이나, 데이터 수가 적을 경우 왜곡된 해석 가능성 있음|
+|히트맵 <br>(heatmap)|- 행과 열로 이루어진 2차원 행렬 데이터를 색상으로 시각화함 <br>- 두 범주형 변수 간의 관계나 상관관계를 나타낼 때 사용 <br>- 색상의 강도를 통해 값의 크기를 비교할 수 있음 <br>- 예 : 상관행렬, 교차표 등|
+
+<br>
+
+```{python}
+# 스트립 플롯
+plt.figure(figsize=(8, 4))
+plt.title('Strip Plot')
+sns.stripplot(x='height', y='weight', hue='gender', alpha=0.5, palette='dark', data=femaledata)
+sns.stripplot(x='height', y='weight', hue='gender', alpha=0.5, palette='Set1', data=maledata)
+plt.legend()
+plt.show()
+```
+
+```{python}
+# 데이터 전처리
+maledata100 = maledata.head(100)
+femaledata100 = femaledata.head(100)
+```
+
+```{python}
+# 스웜 플롯
+plt.figure(figsize=(8, 4))
+plt.title('Swarm Plot')
+sns.stripplot(x='height', y='weight', hue='gender', alpha=0.5, palette='dark', data=femaledata100)
+sns.stripplot(x='height', y='weight', hue='gender', alpha=0.5, palette='Set1', data=maledata100)
+plt.legend()
+plt.show()
+```
+
+```{python}
+# 카운트 플롯1 : 음주 여부에 따른 성별 분포
+plt.figure(figsize=(5, 3))
+plt.title('Gender and Driking')
+sns.countplot(x='drinking', hue='gender', data=data6)
+plt.show()
+```
+
+```{python}
+# 카운트 플롯2 : 흡연 상태에 따른 성별 분포
+plt.figure(figsize=(5, 3))
+plt.title('Gender and Smoking')
+sns.countplot(y='smoking', hue='gender',
+              data=data6, order=['Smoking', 'Quit-smoking', 'Non-smoking'])
+plt.show()
+```
+
+```{python}
+# 바이올린 플롯1 : 성별 및 음주 여부별 몸무게(120 미만) 분포
+plt.figure(figsize=(5, 3))
+plt.title('Weight By Gender and Drinking')
+sns.violinplot(x='gender', y='weight', hue='drinking', data=data6[data6.weight<120])
+plt.show()
+```
+
+```{python}
+# 바이올린 플롯2 : 성별 및 음주 여부별 허리둘레(150 미만) 분포
+plt.figure(figsize=(5, 5))
+plt.title('Waist By Gender and Drinking')
+sns.violinplot(y='gender', x='waist', hue='drinking', data=data6[data6.waist<150])
+plt.show()
+```
+
+```{python}
+# 데이터 전처리
+data8 = data.copy()
+data8 = data8.loc[:,['height', 'weight', 'waist', 'systolic', 'diastolic', 'cholesterol', 'HDL', 'LDL']]
+```
+
+```{python}
+# 히트맵 : 상관행렬
+correlation_data8 = data8.corr()
+upp_mat = np.triu(correlation_data8)
+
+plt.figure(figsize=(8, 5))
+plt.title('Correlation Heatmap')
+sns.heatmap(correlation_data8, annot=True, cmap='seismic', mask=upp_mat, vmin=-1, vmax=1)
+plt.show()
+```
+

@@ -1,0 +1,32 @@
+{
+  "1_1_environment.qmd": {
+    "1_1_environment.html": "2b82de9b"
+  },
+  "1_2_basic.qmd": {
+    "1_2_basic.html": "a029f0e4"
+  },
+  "2_1_numpy.qmd": {
+    "2_1_numpy.html": "5399f907"
+  },
+  "2_2_pandas.qmd": {
+    "2_2_pandas.html": "dd23ac4e"
+  },
+  "2_3_matplotlib.qmd": {
+    "2_3_matplotlib.html": "d96a7416"
+  },
+  "2_4_seaborn.qmd": {
+    "2_4_seaborn.html": "899ca0dd"
+  },
+  "3_2_regression.qmd": {
+    "3_2_regression.html": "895ae1a0"
+  },
+  "3_3_classification.qmd": {
+    "3_3_classification.html": "85ff4e28"
+  },
+  "about.qmd": {
+    "about.html": "e011c09b"
+  },
+  "index.qmd": {
+    "index.html": "26e2eecd"
+  }
+}

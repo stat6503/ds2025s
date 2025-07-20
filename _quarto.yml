@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "R&E 활동"
+  navbar:
+    left:
+      - text: Python Basic
+        menu:
+          - href: 1_1_environment.qmd
+            text: (1) Python 개발 환경
+          - href: 1_2_basic.qmd
+            text: (2) 기초 문법
+      - text: Data Exploration
+        menu:
+          - href: 2_1_numpy.qmd
+            text: (1) NumPy
+          - href: 2_2_pandas.qmd
+            text: (2) Pandas
+          - href: 2_3_matplotlib.qmd
+            text: (3) Matplotlib
+          - href: 2_4_seaborn.qmd
+            text: (4) Seaborn
+      - text: Machine Learning
+        menu:
+          - href: 3_2_regression.qmd
+            text: (1) 지도학습：회귀
+          - href: 3_3_classification.qmd
+            text: (2) 지도학습：분류
+
+format:
+  html:
+    theme:
+      - cerulean
+    css: styles.css
+    toc: true
+    toc-depth: 2
