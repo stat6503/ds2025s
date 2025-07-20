@@ -224,9 +224,9 @@ format:
      + 변경 내용 저장 : `git commit -m "Initial commit"`
      + GitHub 원격 저장소 연결 : `git remote add origin https://github.com/stat6503/ml-project.git`
      + 원격 저장소 연결 확인 : `git remote -v`
+     + GitHub에 업로드 : `git push -u origin main`
      + GitHub 설정 수정
        + GitHub → Repository → Setting → Pages → Branch: `main`, Folder: `/docs`
-     + GitHub에 업로드 : `git push -u origin main`
   5. Git Pages 확인
      + https://stat6503.github.io/ml-project
 

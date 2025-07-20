@@ -4,7 +4,7 @@ jupyter: python3
 
 <h1>6. Seaborn</h1>
 
-### 6.1. Seaborn 
+## 6.1. Seaborn
 + Seaborn
   + Matplotlib 라이브러리를 기반으로 개발된 고급 통계 데이터 시각화 라이브러리
   + 다양한 테마와 통계 그래프를 지원하며, 시각적으로 세련된 그래프를 쉽게 생성할 수 있음
@@ -18,7 +18,7 @@ jupyter: python3
 
 <br>
 
-![](./images/fig2-5.jpg){width=40%}
+![](./images/fig2-5.jpg){width=60%}
 
 <br>
 
@@ -81,7 +81,7 @@ smoking
 
 ```{python}
 # 막대 그래프 : 성별에 따른 음주 여부, 흡연 상태 분포
-fig = plt.figure(figsize=(10, 4))
+fig = plt.figure(figsize=(8, 4))
 area1 = fig.add_subplot(1, 2, 1)
 area2 = fig.add_subplot(1, 2, 2)
 
@@ -230,7 +230,7 @@ data8 = data8.loc[:,['height', 'weight', 'waist', 'systolic', 'diastolic', 'chol
 correlation_data8 = data8.corr()
 upp_mat = np.triu(correlation_data8)
 
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(8, 6))
 plt.title('Correlation Heatmap')
 sns.heatmap(correlation_data8, annot=True, cmap='seismic', mask=upp_mat, vmin=-1, vmax=1)
 plt.show()

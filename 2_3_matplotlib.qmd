@@ -181,7 +181,7 @@ data_good
 
 ```{python}
 # 선 그래프1
-plt.figure(figsize=(10, 3))
+plt.figure(figsize=(8, 3))
 plt.plot(data_good['Nationwide'], color='b', marker='o')
 plt.xlabel('Year')
 plt.ylabel('Count')
@@ -192,7 +192,7 @@ plt.show()
 
 ```{python}
 # 선 그래프2
-plt.figure(figsize=(10, 3))
+plt.figure(figsize=(8, 3))
 for area in ['Nationwide', 'Metropolitan', 'Jeonbuk']:
     plt.plot(data_good[area], marker='o', label=area)
 plt.xlabel('Year')
@@ -220,7 +220,7 @@ data2015_verybad
 
 ```{python}
 # 막대 그래프1
-plt.figure(figsize=(25, 5))
+plt.figure(figsize=(20, 5))
 plt.bar(data2015_verybad.index, data2015_verybad, color='g')
 plt.xlabel('Area')
 plt.ylabel('Count')
@@ -239,7 +239,7 @@ data6
 # 막대 그래프2
 index = np.arange(7)
 
-plt.figure(figsize=(25, 5))
+plt.figure(figsize=(20, 5))
 for year in data6.columns:
     plt.bar(index, data6[year], width=0.15, label=year)
     index = index + 0.15
@@ -263,7 +263,7 @@ data4
 index = np.arange(7)
 left = np.zeros(len(data4))
 
-plt.figure(figsize=(10, 4))
+plt.figure(figsize=(8, 3))
 for year in data4.columns:
     plt.barh(index, data4[year], left=left, label=year.split("_")[0])
     left = left + data4[year]
