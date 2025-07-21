@@ -24,11 +24,11 @@ website:
             text: (4) Seaborn
       - text: Machine Learning
         menu:
-          - href: 3_1_machine_learning.ipynb
+          - href: 3_1_machine_learning.qmd
             text: (1) 머신러닝
-          - href: 3_2_regression.ipynb
+          - href: 3_2_regression.qmd
             text: (2) 지도학습：회귀
-          - href: 3_3_classification.ipynb
+          - href: 3_3_classification.qmd
             text: (3) 지도학습：분류
 
 format:
