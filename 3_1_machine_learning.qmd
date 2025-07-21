@@ -53,7 +53,7 @@ jupyter: python3
 
 ![](./images/fig3-2.jpg)
 ![](./images/fig3-3.jpg)
-![](./images/fig3-4.jpg){width=98%}
+![](./images/fig3-4.jpg){width=95%}
 
 <br>
 

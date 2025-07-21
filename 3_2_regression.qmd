@@ -5,27 +5,42 @@ jupyter: python3
 <h1>8. 지도학습 : 회귀</h1>
 
 ## 8.1. 상관분석
-+ 상관관계(correlation)
-  + 두 수치형 변수 간 선형적 관계(linear ralationship)를 의미함
-  + 산점도나 상관계수를 통해 확인할 수 있음
+### 8.1.1. 상관계수
++ 상관분석(correlation analysis)
+  + 두 수치형 변수 간 선형적인 관계(linear relationship)를 파악하는 통계 기법
+  + 상관계수(correlation coefficient)
+    + 두 변수 간 상관관계를 수치로 나타내어 정량화한 지표
+    + 상관계수의 절대값은 선형성의 강도를, 부호는 선형성의 방향성을 나타냄
+    + 변수의 측정 단위의 영향을 받지 않음
 
 <br>
 
-+ 상관계수(correlation coefficient)
-  + 두 변수 간 선형적 관계의 강도와 방향을 수치로 나타낸 통계량
-  + 상관계수는 -1에서 1 사이의 값을 가짐
-    + 절대값이 1에 가까울 수록 강한 상관관계, 0에 가까울수록 약한 상관관계를 가짐
-    + 양수이면 양의 상관관계, 음수이면 음의 상관관계를 가짐
++ 상관계수의 성질
+  + 상관계수 r은 항상 -1에서 +1 사이의 값을 가짐
+  + 절대값이 1에 가까울수록 강한 상관관계를 의미함
+  + r>0이면 양의 상관관계, r<0이면 음의 상관관계, r=0이면 상관관계가 없음을 나타냄
+    + 양의 상관관계 : 한 변수가 증가할 때 다른 변수도 증가
+    + 음의 상관관계 : 한 변수가 증가할 때 다른 변수는 감소
+    + 상관관계 없음 : 한 변수가 증가할 때 다른 변수는 영향을 받지 않음
 
 ![](./images/fig3-6.jpg){width=70%}
 
 <br>
 
+### 8.1.2. (실습) 행복지수 데이터 분석
 + \[데이터\] 캐글에서 제공하는 전세계 행복지수 데이터
   + 평가지표 : 1인당 GDP, 사회적 지지 정도, 건강한 기대수명, 인생 선택의 자유, 기부
   + \[실습파일\] [2020.csv](./data/2020.csv), [2021.csv](./data/2021.csv)
 
 <br>
+
+> **행복지수와 관련된 요인은 무엇일까?**
+
+<br>
+
+```{python}
+## (1) 데이터 확인 및 전처리
+```
 
 ```{python}
 # 라이브러리 불러오기
@@ -67,18 +82,30 @@ df2021.drop(['upperwhisker', 'lowerwhisker', 'Dystopia'], axis=1, inplace=True)
 
 ```{python}
 # 열 이름 변경 : 공백을 .으로 대체
-df2020.columns = df2020.columns.str.replace(' ','.')
-df2021.columns = df2021.columns.str.replace(' ','.')
+#df2020.columns = df2020.columns.str.replace(' ','.')
+#df2021.columns = df2021.columns.str.replace(' ','.')
+```
+
+```{python}
+# 열 이름 변경
+df2020.columns = ['Country', 'Score', 'GDP.per.capita', 'Social.support', 'Life.expectancy', 'Freedom', 'Generosity']
+df2021.columns = ['Country', 'Score', 'GDP.per.capita', 'Social.support', 'Life.expectancy', 'Freedom', 'Generosity']
+```
+
+<br>
+
+```{python}
+## (2) 데이터 분석 및 시각화
+## (2-1) 행복 점수와 기능의 상관관계
+##       한 국가의 행복지수와 경제적(GDP), 법적 상태(Freedom)는 상관관계가 있는가?
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 455}
-## 행복 지수에 영향을 주는 요인 파악1 : 행복 점수와 기능의 상관관계
-## 한 국가의 행복지수와 경제적(GDP), 법적 상태(Freedom) 간에 강한 관계가 있는가?
 # 데이터 전처리
 df1 = df2020.copy()
-df1.drop(['Social.support', 'Healthy.life.expectancy', 'Generosity'], axis=1, inplace=True)
-df1
+df1.drop(['Social.support', 'Life.expectancy', 'Generosity'], axis=1, inplace=True)
+df1.head()
 ```
 
 ```{python}
@@ -87,15 +114,17 @@ df1.dtypes
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-# 상관계수 계산 : 2020년 데이터
+# 상관관계 : 2020년 데이터
+# 행복지수와 GDP 간 상관계수는 0.78로, 강한 양의 상관관계임
+# 헹복지수와 Freedom 간 상관계수는 0.59로, 뚜렷한 양의 상관관계임
 corr = df1.select_dtypes(include='number').corr()
-corr['Happiness.score'].sort_values(ascending=False)
+corr['Score'].sort_values(ascending=False)
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 396}
 # 히트맵 : 2020년 데이터
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(6, 4))
 sns.heatmap(corr, annot=True, cmap='Blues')
 plt.show()
 ```
@@ -104,42 +133,52 @@ plt.show()
 #| colab: {base_uri: https://localhost:8080/, height: 455}
 # 데이터 전처리
 df2 = df2021.copy()
-df2.drop(['Social.support', 'Healthy.life.expectancy', 'Generosity'], axis=1, inplace=True)
-df2
+df2.drop(['Social.support', 'Life.expectancy', 'Generosity'], axis=1, inplace=True)
+df2.head()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 396}
 # 히트맵 : 2021년 데이터
-plt.figure(figsize=(8, 5))
+# 행복지수와 GDP 간 상관계수는 0.79로, 강한 양의 상관관계임
+# 헹복지수와 Freedom 간 상관계수는 0.61로, 뚜렷한 양의 상관관계임
+plt.figure(figsize=(6, 4))
 sns.heatmap(df2.select_dtypes(include='number').corr(), annot=True, cmap='PuBuGn')
 plt.show()
 ```
 
 <br>
 
-+ 분석 결과
-  + 위에 표시된 2개의 히트맵은 2020년, 2021년 각각에 해당하는 3개 열, 점수, GDP, 자유 상관관 관계 매트릭스를 표시함
-  1. GDP는 행복지수와 어떤 관련이 있는가?
-     + 히트맵에서 GDP.per.capita와 Score 간의 상관 계수는 총 2년 동안 ~ 0.79로 GDP에 대한 시민의 만족도와 행복도 점수 사이에 강한 양의 관계가 있음을 나타냅니다. GDP.per.capita는 한 국가의 경제 성장을 추적하는 지표입니다. 긍정적인 경제 성장률을 보이는 국가의 사람들은 더 높은 소득과 더 나은 생활 수준으로 이어지기 때문에 더 행복해지는 경향이 있습니다. 따라서 우리는 만족을 보장하기 위해 한 국가의 GDP가 최우선 순위 중 하나가 되어야 한다고 결론지었습니다.
-  2. 행복 점수와 자유의 관계는?
-     + 자유와 점수 사이의 상관 계수는 2년 전체에서 ~ 0.61로 자유에 대한 인식과 국가의 행복 지수 사이에 중간 정도의 양의 관계를 나타냅니다. 자유에 대한 이러한 인식을 일반화하는 것은 연구에 따르면 세계의 다른 지역에 속한 사람들마다 다르기 때문에 어려운 작업입니다. 그럼에도 불구하고 여전히 국가의 행복지수에 중요한 기여를 합니다.
-    
++ 행복지수와 GDP 간 관계는?
+  + 상관계수는 2020년 0.78, 2021년 0.79로, 강한 양의 상관관계로 나타남
+  + 경제 성장은 보통 더 높은 소득과 향상된 생활 수준으로 이어지므로, 국민의 행복 수준도 높아지는 경향이 있음
+  + 따라서 국민의 행복을 보장하기 위해, 국가의 GDP는 주요 우선순위 중 하나로 고려될 필요가 있음
+
+<br>
+
++ 행복지수와 인생 선택의 자유 간 관계는?
+  + 상관계수는 2020년 0.59, 2021년 0.61로, 뚜렷한 양의 상관관계로 나타남
+  + 자유에 대한 인식은 지역과 문화에 따라 다양하기 때문에 일반화하기는 어려움
+  + 그럼에도 불구하고, 개인이 삶을 선택할 자유를 얼마나 느끼는지는 국민의 행복 수준에 중요한 영향을 미침
+
 <br>
 
 ```{python}
-## 행복 지수에 영향을 주는 요인 파악2 : 행복 점수와 사회적 상태의 상관관계
-## 한 국가의 사회적 상태에 대한 인식은 행복 지수에 어떤 영향을 미치는가?
+## (2-2) 행복 점수와 사회적 상태의 상관관계
+##       한 국가의 행복지수와 사회적 상태(Social.support)는 상관관계가 있는가?
+```
+
+```{python}
 # 데이터 전처리
-x1 = df2020[['Generosity', 'Social.support', 'Happiness.score']].copy()
-x2 = df2021[['Generosity', 'Social.support', 'Happiness.score']].copy()
+x1 = df2020[['Generosity', 'Social.support', 'Score']].copy()
+x2 = df2021[['Generosity', 'Social.support', 'Score']].copy()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 396}
 # 히트맵 : 2020년 데이터
 a1 = x1.corr()
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(6, 4))
 sns.heatmap(a1, annot=True)
 plt.show()
 ```
@@ -148,26 +187,36 @@ plt.show()
 #| colab: {base_uri: https://localhost:8080/, height: 396}
 # 히트맵 : 2021년 데이터
 a2 = x2.corr()
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(6, 4))
 sns.heatmap(a2, annot=True, cmap='GnBu')
 plt.show()
 ```
 
 <br>
 
-+ 분석 결과
-  + 관대함과 사회적 지지는 행복 점수와 어떤 관련이 있는가?
-     + 관대함과 사회적 지지 상관 계수는 -0.057, -0.11으로 관찰되어 매우 약한 음의 관계를 나타냅니다. 두 메트릭 간에 선형 변화가 많이 관찰되지 않습니다. 관대함은 시민들이 서로에게서 얻는 인식입니다. 관대함과 점수 상관계수는 0.069, -0.018으로 관찰되어 매우 약한 음의 관계를 나타낸다.
-     + 한편, 사회적 지지와 점수의 상관값은 0.77, 0.76로 강한 양의 관계를 나타낸다. 사회적 지지는 사람들이 가족, 친구, 지인 등과 함께 얼마나 행복한지에 대한 인식입니다. 이들은 일상생활에서 거의 모든 사람들이 대하는 사람들이기 때문에 사회적 지지에 대한 인식이 행복지수를 결정하는 중요한 요소라고 볼 수 있다.
++ 행복지수와 사회적 지지 간 관계는?
+  + 상관계수는 2020년 0.77, 2021년 0.76으로, 강한 양의 상관관계로 나타남
+  + 사회적 지지는 가족, 친구, 지인 등과 함께하는 관계에서 느끼는 정서적 지원에 대한 인식을 의미함
+  + 일상 생활에서 가깝게 지내는 사람들과의 관계에서 형성되므로, 사회적 지지는 행복 수준에 중요햔 요소임을 알 수 있음
 
 <br>
+
++ 행복지수와 기부 문화 간 관계는?
+  + 상관계수는 2020년 0.069, 2021년 -0.018로, 상관관계가 거의 없는 것으로 나타남
+  + 따라서 기부 문화가 행복 수준과 직접적인 관련이 거의 없음을 확인할 수 있음
+
+<br>
+
+```{python}
+## (2-3) 행복 점수와 전체 변수의 상관관계
+```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 580}
 # 전체 상관계수 : 2020년 데이터
 corr = df2020.select_dtypes(include='number').corr()
 
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(8, 6))
 upp_mat = np.triu(corr)
 sns.heatmap(corr, mask=upp_mat,vmin=-1, vmax=1, annot=True, cmap ='RdYlBu_r', linewidths=4)
 plt.xticks(rotation=45)
@@ -180,73 +229,14 @@ plt.show()
 # 행복도에 가장 큰 영향을 주는 것은 경제적 여유, 사회적 지지, 기대수명(건간), 자유도 순인 것을 알 수 있었다.
 corr = df2021.select_dtypes(include='number').corr()
 
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(8, 6))
 upp_mat = np.triu(corr)
 sns.heatmap(corr, mask=upp_mat, vmin=-1, vmax=1,annot = True, cmap ='PiYG', linewidths=4)
 plt.xticks(rotation=45)
 plt.show()
 ```
 
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 1000}
-## 상위 50위 국가의 기대수명과 GDP 간 관계
-# 데이터 전처리
-top50 = df2021.head(50)
-top50.head()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 899}
-# 산점도
-sns.set_theme(style='dark')
-plt.figure(figsize=(25, 7))
-ax = sns.scatterplot(data=top50, x='Country.name', y='Healthy.life.expectancy', size='GDP.per.capita',
-                     sizes=(400, 1500), hue='GDP.per.capita')
-plt.xticks(rotation=90, fontsize=15, color='midnightblue')
-plt.yticks(fontsize=15, color='midnightblue')
-plt.xlabel('Country', size=15, color='midnightblue')
-plt.ylabel('Healthy Life Expectancy', size=15, color='midnightblue')
-plt.show()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-# 우리나라는 앞의 3가지가 각각 몇 위일까?
-economy = df2020.loc[:,['Country.name','GDP.per.capita']]
-economy = economy.groupby(economy['Country.name'])['GDP.per.capita'].mean().sort_values(ascending=False)
-economy = economy.rank(method='min',ascending=False)['South Korea']
-
-social = df2020.loc[:,['Country.name','Social.support']]
-social = social.groupby(social['Country.name'])['Social.support'].mean().sort_values(ascending=False)
-social = social.rank(method='min',ascending=False)['South Korea']
-
-health = df2020.loc[:,['Country.name','Healthy.life.expectancy']]
-health = health.groupby(health['Country.name'])['Healthy.life.expectancy'].mean().sort_values(ascending=False)
-health = health.rank(method='min',ascending=False)['South Korea']
-
-free = df2020.loc[:,['Country.name','Freedom.to.make.life.choices']]
-free= free.groupby(free['Country.name'])['Freedom.to.make.life.choices'].mean().sort_values(ascending=False)
-free = free.rank(method='min',ascending=False)['South Korea']
-
-print(f'153개국 중 대한민국의 \nGDP 순위:{economy.astype(int)}위\n사회적 지위 순위:{social.astype(int)}위\n기대수명 순위:{health.astype(int)}위\n자유도 순위:{free.astype(int)}위')
-```
-
 <br>
-
-+ 분석 결과
-  + GDP 순위는 양호, 기대수명은 굉장히 높다. 다른나라보다 국가 복지 수준이 높은 덕에 높은 순위를 차지한 것 같다.
-  + 사회적 지위 순위도 하위 수준이었다.
-  + 자유도는 거의 최하위 수준이였다. 자유도의 정의는 무엇일까. 정치적으로 문제가 있으면 자유롭게 시위도하고, 표현의 자유, 언론의 자유, 알권리 모두 상위라고 생각하는데 이렇게 최 하위 수준이 나온 이유는 무엇일까.
-행복도가 높은 유럽지역처럼 길거리에서 느껴지는 여유로움이 자유도의 큰 부분을 차지하는 것일까?
-
-<br>
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 1000}
-# 산점도 행렬 : 상관관계 확인
-sns.pairplot(df2020)
-plt.show()
-```
 
 <br>
 
