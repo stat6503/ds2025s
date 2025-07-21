@@ -169,12 +169,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-machine-learning">    
         <li>
-    <a class="dropdown-item" href="./3_2_regression.html">
- <span class="dropdown-text">(1) 지도학습：회귀</span></a>
+    <a class="dropdown-item" href="./3_1_machine_learning.ipynb">
+ <span class="dropdown-text">(1) 머신러닝</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./3_3_classification.html">
- <span class="dropdown-text">(2) 지도학습：분류</span></a>
+    <a class="dropdown-item" href="./3_2_regression.ipynb">
+ <span class="dropdown-text">(2) 지도학습：회귀</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./3_3_classification.ipynb">
+ <span class="dropdown-text">(3) 지도학습：분류</span></a>
   </li>  
     </ul>
   </li>
@@ -246,14 +250,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><img src="./images/fig3-8.jpg" class="img-fluid" style="width:70.0%"></p>
 <p><br></p>
-<div id="b106afa3" class="cell" data-execution_count="1">
+<div id="a02a0f1a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 라이브러리 불러오기</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="04f2aef1" class="cell" data-execution_count="2">
+<div id="100cff38" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 원두맛에 대한 데이터 생성</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">14</span> , <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>] </span>
@@ -276,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[(4, 21), (5, 19), (10, 24), (4, 17), (3, 16), (11, 25), (14, 24), (8, 22), (10, 21), (12, 21)]</code></pre>
 </div>
 </div>
-<div id="a856aa5a" class="cell" data-execution_count="3">
+<div id="a3531881" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># k=1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>knn.fit(data, classes)</span>
@@ -299,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="130feb15" class="cell" data-execution_count="4">
+<div id="cf798c11" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># k=5</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>knn.fit(data, classes)</span>
@@ -319,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="a50a9e04" class="cell" data-execution_count="5">
+<div id="50339636" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 교차검증으로 k찾기</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -334,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3번째 정확도: 0.6666666666666666</code></pre>
 </div>
 </div>
-<div id="01a43687" class="cell" data-execution_count="6">
+<div id="bc6c3956" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 표준화 예제 데이터 생성</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'A'</span> : np.arange(<span class="dv">11</span>), <span class="st">'B'</span> : np.arange(<span class="dv">11</span>) <span class="op">**</span> <span class="dv">2</span>})</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -412,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="26ec1d72" class="cell" data-execution_count="7">
+<div id="aba0a115" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard Scaler</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>standardScaler <span class="op">=</span> StandardScaler()</span>
@@ -492,7 +496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="b2565b15" class="cell" data-execution_count="8">
+<div id="8c8e650c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#MinMaxScaler</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>minmaxScaler <span class="op">=</span> MinMaxScaler()</span>
@@ -578,7 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="실습-드라마-분류" class="level2">
 <h2 class="anchored" data-anchor-id="실습-드라마-분류">9.2. (실습) 드라마 분류</h2>
 <p><br></p>
-<div id="48dea54c" class="cell" data-execution_count="9">
+<div id="70ae5919" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 11.2 드라마분류하기</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./data/chap11_movie_genre_final.csv'</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -693,7 +697,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="ac339a95" class="cell" data-execution_count="10">
+<div id="a4dcc73c" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -732,7 +736,7 @@ dtypes: float64(1), int64(22), object(4)
 memory usage: 1007.4+ KB</code></pre>
 </div>
 </div>
-<div id="6d0ed610" class="cell" data-execution_count="11">
+<div id="65868caf" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(df[<span class="st">'target'</span>], bins<span class="op">=</span><span class="dv">20</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"movie count"</span>)</span>
@@ -745,7 +749,7 @@ memory usage: 1007.4+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="30ed691e" class="cell" data-execution_count="12">
+<div id="2ecf5ba1" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(df[<span class="st">'vote_average'</span>], bins<span class="op">=</span><span class="dv">20</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"vote_average"</span>)</span>
@@ -758,7 +762,7 @@ memory usage: 1007.4+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="265e4f50" class="cell" data-execution_count="13">
+<div id="9f790dc7" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Index(['id', 'original_title', 'target', 'vote_average', 'Action', 'Adventure',
@@ -769,7 +773,7 @@ memory usage: 1007.4+ KB</code></pre>
       dtype='object')</code></pre>
 </div>
 </div>
-<div id="6057dba9" class="cell" data-execution_count="14">
+<div id="41ba9fb6" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>count_list<span class="op">=</span>[]</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>genre_list<span class="op">=</span>[<span class="st">'Action'</span>, <span class="st">'Adventure'</span>,<span class="st">'Fantasy'</span>, <span class="st">'ScienceFiction'</span>, <span class="st">'Crime'</span>, <span class="st">'Drama'</span>, <span class="st">'Thriller'</span>, <span class="st">'Animation'</span>,<span class="st">'Family'</span>, <span class="st">'Western'</span>, <span class="st">'Comedy'</span>, <span class="st">'Romance'</span>, <span class="st">'Horror'</span>, <span class="st">'Mystery'</span>,<span class="st">'History'</span>, <span class="st">'War'</span>, <span class="st">'Music'</span>, <span class="st">'Documentary'</span>, <span class="st">'Foreign'</span>, <span class="st">'TVMovie'</span>]</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -800,7 +804,7 @@ memory usage: 1007.4+ KB</code></pre>
  8]</code></pre>
 </div>
 </div>
-<div id="211dfb85" class="cell" data-execution_count="15">
+<div id="8bad1fde" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.barh(genre_list,count_list,color<span class="op">=</span>sns.color_palette(<span class="st">'hls'</span>,<span class="dv">20</span>))</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -812,7 +816,7 @@ memory usage: 1007.4+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="f9e3170d" class="cell" data-execution_count="16">
+<div id="19bc5eac" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(genre_list)):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>genre_list[i]<span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>count_list[i]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -838,7 +842,7 @@ Foreign : 33
 TVMovie : 8</code></pre>
 </div>
 </div>
-<div id="66a178d8" class="cell" data-execution_count="17">
+<div id="7c52a393" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> (df.Drama<span class="op">==</span><span class="dv">1</span>)<span class="op">&amp;</span>(df.vote_average<span class="op">&gt;=</span><span class="fl">6.5</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df[temp]</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'드라마 장르 영화 2281편 중 평점 6.5 이상:</span><span class="sc">{</span><span class="bu">len</span>(df[temp])<span class="sc">}</span><span class="ss">편'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -846,7 +850,7 @@ TVMovie : 8</code></pre>
 <pre><code>드라마 장르 영화 2281편 중 평점 6.5 이상:1208편</code></pre>
 </div>
 </div>
-<div id="b189f372" class="cell" data-execution_count="18">
+<div id="8e2a046a" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> (df.Comedy<span class="op">==</span><span class="dv">1</span>)<span class="op">&amp;</span>(df.vote_average<span class="op">&gt;=</span><span class="fl">6.5</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df[temp]</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'코메디 장르 영화 1714편 중 평점 6.5 이상:</span><span class="sc">{</span><span class="bu">len</span>(df[temp])<span class="sc">}</span><span class="ss">편'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -854,7 +858,7 @@ TVMovie : 8</code></pre>
 <pre><code>코메디 장르 영화 1714편 중 평점 6.5 이상:521편</code></pre>
 </div>
 </div>
-<div id="88030247" class="cell" data-execution_count="19">
+<div id="6dd886ea" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> (df.Thriller<span class="op">==</span><span class="dv">1</span>)<span class="op">&amp;</span>(df.vote_average<span class="op">&gt;=</span><span class="fl">6.5</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df[temp]</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'스릴러 영화 1270편 중 평점 6.5 이상:</span><span class="sc">{</span><span class="bu">len</span>(df[temp])<span class="sc">}</span><span class="ss">편'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -862,7 +866,7 @@ TVMovie : 8</code></pre>
 <pre><code>스릴러 영화 1270편 중 평점 6.5 이상:415편</code></pre>
 </div>
 </div>
-<div id="76c236bb" class="cell" data-execution_count="20">
+<div id="a7556b2d" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> (df.Action<span class="op">==</span><span class="dv">1</span>)<span class="op">&amp;</span>(df.vote_average<span class="op">&gt;=</span><span class="fl">6.5</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df[temp]</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'액션 영화 1140편 중 평점 6.5 이상:</span><span class="sc">{</span><span class="bu">len</span>(df[temp])<span class="sc">}</span><span class="ss">편'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -870,35 +874,35 @@ TVMovie : 8</code></pre>
 <pre><code>액션 영화 1140편 중 평점 6.5 이상:355편</code></pre>
 </div>
 </div>
-<div id="cfc03a58" class="cell" data-execution_count="21">
+<div id="09c93d5e" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1208</span><span class="op">/</span><span class="dv">2218</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>0.5446348061316502</code></pre>
 </div>
 </div>
-<div id="3aea3ecf" class="cell" data-execution_count="22">
+<div id="db681c48" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">521</span><span class="op">/</span><span class="dv">1714</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>0.3039673278879813</code></pre>
 </div>
 </div>
-<div id="8b62ac74" class="cell" data-execution_count="23">
+<div id="9da6057e" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">415</span><span class="op">/</span><span class="dv">1270</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>0.32677165354330706</code></pre>
 </div>
 </div>
-<div id="692f0813" class="cell" data-execution_count="24">
+<div id="64338baa" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">355</span><span class="op">/</span><span class="dv">1140</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>0.31140350877192985</code></pre>
 </div>
 </div>
-<div id="d036168d" class="cell" data-execution_count="25">
+<div id="d47dcab7" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b01d3dc7" class="cell" data-execution_count="26">
+<div id="3adc4076" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>df[[<span class="st">'Action'</span>, <span class="st">'Adventure'</span>, <span class="st">'Fantasy'</span>, <span class="st">'ScienceFiction'</span>, <span class="st">'Crime'</span>, <span class="st">'Drama'</span>, <span class="st">'Thriller'</span>, <span class="st">'Animation'</span>, <span class="st">'Family'</span>, <span class="st">'Western'</span>, <span class="st">'Comedy'</span>, <span class="st">'Romance'</span>, <span class="st">'Horror'</span>, <span class="st">'Mystery'</span>, <span class="st">'History'</span>, <span class="st">'War'</span>, <span class="st">'Music'</span>, <span class="st">'Documentary'</span>, <span class="st">'Foreign'</span>, <span class="st">'TVMovie'</span>]]</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>df[[<span class="st">'target'</span>]]</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -910,7 +914,7 @@ TVMovie : 8</code></pre>
 (955, 20)</code></pre>
 </div>
 </div>
-<div id="cab66d74" class="cell" data-execution_count="27">
+<div id="83ce3537" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier()</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>scores<span class="op">=</span>cross_val_score(knn, x_train, y_train, cv<span class="op">=</span><span class="dv">2</span>, scoring<span class="op">=</span><span class="st">'accuracy'</span>)</span>
@@ -921,25 +925,27 @@ TVMovie : 8</code></pre>
 <pre><code>C:\Users\USER\anaconda3\Lib\site-packages\sklearn\neighbors\_classification.py:238: DataConversionWarning:
 
 A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
-
-C:\Users\USER\anaconda3\Lib\site-packages\sklearn\neighbors\_classification.py:238: DataConversionWarning:
+</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1번째 정확도: 0.4073298429319372
+2번째 정확도: 0.393717277486911</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\USER\anaconda3\Lib\site-packages\sklearn\neighbors\_classification.py:238: DataConversionWarning:
 
 A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
 </code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1번째 정확도: 0.3769633507853403
-2번째 정확도: 0.3471204188481675</code></pre>
 </div>
-</div>
-<div id="822f12c4" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>neigh<span class="op">=</span>KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>neigh.fit(x_train, y_train)</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(neigh.classes_)</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'거리계산방법: </span><span class="sc">{</span>neigh<span class="sc">.</span>effective_metric_<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'샘플수: </span><span class="sc">{</span>neigh<span class="sc">.</span>n_samples_fit_<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f45c3e33" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>neigh<span class="op">=</span>KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>neigh.fit(x_train, y_train)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(neigh.classes_)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'거리계산방법: </span><span class="sc">{</span>neigh<span class="sc">.</span>effective_metric_<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'샘플수: </span><span class="sc">{</span>neigh<span class="sc">.</span>n_samples_fit_<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[ 0  1  2  3  4  5  6  7  8  9 10]
 거리계산방법: euclidean
@@ -952,34 +958,34 @@ A column-vector y was passed when a 1d array was expected. Please change the sha
 </code></pre>
 </div>
 </div>
-<div id="4fe7fef6" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(neigh.score(x_test,y_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="203c77c5" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(neigh.score(x_test,y_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.3612565445026178</code></pre>
+<pre><code>0.38848167539267014</code></pre>
 </div>
 </div>
-<div id="6137e70e" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>new_x <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>]</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>new_df <span class="op">=</span> pd.DataFrame([new_x], columns<span class="op">=</span>x_train.columns)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> neigh.predict(new_df)</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>prediction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d6619f75" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>new_x <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>]</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>new_df <span class="op">=</span> pd.DataFrame([new_x], columns<span class="op">=</span>x_train.columns)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> neigh.predict(new_df)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>prediction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
-<pre><code>array([7], dtype=int64)</code></pre>
+<pre><code>array([5], dtype=int64)</code></pre>
 </div>
 </div>
-<div id="a8bfaff9" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>diabetes <span class="op">=</span> datasets.load_diabetes()</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> diabetes.data[:<span class="dv">150</span>]</span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> diabetes.target[:<span class="dv">150</span>]</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>knn<span class="op">=</span>KNeighborsClassifier()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8b4dfd17" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>diabetes <span class="op">=</span> datasets.load_diabetes()</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> diabetes.data[:<span class="dv">150</span>]</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> diabetes.target[:<span class="dv">150</span>]</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>knn<span class="op">=</span>KNeighborsClassifier()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="91a17e5d" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>scores<span class="op">=</span>cross_val_score(knn,x,y,cv<span class="op">=</span><span class="dv">3</span>,scoring<span class="op">=</span><span class="st">'accuracy'</span>)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(scores.size):</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">번째 정확도: </span><span class="sc">{</span>scores[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="06304cd4" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>scores<span class="op">=</span>cross_val_score(knn,x,y,cv<span class="op">=</span><span class="dv">3</span>,scoring<span class="op">=</span><span class="st">'accuracy'</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(scores.size):</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">번째 정확도: </span><span class="sc">{</span>scores[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1번째 정확도: 0.0
 2번째 정확도: 0.0
@@ -997,9 +1003,9 @@ The least populated class in y has only 1 members, which is less than n_splits=3
 <section id="실습-농구선수-분류" class="level2">
 <h2 class="anchored" data-anchor-id="실습-농구선수-분류">9.3. (실습) 농구선수 분류</h2>
 <p><br></p>
-<div id="c6648dc6" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./data/chap11_basketball_final.csv'</span>)</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fb18a1e5" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./data/chap11_basketball_final.csv'</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <div>
 
@@ -1068,8 +1074,8 @@ The least populated class in y has only 1 members, which is less than n_splits=3
 </div>
 </div>
 </div>
-<div id="79ef52d0" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5113994e" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 1340 entries, 0 to 1339
@@ -1086,8 +1092,8 @@ dtypes: float64(5), int64(1)
 memory usage: 62.9 KB</code></pre>
 </div>
 </div>
-<div id="7af4c641" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Target'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="eef250da" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Target'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>Target
 1    831
@@ -1095,12 +1101,12 @@ memory usage: 62.9 KB</code></pre>
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="664f7d17" class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 경력별 선수의 수</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span>df[<span class="st">'Target'</span>]) </span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Player"</span>)</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="50e64590" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 경력별 선수의 수</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span>df[<span class="st">'Target'</span>]) </span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Player"</span>)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1109,13 +1115,13 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="c7ea6e10" class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 경력에 따른 농구 기술</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"리바운드</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Rebounds'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"어시스트</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Assists'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"스틸</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Steals'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"블록</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Blocks'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"턴오버</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Turnovers'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4187ac6a" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 경력에 따른 농구 기술</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"리바운드</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Rebounds'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"어시스트</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Assists'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"스틸</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Steals'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"블록</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Blocks'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"턴오버</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>df[<span class="st">'Turnovers'</span>]<span class="sc">.</span>groupby(df[<span class="st">'Target'</span>])<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>리바운드
  Target
@@ -1144,27 +1150,27 @@ Name: Blocks, dtype: float64
 Name: Turnovers, dtype: float64</code></pre>
 </div>
 </div>
-<div id="e23ddabd" class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련데이터와 테스트데이터 분리</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>df[[<span class="st">'Rebounds'</span>,<span class="st">'Assists'</span>,<span class="st">'Steals'</span>,<span class="st">'Blocks'</span>,<span class="st">'Turnovers'</span>]]</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>df[[<span class="st">'Target'</span>]]</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>x_train, x_test, y_train, y_test <span class="op">=</span> train_test_split( x, y, test_size<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_train.shape)</span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="666973f2" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련데이터와 테스트데이터 분리</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>df[[<span class="st">'Rebounds'</span>,<span class="st">'Assists'</span>,<span class="st">'Steals'</span>,<span class="st">'Blocks'</span>,<span class="st">'Turnovers'</span>]]</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>df[[<span class="st">'Target'</span>]]</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>x_train, x_test, y_train, y_test <span class="op">=</span> train_test_split( x, y, test_size<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_train.shape)</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(1072, 5)
 (268, 5)</code></pre>
 </div>
 </div>
-<div id="b1e4db3c" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 최적의 k찾기</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>knn<span class="op">=</span>KNeighborsClassifier()</span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>scores<span class="op">=</span>cross_val_score(knn,x,y,cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'accuracy'</span>)</span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(scores.size):</span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">번째 정확도: </span><span class="sc">{</span>scores[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2f8b4844" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 최적의 k찾기</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>knn<span class="op">=</span>KNeighborsClassifier()</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>scores<span class="op">=</span>cross_val_score(knn,x,y,cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'accuracy'</span>)</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(scores.size):</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">번째 정확도: </span><span class="sc">{</span>scores[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1번째 정확도: 0.6492537313432836
 2번째 정확도: 0.6119402985074627
@@ -1195,14 +1201,14 @@ A column-vector y was passed when a 1d array was expected. Please change the sha
 </code></pre>
 </div>
 </div>
-<div id="713ef2ed" class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 생성과 학습</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>neigh<span class="op">=</span>KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">7</span>)</span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>neigh.fit(x_train, y_train)</span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(neigh.classes_)</span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'거리계산방법: </span><span class="sc">{</span>neigh<span class="sc">.</span>effective_metric_<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'샘플수: </span><span class="sc">{</span>neigh<span class="sc">.</span>n_samples_fit_<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="140cfbd6" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 생성과 학습</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>neigh<span class="op">=</span>KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>neigh.fit(x_train, y_train)</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(neigh.classes_)</span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'거리계산방법: </span><span class="sc">{</span>neigh<span class="sc">.</span>effective_metric_<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'샘플수: </span><span class="sc">{</span>neigh<span class="sc">.</span>n_samples_fit_<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[0 1]
 거리계산방법: euclidean
@@ -1215,13 +1221,13 @@ A column-vector y was passed when a 1d array was expected. Please change the sha
 </code></pre>
 </div>
 </div>
-<div id="d0d3941e" class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(neigh.score(x_test,y_test))</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>new_x <span class="op">=</span> [<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>]</span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> neigh.predict([new_x])</span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prediction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5993bccc" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(neigh.score(x_test,y_test))</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>new_x <span class="op">=</span> [<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>]</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> neigh.predict([new_x])</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prediction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.5932835820895522
+<pre><code>0.6305970149253731
 [1]</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">

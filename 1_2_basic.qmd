@@ -266,7 +266,7 @@ print(x)
 
 ```{python}
 # 튜플 생성1 : 빈 튜플 생성
-x = ()                                                            # x = tuple()
+x = ()
 print(x)
 ```
 
@@ -323,7 +323,7 @@ x[:2]
 
 ```{python}
 # 딕셔너리 생성1 : 빈 딕셔너리 생성
-x = {}                                                            # x = dict()
+x = {}
 print(x)
 ```
 
@@ -394,7 +394,7 @@ print(x)
 ```{python}
 # 리스트 컴프리헨션1 : 조건이 없는 경우
 num = [-20, -10, 0, 0, 10, 20]
-[x + 5 for x in num]
+[x+5 for x in num]
 ```
 
 ```{python}

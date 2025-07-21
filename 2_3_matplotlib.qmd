@@ -58,7 +58,7 @@ plt.show()
 # 시각화 옵션2 : 범례
 # plot()의 label 속성에 범례에 표시할 문자열을 작성
 plt.figure(figsize=(5, 3))
-plt.title('Legend properties')
+plt.title('Legend Properties')
 data1 = [1, 3, 5, 7]
 data2 = [9, 7, 5, 3]
 plt.plot(data1, label='Salary')
@@ -71,7 +71,7 @@ plt.show()
 # 시각화 옵션3 : 색상
 # plot()의 color 속성에 색상 설정
 plt.figure(figsize=(5, 3))
-plt.title('Color properties')
+plt.title('Color Properties')
 xdata = [3, 5, 7, 9]
 ydata = [1, 3, 5, 7]
 plt.plot(xdata, ydata, color='green')
@@ -81,7 +81,7 @@ plt.show()
 ```{python}
 # 시각화 옵션4 : x축 및 y축 이름
 plt.figure(figsize=(5, 3))
-plt.title('Axis name properties')
+plt.title('Axis name Properties')
 xdata = [3, 5, 7, 9]
 ydata = [1, 3, 5, 7]
 plt.plot(xdata, ydata)
@@ -94,7 +94,7 @@ plt.show()
 # 시각화 옵션5 : 그래프 선 모양
 # plot()의 linestyle 속성에 선 모양을 '-', '--', '-.', ':' 등으로 설정
 plt.figure(figsize=(5, 3))
-plt.title('Line shape properties')
+plt.title('Line shape Properties')
 data1 = [1, 3, 5, 7]
 data2 = [9, 7, 5, 3]
 plt.plot(data1, color='b', linestyle='--', label='dashed')
@@ -106,7 +106,7 @@ plt.show()
 ```{python}
 # 시각화 옵션6 : 그림 범위 지정
 plt.figure(figsize=(5, 3))
-plt.title('X, Y range properties')
+plt.title('X, Y range Properties')
 xdata = [15, 25, 35, 45]
 ydata = [2, 4, 6, 8]
 plt.plot(xdata, ydata, 'b--o', markersize=7)
@@ -126,11 +126,13 @@ df = pd.DataFrame(my_score, columns=subject)
 
 # 선 그래프
 df.plot(kind='line', figsize=(5, 3))
+plt.show()
 ```
 
 ```{python}
 # 상자수염 그래프
 df.plot(kind='box', figsize=(5, 3))
+plt.show()
 ```
 
 ```{python}
@@ -141,6 +143,7 @@ df.plot(kind='box', figsize=(5, 3))
 ```{python}
 # 커널 밀도 그래프
 df.plot(kind='kde', figsize=(5, 3))
+plt.show()
 ```
 
 <br>
@@ -303,7 +306,7 @@ plt.figure(figsize=(4, 4))
 plt.scatter(data['PetalLength'], data['PetalWidth'])
 plt.xlabel('Petal Length')
 plt.ylabel('Petal Width')
-plt.title('Iris Petal Scatter Plot')
+plt.title('Petal Length vs Width')
 plt.show()
 ```
 
@@ -314,7 +317,7 @@ plt.scatter(data['PetalLength'], data['PetalWidth'], alpha = 0.5,
             c=data['Species'].map({'setosa': 'red', 'versicolor': 'green', 'virginica': 'blue'}))
 plt.xlabel('Petal Length')
 plt.ylabel('Petal Width')
-plt.title('Iris Petal Scatter Plot')
+plt.title('Petal Length vs Width By Species')
 plt.show()
 ```
 
@@ -333,9 +336,9 @@ setosa = data.loc[data['Species']=='setosa',]
 
 plt.figure(figsize=(5, 3))
 plt.hist(setosa['PetalLength'], bins=8, edgecolor='black')
-plt.xlabel('Petal')
-plt.ylabel('Length')
-plt.title('Iris Setosa Petal Length Histogram')
+plt.xlabel('Petal Length')
+plt.ylabel('Count')
+plt.title('Distribution of Petal Length in Iris Setosa')
 plt.show()
 ```
 
@@ -356,10 +359,8 @@ plt.show()
 plt.figure(figsize=(5, 3))
 plt.boxplot([data['SepalLength'], data['SepalWidth']],
             tick_labels=['Sepal Length', 'Sepal Width'],
-            vert=False)
-plt.xlabel('Value')
-plt.ylabel('Sepal')
-plt.title('Iris Sepal Box Plot')
+            vert=False, widths=0.5)
+plt.title('Sepal Length and Width')
 plt.show()
 ```
 

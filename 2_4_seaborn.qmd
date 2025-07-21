@@ -18,10 +18,6 @@ jupyter: python3
 
 <br>
 
-![](./images/fig2-5.jpg){width=60%}
-
-<br>
-
 <br>
 
 ## 6.2. 기본 시각화 유형
@@ -112,7 +108,7 @@ sns.histplot(femaledata['weight'], bins=8, alpha=0.5, label='Female', color='r')
 plt.xlim(20, 130)
 plt.xlabel('Weight')
 plt.ylabel('Count')
-plt.title('Weight Histogram')
+plt.title('Distribution of Weight')
 plt.legend()
 plt.show()
 ```
@@ -125,7 +121,7 @@ sns.histplot(femaledata['waist'], bins=7, alpha=0.5, label='Female', color='r', 
 plt.xlim(40,130)
 plt.xlabel('Waist')
 plt.ylabel('Count')
-plt.title('Waist  Histogram wieh KDE(Kernel Density Estimator)')
+plt.title('Distribution of Waist with KDE')
 plt.legend()
 plt.show()
 ```
@@ -134,15 +130,15 @@ plt.show()
 # 상자수염 그래프 : 성별 및 음주 여부에 따른 몸무게 분포
 plt.figure(figsize=(8, 4))
 plt.title('Weight By Gender and Drinking')
-sns.boxplot(x='drinking', y='weight', hue='gender', data=data6)
+sns.boxplot(x='drinking', y='weight', hue='gender', width=0.5, data=data6)
 plt.show()
 ```
 
 ```{python}
 # 상자수염 그래프 : 성별 및 흡연 상태에 따른 몸무게 분포
-plt.figure(figsize=(8, 4))
+plt.figure(figsize=(8, 6))
 plt.title('Weight By Gender and Drinking')
-sns.boxplot(x='weight', y='smoking', hue='gender', data=data6, orient='h')
+sns.boxplot(x='weight', y='smoking', hue='gender', width=0.5, data=data6, orient='h')
 plt.show()
 ```
 
@@ -163,7 +159,7 @@ plt.show()
 ```{python}
 # 스트립 플롯
 plt.figure(figsize=(8, 4))
-plt.title('Strip Plot')
+plt.title('Height vs Weight by Gender - Strip Plot')
 sns.stripplot(x='height', y='weight', hue='gender', alpha=0.5, palette='dark', data=femaledata)
 sns.stripplot(x='height', y='weight', hue='gender', alpha=0.5, palette='Set1', data=maledata)
 plt.legend()
@@ -179,7 +175,7 @@ femaledata100 = femaledata.head(100)
 ```{python}
 # 스웜 플롯
 plt.figure(figsize=(8, 4))
-plt.title('Swarm Plot')
+plt.title('Height vs Weight by Gender - Swarm Plot')
 sns.stripplot(x='height', y='weight', hue='gender', alpha=0.5, palette='dark', data=femaledata100)
 sns.stripplot(x='height', y='weight', hue='gender', alpha=0.5, palette='Set1', data=maledata100)
 plt.legend()
@@ -189,7 +185,7 @@ plt.show()
 ```{python}
 # 카운트 플롯1 : 음주 여부에 따른 성별 분포
 plt.figure(figsize=(5, 3))
-plt.title('Gender and Driking')
+plt.title('Gender and Drinking')
 sns.countplot(x='drinking', hue='gender', data=data6)
 plt.show()
 ```
@@ -206,7 +202,7 @@ plt.show()
 ```{python}
 # 바이올린 플롯1 : 성별 및 음주 여부별 몸무게(120 미만) 분포
 plt.figure(figsize=(5, 3))
-plt.title('Weight By Gender and Drinking')
+plt.title('Weight By Gender and Drinking (Under 120kg)')
 sns.violinplot(x='gender', y='weight', hue='drinking', data=data6[data6.weight<120])
 plt.show()
 ```
@@ -214,7 +210,7 @@ plt.show()
 ```{python}
 # 바이올린 플롯2 : 성별 및 음주 여부별 허리둘레(150 미만) 분포
 plt.figure(figsize=(5, 5))
-plt.title('Waist By Gender and Drinking')
+plt.title('Waist By Gender and Drinking (Under 150cm)')
 sns.violinplot(y='gender', x='waist', hue='drinking', data=data6[data6.waist<150])
 plt.show()
 ```

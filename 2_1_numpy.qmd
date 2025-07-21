@@ -2,7 +2,7 @@
 jupyter: python3
 ---
 
-<h1>3. Numpy</h1>
+<h1>3. NumPy</h1>
 
 ## 3.1. 넘파이 배열
 + NumPy 라이브러리
@@ -30,66 +30,66 @@ import numpy as np
 
 ```{python}
 # 넘파이 배열 생성1 : 리스트 사용
-arr1 = np.array([1, 2, 3, 4])
-print(arr1)
+arr = np.array([1, 2, 3, 4])
+print(arr)
 ```
 
 ```{python}
 # 넘파이 배열 생성2
 # 하나의 배열에는 동일한 자료형만 저장할 수 있음
 # 만약 숫자와 문자를 동시에 배열에 넣으면 모두 문자열로 취급됨
-arr2 = np.array([1, 2, "A"])
-print(arr2)
+arr = np.array([1, 2, "A"])
+print(arr)
 ```
 
 ```{python}
 # 넘파이 배열 생성3 : 2차원 배열
 # 리스트를 중첩해서 인수로 넘겨 2차원 배열을 만듬
-arr3 = np.array([[1, 2, 3, 4, 5],
-                 [6, 7, 8, 9, 10]])
-print(arr3)
+arr = np.array([[1, 2, 3, 4, 5],
+                [6, 7, 8, 9, 10]])
+print(arr)
 ```
 
 ```{python}
 # 넘파이 배열 속성1 : 배열의 차원
-arr3.ndim
+arr.ndim
 ```
 
 ```{python}
 # 넘파이 배열 속성2 : 배열 요소의 자료형
-arr3.dtype
+arr.dtype
 ```
 
 ```{python}
 # 넘파이 배열 속성3 : 배열 요소의 byte 수
-arr3.itemsize
+arr.itemsize
 ```
 
 ```{python}
 # 넘파이 배열 속성4 : 배열 요소의 개수
-arr3.size
+arr.size
 ```
 
 ```{python}
 # 넘파이 배열 속성5 : 배열 전체의 byte 수
-arr3.nbytes
+arr.nbytes
 ```
 
 ```{python}
 # 넘파이 배열 속성6 : 배열의 모양(행, 열)
-arr3.shape
+arr.shape
 ```
 
 ```{python}
 # 넘파이 배열 속성7 : 전치(transpose)
-arr3.T
+arr.T
 ```
 
 <br>
 
 + NumPy 라이브러리의 `arange()` 함수를 이용하여 등차수열을 생성할 수 있음
   + start : 시작 값
-  + end : 끝 값 (포함하지 않음)
+  + stop : 끝 값 (포함하지 않음)
   + step : 차이 값; 간격(stride)
 
 <br>
@@ -100,27 +100,27 @@ arr3.T
 
 ```{python}
 # 등차수열 생성1 : 0부터 n-1까지 정수
-arr4 = np.arange(5)
-print(arr4)
+arr = np.arange(5)
+print(arr)
 ```
 
 ```{python}
 # 등차수열 생성2 : 시작 값, 끝 값 지정
-arr5 = np.arange(2, 10)
-print(arr5)  
+arr = np.arange(2, 10)
+print(arr)  
 ```
 
 ```{python}
 # 등차수열 생성3 : 간격 지정
-arr6 = np.arange(1, 10, 2)
-print(arr6)
+arr = np.arange(1, 10, 2)
+print(arr)
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
 # 등차수열 생성4 : 실수(float) 간격 지정
-arr7 = np.arange(0, 1, 0.2)
-print(arr7)
+arr = np.arange(0, 1, 0.2)
+print(arr)
 ```
 
 <br>
@@ -137,22 +137,22 @@ print(arr7)
 
 ```{python}
 # 정수 인덱싱
-arr8 = np.array([10, 20, 30, 40, 50])
-print(arr8[1])
-print(arr8[-2])
+arr = np.array([10, 20, 30, 40, 50])
+print(arr[1])
+print(arr[-2])
 ```
 
 ```{python}
 # 배열 인덱싱
 idx = np.array([0, 2])
-print(arr8[idx])
+print(arr[idx])
 ```
 
 ```{python}
 # 논리값(boolean) 인덱싱 : 조건을 만족하는 값 추출
 mask = np.array([True, False, True, True, False])
-print(arr8[mask])
-print(arr8[arr8 > 25])                                            # 25보다 큰 값만 추출
+print(arr[mask])
+print(arr[arr > 25])
 ```
 
 <br>
@@ -168,28 +168,28 @@ print(arr8[arr8 > 25])                                            # 25보다 큰
 
 ```{python}
 # 배열 슬라이싱1 : 1번 인덱스부터 4번 인덱스 전까지
-arr9 = np.array([11, 12, 13, 14, 15])
-print(arr9[1:4])
+arr = np.array([11, 12, 13, 14, 15])
+print(arr[1:4])
 ```
 
 ```{python}
 # 배열 슬라이싱2 : 처음부터 3번 인덱스 전까지
-print(arr9[:3])
+print(arr[:3])
 ```
 
 ```{python}
 # 배열 슬라이싱3 : 2번 인덱스부터 끝까지
-print(arr9[2:])            # [30 40 50] ()
+print(arr[2:])            # [30 40 50] ()
 ```
 
 ```{python}
 # 배열 슬라이싱4 : 요소를 2개씩 건너뛰기
-print(arr9[::2])
+print(arr[::2])
 ```
 
 ```{python}
 # 배열 슬라이싱5 : 역순 정렬
-print(arr9[::-1])
+print(arr[::-1])
 ```
 
 <br>
@@ -204,10 +204,17 @@ print(arr9[::-1])
 <br>
 
 ```{python}
-# 브로드캐스팅
-arr10 = np.array([1, 2, 3, 4])
-print(arr10 + 2)
-print(arr10 * 2)
+# 넘파이 배열 연산 : 동일한 위치의 요소 간 연산 숭행
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([10, 20, 30])
+arr1 + arr2
+```
+
+```{python}
+# 넘파이 배열 연산 : 브로드캐스팅
+arr = np.array([1, 2, 3, 4])
+print(arr + 2)
+print(arr * 2)
 ```
 
 <br>
@@ -230,34 +237,34 @@ print(arr10 * 2)
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
 # 얕은 복사
-arr11 = np.arange(6)
-copy1 = arr11
+arr1 = np.arange(6)
+copy1 = arr1
 
-print(arr11)
+print(arr1)
 print(copy1)
 ```
 
 ```{python}
 # 복사본을 수정하면 원본도 변함
 copy1[0] = 10
-print(arr11)
+print(arr1)
 print(copy1)
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
 # 깊은 복사
-arr12 = np.arange(6)
-copy2 = arr12.copy()
+arr2 = np.arange(6)
+copy2 = arr2.copy()
 
-print(arr12)
+print(arr2)
 print(copy2)
 ```
 
 ```{python}
 # 복사본을 수정해도 원본이 변하지 않음
 copy2[0] = 20
-print(arr12)
+print(arr2)
 print(copy2)
 ```
 
@@ -273,20 +280,20 @@ print(copy2)
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
 # 배열 정렬1
-arr13 = np.array([3, 2, 5, 1, 4])
-print(np.sort(arr13))
-print(arr13)
+arr = np.array([3, 2, 5, 1, 4])
+print(np.sort(arr))
+print(arr)
 ```
 
 ```{python}
 # 배열 정렬2
-arr13.sort()
-print(arr13)
+arr.sort()
+print(arr)
 ```
 
 ```{python}
 # 배열 정렬3
-arr13 = np.array([3, 2, 5, 1, 4])
-print(np.argsort(arr13))
+arr = np.array([3, 2, 5, 1, 4])
+print(np.argsort(arr))
 ```
 
