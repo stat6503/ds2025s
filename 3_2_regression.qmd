@@ -104,21 +104,17 @@ df2021.columns = ['Country', 'Score', 'GDP.per.capita', 'Social.support', 'Life.
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 455}
-# 데이터 전처리
+# 2020년 데이터 전처리
 df1 = df2020.copy()
 df1.drop(['Social.support', 'Life.expectancy', 'Generosity'], axis=1, inplace=True)
 df1.head()
 ```
 
 ```{python}
-df1.dtypes
-```
-
-```{python}
 #| colab: {base_uri: https://localhost:8080/}
 # 상관관계 : 2020년 데이터
 # 행복지수와 GDP 간 상관계수는 0.78로, 강한 양의 상관관계임
-# 헹복지수와 Freedom 간 상관계수는 0.59로, 뚜렷한 양의 상관관계임
+# 행복지수와 Freedom 간 상관계수는 0.59로, 뚜렷한 양의 상관관계임
 corr = df1.select_dtypes(include='number').corr()
 corr['Score'].sort_values(ascending=False)
 ```
@@ -133,7 +129,7 @@ plt.show()
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 455}
-# 데이터 전처리
+# 2021년 데이터 전처리
 df2 = df2021.copy()
 df2.drop(['Social.support', 'Life.expectancy', 'Generosity'], axis=1, inplace=True)
 df2.head()
@@ -151,6 +147,7 @@ plt.show()
 
 <br>
 
+##### 결과 및 시사점
 + 행복지수와 GDP 간 관계는?
   + 상관계수는 2020년 0.78, 2021년 0.79로, 강한 양의 상관관계로 나타남
   + 경제 성장은 보통 더 높은 소득과 향상된 생활 수준으로 이어지므로, 국민의 행복 수준도 높아지는 경향이 있음
@@ -196,6 +193,7 @@ plt.show()
 
 <br>
 
+##### 결과 및 시사점
 + 행복지수와 사회적 지지 간 관계는?
   + 상관계수는 2020년 0.77, 2021년 0.76으로, 강한 양의 상관관계로 나타남
   + 사회적 지지는 가족, 친구, 지인 등과 함께하는 관계에서 느끼는 정서적 지원에 대한 인식을 의미함
@@ -228,7 +226,6 @@ plt.show()
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 580}
 # 전체 상관계수 : 2021년 데이터
-# 행복도에 가장 큰 영향을 주는 것은 경제적 여유, 사회적 지지, 기대수명(건간), 자유도 순인 것을 알 수 있었다.
 corr = df2021.select_dtypes(include='number').corr()
 
 plt.figure(figsize=(8, 6))
@@ -237,6 +234,13 @@ sns.heatmap(corr, mask=upp_mat, vmin=-1, vmax=1,annot = True, cmap ='PiYG', line
 plt.xticks(rotation=45)
 plt.show()
 ```
+
+<br>
+
+##### 결과 및 시사점
++ 행복지수에 가장 큰 영향을 미치는 요인은 경제적 여유(GDP, 0.79), 건강(0.77), 사회적 지지(0.76), 선택에 대한 자유도(0.61) 순으로 나타남
++ 기부 활동과 행복지수는 뚜렷한 관련이 없는 것으로 나타남
++ 1인당 GDP와 건강한 기대수명은 강한 양의 상관관계(0.86)가 있으므로, 경제적으로 여유로운 사람들이 더 건강하게 사는 경향이 있음을 알 수 있음
 
 <br>
 

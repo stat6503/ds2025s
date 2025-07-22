@@ -51,9 +51,9 @@ jupyter: python3
 
 <br>
 
-![](./images/fig3-2.jpg)
 ![](./images/fig3-3.jpg)
-![](./images/fig3-4.jpg){width=95%}
+![](./images/fig3-4.jpg)
+![](./images/fig3-5.jpg){width=95%}
 
 <br>
 
@@ -76,7 +76,7 @@ jupyter: python3
 
 <br>
 
-![](./images/fig3-5.png){width=70%}
+![](./images/fig3-6.png){width=70%}
 
 <br>
 
@@ -85,5 +85,9 @@ jupyter: python3
   + 학습 데이터(training data) : 모델이 패턴과 규칙을 학습하는 데 사용
   + 검증 데이터(validation data)(선택) : 학습 과정에서 하이퍼파라미터 튜닝이나 과적합 여부 확인에 사용
   + 평가 데이터(test data) : 학습에 포함되지 않은 데이터로, 모델의 예측 결과와 실제 정답(label)을 비교하여 모델의 성능을 평가함
-+ 일반적으로 데이터는 학습:검증:평가를 7:1.5:1.5, 8:1:1 비율로 나눔
++ 일반적으로 데이터는 학습:검증:평가를 6:2:2 비율로 나눔
+
+<br>
+
+![](./images/fig3-2.jpg)
 

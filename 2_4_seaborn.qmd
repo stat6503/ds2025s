@@ -96,6 +96,8 @@ plt.tight_layout(rect=[0, 0, 1, 0.99])
 plt.show()
 ```
 
+<br>
+
 ## 6.3. 히스토그램
 
 <br>
@@ -135,6 +137,8 @@ plt.legend()
 plt.show()
 ```
 
+<br>
+
 ## 6.4. 상자수염 그래프
 
 <br>
@@ -143,7 +147,7 @@ plt.show()
 # 상자수염 그래프 : 성별 및 음주 여부에 따른 몸무게 분포
 plt.figure(figsize=(8, 4))
 plt.title('Weight By Gender and Drinking')
-sns.boxplot(x='drinking', y='weight', hue='gender', dodge = True, width=0.7, gap = 0.1, data=data6)
+sns.boxplot(x='drinking', y='weight', hue='gender', width=0.7, gap = 0.1, data=data6)
 plt.show()
 ```
 
@@ -188,14 +192,16 @@ plt.show()
 <br>
 
 ```{python}
-# 데이터 전처리 : 키, 몸무게, 허리둘레, 수축기 혈압, 이완기 혈압, 총콜레스테롤, HDL 콜레스테롤, LDL 콜레스테롤 변수 선택
+# 데이터 전처리 : 8개 건강 지표 선택
 data8 = data.copy()
-data8 = data8.loc[:, ['height', 'weight', 'waist', 'systolic', 'diastolic', 'cholesterol', 'HDL', 'LDL']]
+data8 = data8.loc[:, ['height', 'weight', 'waist',
+                      'systolic', 'diastolic', 'cholesterol', 'HDL', 'LDL']]
 ```
 
 ```{python}
 # 히트맵 : 8개의 건강 지표 간 상관관계
-# 상관계수는 -1에서 +1 사이의 값을 가지므로, vmin=-1, vmax=1 옵션 설정으로 색상 범위의 균형을 맞춤
+# 상관계수는 -1에서 +1 사이의 값을 가지므로,
+# vmin=-1, vmax=1 옵션 설정으로 색상 범위의 균형을 맞춤
 correlation_data8 = data8.corr()
 upp_mat = np.triu(correlation_data8)
 
