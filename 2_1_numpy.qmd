@@ -219,7 +219,36 @@ print(arr * 2)
 
 <br>
 
-## 3.5. 넘파이 배열 복사
+## 3.5. 배열 정렬
++ `np.sort(배열)` : 배열을 오름차순 정렬한 새로운 배열을 반환, 원본은 변하지 않음
++ `배열.sort()` : 배열을 오름차순 정렬하고, 원본 자체를 변경함
++ `np.argsort(배열)` : 정렬 시 각 요소가 위치하게 될 인덱스의 배열을 반환
+
+<br>
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/}
+# 배열 정렬1
+arr = np.array([3, 2, 5, 1, 4])
+print(np.sort(arr))
+print(arr)
+```
+
+```{python}
+# 배열 정렬2
+arr.sort()
+print(arr)
+```
+
+```{python}
+# 배열 정렬3
+arr = np.array([3, 2, 5, 1, 4])
+print(np.argsort(arr))
+```
+
+<br>
+
+## 3.6. 얕은 복사와 깊은 복사
 + 얕은 복사
   + `=` 연산자 또는 `view()` 메소드를 사용한 복사
   + 데이터의 메모리 주소만 복사하여, 원본과 데이터를 공유함
@@ -266,34 +295,5 @@ print(copy2)
 copy2[0] = 20
 print(arr2)
 print(copy2)
-```
-
-<br>
-
-## 3.6. 배열 정렬
-+ `np.sort(배열)` : 배열을 오름차순 정렬한 새로운 배열을 반환, 원본은 변하지 않음
-+ `배열.sort()` : 배열을 오름차순 정렬하고, 원본 자체를 변경함
-+ `np.argsort(배열)` : 정렬 시 각 요소가 위치하게 될 인덱스의 배열을 반환
-
-<br>
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-# 배열 정렬1
-arr = np.array([3, 2, 5, 1, 4])
-print(np.sort(arr))
-print(arr)
-```
-
-```{python}
-# 배열 정렬2
-arr.sort()
-print(arr)
-```
-
-```{python}
-# 배열 정렬3
-arr = np.array([3, 2, 5, 1, 4])
-print(np.argsort(arr))
 ```
 

@@ -199,7 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#데이터-시각화" id="toc-데이터-시각화" class="nav-link active" data-scroll-target="#데이터-시각화">5.1. 데이터 시각화</a></li>
-  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link" data-scroll-target="#matplotlib">5.2. Matplotlib</a></li>
+  <li><a href="#시각화-옵션" id="toc-시각화-옵션" class="nav-link" data-scroll-target="#시각화-옵션">5.2. 시각화 옵션</a></li>
+  <li><a href="#선-그래프" id="toc-선-그래프" class="nav-link" data-scroll-target="#선-그래프">5.3. 선 그래프</a></li>
+  <li><a href="#막대-그래프" id="toc-막대-그래프" class="nav-link" data-scroll-target="#막대-그래프">5.4. 막대 그래프</a></li>
+  <li><a href="#산점도" id="toc-산점도" class="nav-link" data-scroll-target="#산점도">5.5. 산점도</a></li>
+  <li><a href="#히스토그램" id="toc-히스토그램" class="nav-link" data-scroll-target="#히스토그램">5.6. 히스토그램</a></li>
+  <li><a href="#상자수염-그래프" id="toc-상자수염-그래프" class="nav-link" data-scroll-target="#상자수염-그래프">5.7. 상자수염 그래프</a></li>
   </ul>
 </nav>
     </div>
@@ -236,10 +241,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><br></p>
 </section>
-<section id="matplotlib" class="level2">
-<h2 class="anchored" data-anchor-id="matplotlib">5.2. Matplotlib</h2>
-<section id="시각화-옵션" class="level3">
-<h3 class="anchored" data-anchor-id="시각화-옵션">5.2.1. 시각화 옵션</h3>
+<section id="시각화-옵션" class="level2">
+<h2 class="anchored" data-anchor-id="시각화-옵션">5.2. 시각화 옵션</h2>
 <ul>
 <li>Matplotlib
 <ul>
@@ -249,26 +252,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <p><br></p>
-<div id="328106ba" class="cell" data-execution_count="1">
+<div id="0ac39725" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matplotlib 라이브러리 설치</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install matplotlib</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7219af82" class="cell" data-execution_count="2">
+<div id="4acda177" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matplotlib 라이브러리의 pylot 모듈 불러오기</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0ae418a9" class="cell" data-execution_count="3">
+<div id="8fc0c2e4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="bb7e6713" class="cell" data-execution_count="4">
+<div id="c8151a7f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 옵션1 : 제목</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line Graph'</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ydata <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.plot(xdata, ydata)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ydata <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line Graph'</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.plot(xdata, ydata)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -277,17 +281,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="25cda14b" class="cell" data-execution_count="5">
+<div id="5d855924" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 옵션2 : 범례</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot()의 label 속성에 범례에 표시할 문자열을 작성</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Legend Properties'</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> [<span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">3</span>]</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.plot(data1, label<span class="op">=</span><span class="st">'Salary'</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.plot(data2, label<span class="op">=</span><span class="st">'Prices'</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> [<span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">3</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Legend Properties'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.plot(data1, label<span class="op">=</span><span class="st">'Salary'</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.plot(data2, label<span class="op">=</span><span class="st">'Prices'</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -296,15 +301,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="4dd84297" class="cell" data-execution_count="6">
+<div id="6d635e46" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 옵션3 : 색상</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot()의 color 속성에 색상 설정</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Color Properties'</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ydata <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.plot(xdata, ydata, color<span class="op">=</span><span class="st">'green'</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ydata <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Color Properties'</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.plot(xdata, ydata, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -313,16 +319,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="38d1df27" class="cell" data-execution_count="7">
+<div id="69c1e765" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 옵션4 : x축 및 y축 이름</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Axis name Properties'</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ydata <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.plot(xdata, ydata)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'X value'</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Y value'</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ydata <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Axis name Properties'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.plot(xdata, ydata)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'X value'</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Y value'</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -331,17 +338,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="b057b1dd" class="cell" data-execution_count="8">
+<div id="01aeb5dc" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 옵션5 : 그래프 선 모양</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot()의 linestyle 속성에 선 모양을 '-', '--', '-.', ':' 등으로 설정</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line shape Properties'</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> [<span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">3</span>]</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.plot(data1, color<span class="op">=</span><span class="st">'b'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'dashed'</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.plot(data2, <span class="st">'r:'</span>, label<span class="op">=</span><span class="st">'dotted'</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> [<span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">3</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Line shape Properties'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.plot(data1, color<span class="op">=</span><span class="st">'b'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.plot(data2, <span class="st">'r:'</span>, label<span class="op">=</span><span class="st">'dotted'</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -350,16 +358,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="50d331eb" class="cell" data-execution_count="9">
+<div id="d2e28f8a" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 옵션6 : 그림 범위 지정</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'X, Y range Properties'</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> [<span class="dv">15</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">45</span>]</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ydata <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.plot(xdata, ydata, <span class="st">'b--o'</span>, markersize<span class="op">=</span><span class="dv">7</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">10</span>, <span class="dv">50</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">10</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> [<span class="dv">15</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">45</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ydata <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'X, Y range Properties'</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.plot(xdata, ydata, <span class="st">'b--o'</span>, markersize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">10</span>, <span class="dv">50</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -368,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="3d364a9e" class="cell" data-execution_count="10">
+<div id="f35e1202" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 옵션7 : 내장 시각화 옵션</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pandas 라이브러리의 plot() 메소드를 이용하여 그래프를 그릴 수 있음</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>my_score <span class="op">=</span> [[<span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">95</span>], [<span class="dv">65</span>, <span class="dv">85</span>, <span class="dv">90</span>], [<span class="dv">80</span>, <span class="dv">75</span>, <span class="dv">100</span>],</span>
@@ -387,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="3fca13ac" class="cell" data-execution_count="11">
+<div id="194cbf3d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상자수염 그래프</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df.plot(kind<span class="op">=</span><span class="st">'box'</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -399,11 +408,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1af71901" class="cell" data-execution_count="12">
+<div id="3d156a0c" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SciPy 라이브러리 설치</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install scipy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e802dac1" class="cell" data-execution_count="13">
+<div id="e63df67e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 커널 밀도 그래프</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df.plot(kind<span class="op">=</span><span class="st">'kde'</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -417,8 +426,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><br></p>
 </section>
-<section id="선-그래프" class="level3">
-<h3 class="anchored" data-anchor-id="선-그래프">5.2.2. 선 그래프</h3>
+<section id="선-그래프" class="level2">
+<h2 class="anchored" data-anchor-id="선-그래프">5.3. 선 그래프</h2>
 <ul>
 <li>일반적으로 시간에 따라 연속적으로 변화하는 데이터를 시각화할 때 사용함
 <ul>
@@ -436,8 +445,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <p><br></p>
-<div id="42029aeb" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
+<div id="cca85932" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기 : area' 변수를 행 인덱스로 지정</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./data/04_data1.csv'</span>, index_col<span class="op">=</span><span class="st">'area'</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
@@ -623,12 +632,220 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="a2db3bd7" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '2015-2020년 미세먼지 좋음' 일수만 가져온 후, 행렬 전환(transpose)</span></span>
+<div id="6b484ddc" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '2015-2020년 미세먼지 좋음' 일수만 가져오기</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data_good <span class="op">=</span> data.copy()</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>data_good <span class="op">=</span> data_good.iloc[:,<span class="dv">0</span>:<span class="dv">6</span>].T</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>data_good <span class="op">=</span> data_good.loc[:, <span class="st">'2015_good'</span>:<span class="st">'2020_good'</span>]</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>data_good</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">2015_good</th>
+<th data-quarto-table-cell-role="th">2016_good</th>
+<th data-quarto-table-cell-role="th">2017_good</th>
+<th data-quarto-table-cell-role="th">2018_good</th>
+<th data-quarto-table-cell-role="th">2019_good</th>
+<th data-quarto-table-cell-role="th">2020_good</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">area</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Nationwide</td>
+<td>72.0</td>
+<td>54</td>
+<td>84</td>
+<td>135</td>
+<td>117</td>
+<td>171</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Metropolitan</td>
+<td>72.0</td>
+<td>45</td>
+<td>77</td>
+<td>126</td>
+<td>109</td>
+<td>150</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Seoul</td>
+<td>97.0</td>
+<td>65</td>
+<td>113</td>
+<td>140</td>
+<td>139</td>
+<td>168</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Busan</td>
+<td>102.0</td>
+<td>89</td>
+<td>86</td>
+<td>136</td>
+<td>163</td>
+<td>208</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Daegu</td>
+<td>90.0</td>
+<td>103</td>
+<td>111</td>
+<td>155</td>
+<td>148</td>
+<td>176</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Incheon</td>
+<td>67.0</td>
+<td>49</td>
+<td>78</td>
+<td>140</td>
+<td>115</td>
+<td>182</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Gwangju</td>
+<td>122.0</td>
+<td>151</td>
+<td>134</td>
+<td>149</td>
+<td>117</td>
+<td>210</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Daejeon</td>
+<td>111.0</td>
+<td>92</td>
+<td>83</td>
+<td>121</td>
+<td>143</td>
+<td>182</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Ulsan</td>
+<td>101.0</td>
+<td>101</td>
+<td>104</td>
+<td>162</td>
+<td>173</td>
+<td>206</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Sejong</td>
+<td>NaN</td>
+<td>65</td>
+<td>69</td>
+<td>130</td>
+<td>127</td>
+<td>165</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Gyeonggi</td>
+<td>65.0</td>
+<td>45</td>
+<td>59</td>
+<td>123</td>
+<td>97</td>
+<td>137</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Gangwon</td>
+<td>77.0</td>
+<td>65</td>
+<td>108</td>
+<td>150</td>
+<td>159</td>
+<td>219</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Chungbuk</td>
+<td>90.0</td>
+<td>99</td>
+<td>106</td>
+<td>117</td>
+<td>113</td>
+<td>164</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Chungnam</td>
+<td>94.0</td>
+<td>65</td>
+<td>74</td>
+<td>144</td>
+<td>96</td>
+<td>145</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Jeonbuk</td>
+<td>86.0</td>
+<td>58</td>
+<td>69</td>
+<td>121</td>
+<td>108</td>
+<td>171</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Jeonnam</td>
+<td>142.0</td>
+<td>166</td>
+<td>160</td>
+<td>191</td>
+<td>193</td>
+<td>247</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Gyeongbuk</td>
+<td>101.0</td>
+<td>123</td>
+<td>124</td>
+<td>129</td>
+<td>142</td>
+<td>212</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Gyeongnam</td>
+<td>76.0</td>
+<td>75</td>
+<td>93</td>
+<td>136</td>
+<td>136</td>
+<td>220</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Jeju</td>
+<td>84.0</td>
+<td>138</td>
+<td>166</td>
+<td>202</td>
+<td>176</td>
+<td>220</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="1ac40046" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 행렬 전환(transpose)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 인덱스는 열 이름이 되고, 열 이름은 인덱스가 됨</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>data_good <span class="op">=</span> data_good.T</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>data_good</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 
@@ -796,19 +1013,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="08de2883" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 인덱스를 연도로 수정</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data_good.columns.name <span class="op">=</span> <span class="st">'year'</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>data_good.index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2015</span>, <span class="dv">2021</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>data_good</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div id="24f90b16" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 이름 상단의 이름(label) 삭제</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data_good.columns.name <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 인덱스를 연도(2015-2020)로 수정</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>data_good.index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2015</span>, <span class="dv">2021</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>data_good</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">Nationwide</th>
 <th data-quarto-table-cell-role="th">Metropolitan</th>
 <th data-quarto-table-cell-role="th">Seoul</th>
@@ -969,34 +1188,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="7fc7016d" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 선 그래프1</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(data_good[<span class="st">'Nationwide'</span>], color<span class="op">=</span><span class="st">'b'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2015-2020 Nationwide Fine Dust(PM10) - Good Days'</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2_3_matplotlib_files/figure-html/cell-18-output-1.png" width="668" height="302" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="7bf22b32" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 선 그래프2</span></span>
+<div id="3e86978f" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 선 그래프1 : 2015-2020 전국 미세먼지(PM10) 좋음 일수 변화 추이</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> area <span class="kw">in</span> [<span class="st">'Nationwide'</span>, <span class="st">'Metropolitan'</span>, <span class="st">'Jeonbuk'</span>]:</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    plt.plot(data_good[area], marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span>area)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2015-2020 Nationwide Fine Dust(PM10) - Good Days'</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.plot(data_good[<span class="st">'Nationwide'</span>], color<span class="op">=</span><span class="st">'b'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2015-2020 Fine Dust(PM10) - Good Days By Area'</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1005,66 +1205,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><br></p>
-</section>
-<section id="막대-그래프" class="level3">
-<h3 class="anchored" data-anchor-id="막대-그래프">5.2.3. 막대 그래프</h3>
-<ul>
-<li>일반적으로 집단 간 비교나 범주형 변수를 시각화할 때 사용함</li>
-<li>가독성 측면에서 항목의 개수가 적으면 가로 막대, 많으면 세로 막대가 편함</li>
-</ul>
-<p><br></p>
-<div id="c4dd43b3" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '2015년 미세먼지 매우 나쁨' 일수만 가져오기</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>data2015_verybad <span class="op">=</span> data.copy()</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>data2015_verybad <span class="op">=</span> data2015_verybad[<span class="st">'2015_verybad'</span>]</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>data2015_verybad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>area
-Nationwide      1.0
-Metropolitan    4.0
-Seoul           4.0
-Busan           1.0
-Daegu           1.0
-Incheon         2.0
-Gwangju         2.0
-Daejeon         1.0
-Ulsan           1.0
-Sejong          NaN
-Gyeonggi        4.0
-Gangwon         3.0
-Chungbuk        1.0
-Chungnam        2.0
-Jeonbuk         3.0
-Jeonnam         1.0
-Gyeongbuk       1.0
-Gyeongnam       1.0
-Jeju            2.0
-Name: 2015_verybad, dtype: float64</code></pre>
-</div>
-</div>
-<div id="eef0c655" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 막대 그래프1</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">22</span>, <span class="dv">4</span>))</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.bar(data2015_verybad.index, data2015_verybad, color<span class="op">=</span><span class="st">'g'</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Area'</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2015 Fine Dust(PM10) - Very Bad Days By Area'</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5058ddfa" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 선 그래프2 : 2015-2020 전국, 수도권, 전북 미세먼지(PM10) 좋음 일수 변화 추이</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2015-2020 Fine Dust(PM10) - Good Days By Area'</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> area <span class="kw">in</span> [<span class="st">'Nationwide'</span>, <span class="st">'Metropolitan'</span>, <span class="st">'Jeonbuk'</span>]:</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    plt.plot(data_good[area], marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span>area)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2_3_matplotlib_files/figure-html/cell-21-output-1.png" width="1705" height="376" class="figure-img"></p>
+<p><img src="2_3_matplotlib_files/figure-html/cell-20-output-1.png" width="668" height="302" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="0409abc8" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 대도시의 '2015-2020년 미세먼지 좋음' 일수만 가져오기</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>data6 <span class="op">=</span> data.copy()</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>data6 <span class="op">=</span> data6.loc[<span class="st">'Seoul'</span>:<span class="st">'Ulsan'</span>, <span class="st">'2015_good'</span>:<span class="st">'2020_good'</span>]</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>data6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<p><br></p>
+</section>
+<section id="막대-그래프" class="level2">
+<h2 class="anchored" data-anchor-id="막대-그래프">5.4. 막대 그래프</h2>
+<ul>
+<li>일반적으로 집단 간 비교나 범주형 변수를 시각화할 때 사용함</li>
+<li>가독성 측면에서 항목의 개수가 적으면 세로 막대, 많으면 가로 막대가 유리함</li>
+</ul>
+<p><br></p>
+<div id="e1fc5c3f" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 전국, 수도권, 전북의 '2015년 미세먼지 매우 나쁨' 일수만 가져오기</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>data2015_verybad <span class="op">=</span> data.copy()</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>data2015_verybad <span class="op">=</span> data2015_verybad.loc[[<span class="st">'Nationwide'</span>, <span class="st">'Metropolitan'</span>, <span class="st">'Jeonbuk'</span>], <span class="st">'2015_verybad'</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>data2015_verybad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>area
+Nationwide      1.0
+Metropolitan    4.0
+Jeonbuk         3.0
+Name: 2015_verybad, dtype: float64</code></pre>
+</div>
+</div>
+<div id="ecee6bd3" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 막대 그래프1 : 2015년 전국, 수도권, 전북 미세먼지(PM10) 매우 나쁨 일수 비교</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2015 Fine Dust(PM10) - Very Bad Days By Area'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>plt.bar(data2015_verybad.index, data2015_verybad, color<span class="op">=</span><span class="st">'c'</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Area'</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_3_matplotlib_files/figure-html/cell-22-output-1.png" width="430" height="302" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3c709a8e" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 전라권의 '2015-2020년 미세먼지 좋음' 일수만 가져오기</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>data6 <span class="op">=</span> data.copy()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>data6 <span class="op">=</span> data6.loc[[<span class="st">'Jeonbuk'</span>, <span class="st">'Jeonnam'</span>, <span class="st">'Gwangju'</span>], <span class="st">'2015_good'</span>:<span class="st">'2020_good'</span>]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>data6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 
 
@@ -1091,40 +1296,22 @@ Name: 2015_verybad, dtype: float64</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Seoul</td>
-<td>97.0</td>
-<td>65</td>
-<td>113</td>
-<td>140</td>
-<td>139</td>
-<td>168</td>
+<td data-quarto-table-cell-role="th">Jeonbuk</td>
+<td>86.0</td>
+<td>58</td>
+<td>69</td>
+<td>121</td>
+<td>108</td>
+<td>171</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">Busan</td>
-<td>102.0</td>
-<td>89</td>
-<td>86</td>
-<td>136</td>
-<td>163</td>
-<td>208</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Daegu</td>
-<td>90.0</td>
-<td>103</td>
-<td>111</td>
-<td>155</td>
-<td>148</td>
-<td>176</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Incheon</td>
-<td>67.0</td>
-<td>49</td>
-<td>78</td>
-<td>140</td>
-<td>115</td>
-<td>182</td>
+<td data-quarto-table-cell-role="th">Jeonnam</td>
+<td>142.0</td>
+<td>166</td>
+<td>160</td>
+<td>191</td>
+<td>193</td>
+<td>247</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Gwangju</td>
@@ -1135,58 +1322,116 @@ Name: 2015_verybad, dtype: float64</code></pre>
 <td>117</td>
 <td>210</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Daejeon</td>
-<td>111.0</td>
-<td>92</td>
-<td>83</td>
-<td>121</td>
-<td>143</td>
-<td>182</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Ulsan</td>
-<td>101.0</td>
-<td>101</td>
-<td>104</td>
-<td>162</td>
-<td>173</td>
-<td>206</td>
-</tr>
 </tbody>
 </table>
 
 </div>
 </div>
 </div>
-<div id="cdd8e373" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 막대 그래프2</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> np.arange(<span class="dv">7</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">22</span>, <span class="dv">4</span>))</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> data6.columns:</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    plt.bar(index, data6[year], width<span class="op">=</span><span class="fl">0.15</span>, label<span class="op">=</span>year)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> index <span class="op">+</span> <span class="fl">0.15</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Area'</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2015-2020 Fine Dust(PM10) - Good Days By Major City'</span>)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>plt.xticks(index<span class="op">-</span><span class="fl">0.53</span>, data6.index)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b65a4adb" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 막대 그래프2 : 2015-2020 전라권 미세먼지(PM10) 좋음 일수 비교</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2015-2020 Fine Dust(PM10) - Good Days By Jeolla Region'</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> np.arange(<span class="dv">3</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> data6.columns:</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    plt.bar(index, data6[year], width<span class="op">=</span><span class="fl">0.15</span>, label<span class="op">=</span>year.split(<span class="st">"_"</span>)[<span class="dv">0</span>])</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> index <span class="op">+</span> <span class="fl">0.15</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Area'</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>plt.xticks(index<span class="op">-</span><span class="fl">0.53</span>, data6.index)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2_3_matplotlib_files/figure-html/cell-23-output-1.png" width="1709" height="376" class="figure-img"></p>
+<p><img src="2_3_matplotlib_files/figure-html/cell-24-output-1.png" width="668" height="302" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="9d4e0881" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 대도시의 '2017-2020년 미세먼지 보통' 일수만 가져오기</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>data4 <span class="op">=</span> data.copy()</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>data4 <span class="op">=</span> data4.loc[<span class="st">'Seoul'</span>:<span class="st">'Ulsan'</span>, <span class="st">'2017_common'</span>:<span class="st">'2020_common'</span>]</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>data4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div id="87e23272" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 17개 시도의 '2020년 미세먼지 나쁨' 일수만 가져오기</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data2020_bad <span class="op">=</span> data.copy()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>data2020_bad <span class="op">=</span> data2020_bad.loc[<span class="st">'Seoul'</span>:, <span class="st">'2020_bad'</span>]</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>data2020_bad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>area
+Seoul        5
+Busan        2
+Daegu        4
+Incheon      2
+Gwangju      0
+Daejeon      1
+Ulsan        2
+Sejong       4
+Gyeonggi     6
+Gangwon      3
+Chungbuk     3
+Chungnam     6
+Jeonbuk      1
+Jeonnam      0
+Gyeongbuk    2
+Gyeongnam    0
+Jeju         2
+Name: 2020_bad, dtype: int64</code></pre>
+</div>
+</div>
+<div id="fc40c796" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># '2020년 미세먼지 나쁨' 일수를 기준으로 오름차순 정렬</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>data2020_bad.sort_values(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>data2020_bad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>area
+Gwangju      0
+Gyeongnam    0
+Jeonnam      0
+Daejeon      1
+Jeonbuk      1
+Jeju         2
+Busan        2
+Incheon      2
+Ulsan        2
+Gyeongbuk    2
+Gangwon      3
+Chungbuk     3
+Daegu        4
+Sejong       4
+Seoul        5
+Chungnam     6
+Gyeonggi     6
+Name: 2020_bad, dtype: int64</code></pre>
+</div>
+</div>
+<div id="7f46853e" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(data2020_bad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>pandas.core.series.Series</code></pre>
+</div>
+</div>
+<div id="f45df23f" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 가로형 막대 그래프 : 2020년 시도별 미세먼지(PM10) 나쁨 일수 비교</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2020 Fine Dust(PM10) - Bay Days By Area'</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>plt.barh(data2020_bad.index, data2020_bad)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Count'</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Area'</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2_3_matplotlib_files/figure-html/cell-28-output-1.png" width="444" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="097375db" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 특·광역시의 '2017-2020년 미세먼지 보통' 일수만 가져오기</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>data4 <span class="op">=</span> data.copy()</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>data4 <span class="op">=</span> data4.loc[<span class="st">'Seoul'</span>:<span class="st">'Ulsan'</span>, <span class="st">'2017_common'</span>:<span class="st">'2020_common'</span>]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>data4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 
 
@@ -1263,36 +1508,37 @@ Name: 2015_verybad, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="15824844" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 막대 그래프3 : 누적 막대 그래프</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> np.arange(<span class="dv">7</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> np.zeros(<span class="bu">len</span>(data4))</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> data4.columns:</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    plt.barh(index, data4[year], left<span class="op">=</span>left, label<span class="op">=</span>year.split(<span class="st">"_"</span>)[<span class="dv">0</span>])</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    left <span class="op">=</span> left <span class="op">+</span> data4[year]</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">1000</span>)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Count'</span>)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Area'</span>)</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2017-2020 Fine Dust(PM10) - Common Days By Major City'</span>)</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.yticks(index, data4.index)</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fbd5905d" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 누적 막대 그래프 : 2017-2020 특·광역시 미세먼지(PM10) 보통 일수 비교</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'2017-2020 Fine Dust(PM10) - Common Days By Major City'</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> np.arange(<span class="dv">7</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> np.zeros(<span class="bu">len</span>(data4))</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> data4.columns:</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    plt.barh(index, data4[year], left<span class="op">=</span>left, label<span class="op">=</span>year.split(<span class="st">"_"</span>)[<span class="dv">0</span>])</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    left <span class="op">=</span> left <span class="op">+</span> data4[year]</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">1000</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Count'</span>)</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Area'</span>)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>plt.yticks(index, data4.index)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2_3_matplotlib_files/figure-html/cell-25-output-1.png" width="717" height="302" class="figure-img"></p>
+<p><img src="2_3_matplotlib_files/figure-html/cell-30-output-1.png" width="717" height="302" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><br></p>
 </section>
-<section id="산점도" class="level3">
-<h3 class="anchored" data-anchor-id="산점도">5.2.4. 산점도</h3>
+<section id="산점도" class="level2">
+<h2 class="anchored" data-anchor-id="산점도">5.5. 산점도</h2>
 <ul>
-<li>서로 다른 두 수치형 변수 간 관계를 시각화할 때 사용함</li>
+<li>두 수치형 변수 간 관계를 시각화할 때 사용함</li>
 <li>데이터의 분포, 이상값, 변수 간 상관관계, 그룹화된 패턴 등을 직관적으로 파악할 수 있음</li>
 </ul>
 <p><br></p>
@@ -1300,15 +1546,15 @@ Name: 2015_verybad, dtype: float64</code></pre>
 <li>[데이터] 캐글에서 제공하는 붓꽃 데이터
 <ul>
 <li>SepalLength(꽃받침 길이), SepalWidth(꽃받침 너비), PetalLength(꽃잎 길이), PetalWidth(꽃잎 너비), Species(품종)</li>
-<li>[실습파일] <a href="./data/04_data1.csv">04_data1.csv</a></li>
+<li>[실습파일] <a href="./data/04_data2.csv">04_data2.csv</a></li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="3210744a" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./data/04_data2.csv'</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div id="c70f62ca" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./data/04_data2.csv'</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
 <div>
 
 
@@ -1370,70 +1616,75 @@ Name: 2015_verybad, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="3bdf7e59" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 산점도1</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(data[<span class="st">'PetalLength'</span>], data[<span class="st">'PetalWidth'</span>])</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Petal Length'</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Petal Width'</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Petal Length vs Width'</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="14bee71b" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 산점도1 : 꽃잎 길이와 꽃잎 너비의 관계</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 꽃잎 길이가 길수록 꽆잎 너비도 대체로 증가하는 경향이 있음</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Petal Length vs Width'</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(data[<span class="st">'PetalLength'</span>], data[<span class="st">'PetalWidth'</span>])</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Petal Length'</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Petal Width'</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2_3_matplotlib_files/figure-html/cell-27-output-1.png" width="366" height="376" class="figure-img"></p>
+<p><img src="2_3_matplotlib_files/figure-html/cell-32-output-1.png" width="366" height="376" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="0f9388d2" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 산점도2</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(data[<span class="st">'PetalLength'</span>], data[<span class="st">'PetalWidth'</span>], alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>            c<span class="op">=</span>data[<span class="st">'Species'</span>].<span class="bu">map</span>({<span class="st">'setosa'</span>: <span class="st">'red'</span>, <span class="st">'versicolor'</span>: <span class="st">'green'</span>, <span class="st">'virginica'</span>: <span class="st">'blue'</span>}))</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Petal Length'</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Petal Width'</span>)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Petal Length vs Width By Species'</span>)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="19edff83" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 산점도2 : 꽃잎 길이와 꽃잎 너비, 품종의 관계</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 각 품종별로 꽃잎 길이와 너비가 뚜렷이 구분됨</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># setosa는 작고 좁은 꽃잎, virginica는 크고 넓은 꽃잎을 가짐</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Petal Length vs Width By Species'</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(data[<span class="st">'PetalLength'</span>], data[<span class="st">'PetalWidth'</span>], alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>            c<span class="op">=</span>data[<span class="st">'Species'</span>].<span class="bu">map</span>({<span class="st">'setosa'</span>: <span class="st">'red'</span>, <span class="st">'versicolor'</span>: <span class="st">'green'</span>, <span class="st">'virginica'</span>: <span class="st">'blue'</span>}))</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Petal Length'</span>)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Petal Width'</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2_3_matplotlib_files/figure-html/cell-28-output-1.png" width="366" height="376" class="figure-img"></p>
+<p><img src="2_3_matplotlib_files/figure-html/cell-33-output-1.png" width="366" height="376" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><br></p>
 </section>
-<section id="히스토그램" class="level3">
-<h3 class="anchored" data-anchor-id="히스토그램">5.2.5. 히스토그램</h3>
+<section id="히스토그램" class="level2">
+<h2 class="anchored" data-anchor-id="히스토그램">5.6. 히스토그램</h2>
 <ul>
 <li>수치형 변수의 분포를 시각화할 때 사용함</li>
 <li>데이터를 일정한 구간(bin)으로 나누고, 각 구간에 속하는 값들의 빈도를 막대의 높이로 나타냄</li>
 </ul>
 <p><br></p>
-<div id="723ccd76" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히스토그램</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>setosa <span class="op">=</span> data.loc[data[<span class="st">'Species'</span>]<span class="op">==</span><span class="st">'setosa'</span>,]</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>plt.hist(setosa[<span class="st">'PetalLength'</span>], bins<span class="op">=</span><span class="dv">8</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Petal Length'</span>)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Petal Length in Iris Setosa'</span>)</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9bfd8a41" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히스토그램 : setosa 품종의 꽃잎 길이 분포</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># setosa 품종의 꽃잎 길이는 1.0~1.9cm 사이에 분포함</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터는 대부분 1.5cm 주변에 집중되어 있으며, 대칭에 가까운 형태로 나타남</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>setosa <span class="op">=</span> data.loc[data[<span class="st">'Species'</span>]<span class="op">==</span><span class="st">'setosa'</span>,]</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Petal Length in Iris Setosa'</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>plt.hist(setosa[<span class="st">'PetalLength'</span>], bins<span class="op">=</span><span class="dv">8</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Petal Length'</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2_3_matplotlib_files/figure-html/cell-29-output-1.png" width="436" height="302" class="figure-img"></p>
+<p><img src="2_3_matplotlib_files/figure-html/cell-34-output-1.png" width="436" height="302" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><br></p>
 </section>
-<section id="상자수염-그래프" class="level3">
-<h3 class="anchored" data-anchor-id="상자수염-그래프">5.2.6. 상자수염 그래프</h3>
+<section id="상자수염-그래프" class="level2">
+<h2 class="anchored" data-anchor-id="상자수염-그래프">5.7. 상자수염 그래프</h2>
 <ul>
 <li>수치형 변수의 분포를 시각화할 때 사용함</li>
 <li>다섯 숫자 요약값을 기반으로 이상값, 분포의 비대칭 여부 등을 직관적으로 파악할 수 있음</li>
@@ -1441,25 +1692,26 @@ Name: 2015_verybad, dtype: float64</code></pre>
 <p><br></p>
 <p><img src="./images/fig2-4.jpg" class="img-fluid" style="width:40.0%"></p>
 <p><br></p>
-<div id="4ac6d904" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상자수염 그래프</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plt.boxplot([data[<span class="st">'SepalLength'</span>], data[<span class="st">'SepalWidth'</span>]],</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>            tick_labels<span class="op">=</span>[<span class="st">'Sepal Length'</span>, <span class="st">'Sepal Width'</span>],</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>            vert<span class="op">=</span><span class="va">False</span>, widths<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Sepal Length and Width'</span>)</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="463e8d67" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상자수염 그래프 : 꽃받침 길이와 너비의 분포 비교</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 꽃받침 길이는 꽃받침 너비보다 전체적으로 큰 값을 가지며, 변동 폭도 더 큼</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 꽃받침 너비는 상대적으로 산포가 작고, 일부 이상값(outlier)이 존재함</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>plt.boxplot([data[<span class="st">'SepalLength'</span>], data[<span class="st">'SepalWidth'</span>]],</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>            tick_labels<span class="op">=</span>[<span class="st">'Sepal Length'</span>, <span class="st">'Sepal Width'</span>],</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>            vert<span class="op">=</span><span class="va">False</span>, widths<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Sepal Length and Width'</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2_3_matplotlib_files/figure-html/cell-30-output-1.png" width="488" height="283" class="figure-img"></p>
+<p><img src="2_3_matplotlib_files/figure-html/cell-35-output-1.png" width="488" height="283" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
