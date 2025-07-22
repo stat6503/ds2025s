@@ -25,7 +25,7 @@ jupyter: python3
 
 <br>
 
-![](./images/fig3-6.jpg){width=70%}
+![](./images/fig3-7.jpg){width=70%}
 
 <br>
 
@@ -89,7 +89,7 @@ df2021.drop(['upperwhisker', 'lowerwhisker', 'Dystopia'], axis=1, inplace=True)
 ```
 
 ```{python}
-# 열 이름 변경
+# 데이터 전처리 : 열 이름 변경
 df2020.columns = ['Country', 'Score', 'GDP.per.capita', 'Social.support', 'Life.expectancy', 'Freedom', 'Generosity']
 df2021.columns = ['Country', 'Score', 'GDP.per.capita', 'Social.support', 'Life.expectancy', 'Freedom', 'Generosity']
 ```
@@ -147,7 +147,7 @@ plt.show()
 
 <br>
 
-##### 결과 및 시사점
+##### **결과 및 시사점**
 + 행복지수와 GDP 간 관계는?
   + 상관계수는 2020년 0.78, 2021년 0.79로, 강한 양의 상관관계로 나타남
   + 경제 성장은 보통 더 높은 소득과 향상된 생활 수준으로 이어지므로, 국민의 행복 수준도 높아지는 경향이 있음
@@ -193,7 +193,7 @@ plt.show()
 
 <br>
 
-##### 결과 및 시사점
+##### **결과 및 시사점**
 + 행복지수와 사회적 지지 간 관계는?
   + 상관계수는 2020년 0.77, 2021년 0.76으로, 강한 양의 상관관계로 나타남
   + 사회적 지지는 가족, 친구, 지인 등과 함께하는 관계에서 느끼는 정서적 지원에 대한 인식을 의미함
@@ -237,7 +237,7 @@ plt.show()
 
 <br>
 
-##### 결과 및 시사점
+##### **결과 및 시사점**
 + 행복지수에 가장 큰 영향을 미치는 요인은 경제적 여유(GDP, 0.79), 건강(0.77), 사회적 지지(0.76), 선택에 대한 자유도(0.61) 순으로 나타남
 + 기부 활동과 행복지수는 뚜렷한 관련이 없는 것으로 나타남
 + 1인당 GDP와 건강한 기대수명은 강한 양의 상관관계(0.86)가 있으므로, 경제적으로 여유로운 사람들이 더 건강하게 사는 경향이 있음을 알 수 있음
@@ -247,6 +247,43 @@ plt.show()
 <br>
 
 ## 8.2. 회귀분석
++ 회귀분석(regression analysis)
+  + 하나 이상의 독립변수(x)가 종속변수(y)에 미치는 영향력의 크기를 수학적 관계식으로 추정하는 통계 기법
+    + 독립변수(independent variable) : 다른 변수의 변화를 야기하는 변수
+    + 종속변수(dependent variable) : 다른 변수의 영향으로 변화하는 변수
+  + 독립변수의 특정 값에 대응하는 종속변수의 값을 예측할 수 있음
+  + 독립변수 개수에 따른 구분
+    + 단순선형 회귀분석(simple linear regression) : 독립변수가 1개인 경우
+    + 다중선형 회귀분석(multiple linear regression) : 독립변수가 2개인 경우
+
+<br>
+
+### 8.2.1. 단순선형 회귀분석
++ 단순선형 회귀분석
+  + 하나의 독립변수가 종속변수에 영향을 미치는 회귀모형
+    + 예 : 공부 시간(독립변수)에 따른 시험 성적(종속변수)의 변화
+  + 단순선형 회귀모형
+      $$y = \beta_0 + \beta_1x + \epsilon$$
+    + $\beta_0$ : 절편(intercept)
+    + $\beta_1$ : 기울기(slope), 독립변수가 1단위 증가할 때 y의 평균적인 변화량
+    + $\epsilon$ : 오차(error)
+  + 회귀분석의 목적은 주어진 데이터를 가장 잘 설명하는 회귀선을 찾는 것
+      $$\hat{y} = b_0 + b_1x$$
+    + 일반적으로 오차의 제곱합을 최소화하는 최소제곱추정법(OLS; Ordinary Least Squares)을 사용함
+
+<br>
+
++ 잔차(residual) : 관측값과 예측값의 차이, $y-\hat{y}$
++ 결정계수 $R^2$
+  + 회귀모형이 데이터를 얼마나 잘 설명하는지 나타내는 지표
+  + 잔차의 크기가 작을수록 모형의 설명력이 높음
+  + 결정계수는 0~1사이의 값을 가지며, 1에 가까울 때 예측의 정밀도가 높음
+
+<br>
+
+![](./images/fig3-8.jpg)
+
+<br>
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
@@ -254,7 +291,7 @@ plt.show()
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-plt.rc('font', family='Malgun Gothic')  # 또는 '맑은 고딕'
+plt.rc('font', family='Malgun Gothic')
 mpl.rcParams['axes.unicode_minus'] = False
 ```
 
@@ -264,93 +301,109 @@ mpl.rcParams['axes.unicode_minus'] = False
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 284}
-import matplotlib.pyplot as plt
+# sklearn의 linear_model 모듈에서 LinearRegression 클래스 불러오기
 from sklearn.linear_model import LinearRegression
+```
 
-# 공부시간 : 독립변수, 시험점수 : 종속변수
-x = [[2],[4],[6],[8],[10]]       # 공부시간
-y = [[81],[93],[90],[97],[100]]  # 시험점수
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 284}
+## 공부 시간(독립변수)에 따른 시험 성적(종속변수)의 변화
+# 데이터프레임 생성
+data = pd.DataFrame({
+    'study_time': [2, 4, 6, 8, 10],
+    'score': [81, 93, 90, 97, 100]
+})
 
-# 산점도 그래프
-plt.scatter(x,y)
+# 산점도 : 두 변수 간 상관관계 확인
+plt.figure(figsize=(5, 3))
+plt.scatter(data['study_time'], data['score'])
+plt.xlabel('Study Time (hours)')
+plt.ylabel('Score')
 plt.show()
 
-# 학습시키기
-model = LinearRegression()      # 선형회귀분석 객체 생성하기
+# 독립변수, 종속변수 분리
+# scikit-Learn에서 입력 데이터(feature)를 2차원 배열로 요구함
+X = data[['study_time']]
+y = data['score']
 
-# 선형회귀분석 객체를 이용하여 학습시키기
-model.fit(x,y)
+# 선형 회귀모형 객체 생성 및 학습
+model = LinearRegression()
+model.fit(X, y)
 
-# 예측하기
-result = model.predict([[7]])   # 7시간 학습
-print(f'예상점수:{result}')
+# 7시간 공부했을 때, 시험 점수 예측
+newdata = pd.DataFrame({'study_time': [7]})
+predicted_score = model.predict(newdata)
+print(predicted_score)
 ```
 
 <br>
 
-### 8.2.1. 단순선형 회귀분석
+### 8.2.2. (실습) 날씨 데이터 분석
++ \[데이터\] 기상자료개방포털에서 제공하는 서울특별시의 기상 관측 데이터
+  + 기간 : 2010년 1월 ~ 2020년 12월
+  + 변수 : 날짜, 지점, 평균기온(℃), 최저기온(℃), 최고기온(℃)
+  + \[실습파일\] [(2010-2020)_weather.csv](./data/(2010-2020)_weather.csv)
+
+<br>
+
+> **2021년 8월 15일의 평균기온을 예측하면?**
 
 <br>
 
 ```{python}
+## (1) 데이터 확인 및 전처리
+```
+
+```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 206}
 # 데이터 불러오기
-seoul = pd.read_csv('./data/(2010-2020) weather.csv', encoding='cp949')
+seoul = pd.read_csv('./data/(2010-2020)_weather.csv', encoding='cp949')
 seoul.head()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
+# 데이터 정보
 seoul.info()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 300}
+# 요약 통계량 확인
 seoul.describe()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 206}
-# 지점 변수 삭제
+# 데이터 전처리 : 열 삭제
 seoul.drop('지점', axis=1, inplace=True)
-seoul.head()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 206}
-seoul.head()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-# 열 이름 변경
+# 데이터 전처리 : 열 이름 변경
 seoul.columns = ['날짜', '평균기온', '최저기온', '최고기온']
-seoul.columns
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
+# 데이터 전처리 : 결측값 확인
 seoul.isnull().sum()
 ```
 
 ```{python}
-# 결측값을 포함하는 행 삭제
-seoul.dropna(subset=['최고기온'], axis=0, inplace=True)
+# 데이터 전처리 : 결측값이 포함된 행 삭제
+seoul.dropna(axis=0, inplace=True)
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
-seoul.info()
-```
-
-```{python}
+# 데이터 전처리 : 날짜 변수를 datetime 형식으로 변환
 seoul['날짜'] = pd.to_datetime(seoul['날짜'])
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 206}
-# 열 추가
+# 데이터 전처리 : 새로운 변수(연도, 월, 일) 생성
 seoul['연도'] = seoul['날짜'].dt.year
 seoul['월']=seoul['날짜'].dt.month
 seoul['일']=seoul['날짜'].dt.day
@@ -359,183 +412,78 @@ seoul.head()
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 394}
-# 필터링
-conditions = (seoul['날짜'].dt.month==8) & (seoul['날짜'].dt.day==15)
+# 데이터 전처리 : 8월 15일 데이터 선택
+conditions = (seoul['월']==8) & (seoul['일']==15)
 seoul0815 = seoul[conditions]
 seoul0815
 ```
 
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-seoul0815.info()
-```
+<br>
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
-# 결측값 확인
-seoul0815.isnull().sum()
+## (2) 데이터 분석 및 시각화
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 444}
-# 연도에 따른 평균기온 변화
+# 산점도 : 연도에 따른 평균기온 변화
+# 독립변수, 종속변수 분리
+# scikit-Learn에서 입력 데이터(feature)를 2차원 배열로 요구함
+X = seoul0815[['연도']]
+y = seoul0815['평균기온']
+
 fig = plt.figure(figsize=(5, 3))
-X = seoul0815[['연도']]
-Y = seoul0815['평균기온']
+plt.scatter(X, y)
 plt.xlabel('연도')
 plt.ylabel('평균기온')
-plt.scatter(X, Y)
 plt.show()
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 869}
-# jointplot 그리기
-sns.jointplot(x='연도', y ='평균기온', kind='reg', data=seoul0815)
-plt.show()
+# 상관계수 : 연도와 평균기온의 상관관계
+# 연도와 평균기온은 약한 양의 상관관계로 나타나, 단순선형 회귀모형을 적합할 수 있음
+seoul0815[['연도', '평균기온']].corr()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-# 단순선형 회귀분석 : 2022년 8월 15일 기온 예측
+# 단순선형 회귀분석 : 2021년 8월 15일 평균기온 예측
+# 선형 회귀모형 객체 생성 및 학습
 model = LinearRegression()
-X = seoul0815[['연도']]
-Y = seoul0815['평균기온']
-model.fit(X, Y)
+model.fit(X, y)
 
-future = pd.DataFrame({'연도': [2022]})
-result = model.predict(future)
-print(result)   
-```
+# 회귀식의 절편 및 기울기
+intercept = model.intercept_
+slope = model.coef_
+print(f'회귀식: hat(y) = {model.intercept_:.2f} + {model.coef_[0]:.2f}*x')
 
-<br>
+# 결정계수
+R2 = model.score(X, y)
+print(f'결정계수 : {R2:.3f}')
 
-+ fit() 메서드는 선형 회귀 모델에 필요한 두 가지 변수를 전달
-  + 기울기: line_fitter.coef_
-  + 절편: line_fitter.intercept_
-  + 이렇게 하면 새로운 X 값을 넣어 y값을 예측할 수 있게 됨
-  + 싸이킷런 단순 선형회귀에서는 최소제곱법(Ordinary Least Squares)을 활용하기 때문
-
-<br>
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-seoul0815.info()
+# 2021년일 때, 평균기온 예측
+newdata = pd.DataFrame({'연도': [2022]})
+predicted_value = model.predict(newdata)
+print(f'2021년 8월 15일 평균기온 예측값 : {predicted_value[0]:.2f}')
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 444}
-# 8월 15일 평균기온을 산점도, 회귀선 출력하기
-x=seoul0815['연도']
-y=seoul0815['평균기온']
-
-fp1 = np.polyfit(x, y,2)
-f1 = np.poly1d(fp1)
-fx = np.linspace(2010, 2020)
-
-plt.figure(figsize=(5, 3))
-plt.scatter(x,y)
-plt.plot(fx, f1(fx), ls='dashed', lw=3, color='g')
-
-plt.xlabel('연도')
-plt.ylabel('평균기온')
-plt.show()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-fp1
-f1
-fx
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 444}
-# 시본 모듈로 추세선 넣기
+# 산점도와 단순선형 회귀선
 fig = plt.figure(figsize=(5, 3))   
-sns.regplot(x='연도', y='평균기온', data=seoul0815) 
+sns.regplot(x='연도', y='평균기온', data=seoul0815)
 plt.grid()
 plt.show()
 ```
 
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 461}
-sns.jointplot(x='연도', y='평균기온', data=seoul0815, kind='reg')
-plt.show()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 728}
-sns.pairplot(seoul0815, kind='reg')
-plt.show()
-```
-
 <br>
 
-### 8.2.2. 다중선형 회귀분석
+##### **결과 및 시사점**
++ 연도와 평균기온은 약한 양의 상관관계(r=0.195)로 나타나, 단순선형 회귀모형을 적합할 수 있음
++ 독립변수는 연도, 종속변수는 평균기온으로 단순선형 회귀분석을 실시한 결과, 모형의 설명력은 3.8%로 비교적 낮게 나타남
++ 적합된 회귀식 : $\hat{y} = -297.85 + 0.16*x$
+  + 연도가 1년 증가할수록 8월 15일의 평균기온은 약 0.16℃ 상승하는 것으로 추정됨
++ 따라서 2021년 8월 15일의 평균기온은 27.51℃로 예측됨
 
 <br>
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 426}
-seoul.info()
-seoul.head()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-from sklearn.linear_model import LinearRegression
-model = LinearRegression()
-
-X = seoul0815[['연도','최저기온','최고기온']]
-Y = seoul0815['평균기온']
-
-model.fit(X, Y)
-new_data = pd.DataFrame({'연도': [2022], '최저기온': [24], '최고기온': [33]})
-result = model.predict(new_data)
-print(result)
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 502}
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-import seaborn as sns
-plt.figure(figsize=(10,3))
-
-# 데이터 준비 : 속성(변수) 2가지 선택
-X = seoul[['연도','최저기온','최고기온']]
-Y = seoul['평균기온']
-
-# 먼저 X와 Y변수를 받아 사이킷런의 train_test_split함수를 통해 7:3의 비율로 데이터를 분할한다.
-x_train, x_test, y_train, y_test = train_test_split(X,Y, train_size = 0.7, test_size = 0.3)
-
-#다중 선형 회귀 모델 생성
-model = LinearRegression()
-model.fit(x_train, y_train)
-
-# 모델 테스트하기 : test셋의 일부 데이터를 가지고 모델의 예측결과가 얼마나 좋게 나타나는지 확인
-plt.plot(model.predict(x_test[:50]), label='predict')
-plt.plot(y_test[:50].values.reshape(-1, 1), label='real temp')
-plt.legend()
-plt.show()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 502}
-# 전체 데이터를 이용해 값을 예측하고 실제 값과 비교하여 산점도 그리기
-plt.figure(figsize=(10, 3))
-y_predict = model.predict(x_test)
-plt.scatter(y_test, y_predict, alpha = 0.4)
-plt.show()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-# score 메소드를 통해 다중선형회귀 모델의 성능을 측정
-print(model.score(x_train,y_train))
-# 결정계수 R²의 최댓값은 1이며 이 수치가 클수록 실제값과 예측값이 유사함을 의미한다.
-# 우리가 모델링한 다중선형회귀모델은 약 0.99의 결정계수를 가지며 
-# 이는 X변수들이 y변수에 미치는 영향이 99%로 X변수들이 평균기온값 변동의 99%를 설명할 수 있다는 뜻임
-```
 

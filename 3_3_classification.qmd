@@ -18,7 +18,7 @@ jupyter: python3
   + 일반적으로 k의 개수는 동점 상황을 만들지 않기 위해 홀수로 지정함
   + 거리 계산에는 보통 유클리디안 거리(Euclidean distance)를 사용함
 
-![](./images/fig3-7.jpg){width=50%}
+![](./images/fig3-9.jpg){width=50%}
 
 <br>
 
@@ -28,7 +28,7 @@ jupyter: python3
     + k가 너무 작으면, 개별 데이터에 민감하게 반응하여 과적합(overfitting)이 발생함
   + 일반적으로 최적의 k 값은 교차검증(cross-validation)을 통해 테스트 오차(test error)를 최소홯는 값으로 결정함
 
-![](./images/fig3-8.jpg){width=70%}
+![](./images/fig3-10.jpg){width=70%}
 
 <br>
 

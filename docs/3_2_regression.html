@@ -104,6 +104,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -245,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 <p><br></p>
-<p><img src="./images/fig3-6.jpg" class="img-fluid" style="width:70.0%"></p>
+<p><img src="./images/fig3-7.jpg" class="img-fluid" style="width:70.0%"></p>
 <p><br></p>
 </section>
 <section id="실습-행복지수-데이터-분석" class="level3">
@@ -262,22 +291,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>행복지수와 관련된 요인은 무엇일까?</strong></p>
 </blockquote>
 <p><br></p>
-<div id="5ac4fe58" class="cell" data-execution_count="1">
+<div id="ded68d2b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (1) 데이터 확인 및 전처리</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0a7daa4e" class="cell" data-execution_count="2">
+<div id="0aeba5ba" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 라이브러리 불러오기</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fed39526" class="cell" data-execution_count="3">
+<div id="863bfa58" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df2020 <span class="op">=</span> pd.read_csv(<span class="st">'./data/2020.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df2021 <span class="op">=</span> pd.read_csv(<span class="st">'./data/2021.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6f9d7298" class="cell" data-execution_count="4">
+<div id="e63338b0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 정보</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df2020.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -294,7 +323,7 @@ Dystopia                        float64
 dtype: object</code></pre>
 </div>
 </div>
-<div id="88aaa73a" class="cell" data-execution_count="5">
+<div id="07b02638" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2020년 데이터 확인</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df2020.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -402,7 +431,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="180fe04c" class="cell" data-execution_count="6">
+<div id="e7329ce8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2021년 데이터 확인</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df2021.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -510,28 +539,28 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="b7612e14" class="cell" data-execution_count="7">
+<div id="e4c01675" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 열 삭제</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df2020.drop([<span class="st">'upperwhisker'</span>, <span class="st">'lowerwhisker'</span>, <span class="st">'Dystopia'</span>], axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df2021.drop([<span class="st">'upperwhisker'</span>, <span class="st">'lowerwhisker'</span>, <span class="st">'Dystopia'</span>], axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3e3f84a0" class="cell" data-execution_count="8">
+<div id="da25c0d6" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 이름 변경 : 공백을 .으로 대체</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#df2020.columns = df2020.columns.str.replace(' ','.')</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#df2021.columns = df2021.columns.str.replace(' ','.')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="80d085af" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 이름 변경</span></span>
+<div id="cd0e2033" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 열 이름 변경</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df2020.columns <span class="op">=</span> [<span class="st">'Country'</span>, <span class="st">'Score'</span>, <span class="st">'GDP.per.capita'</span>, <span class="st">'Social.support'</span>, <span class="st">'Life.expectancy'</span>, <span class="st">'Freedom'</span>, <span class="st">'Generosity'</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df2021.columns <span class="op">=</span> [<span class="st">'Country'</span>, <span class="st">'Score'</span>, <span class="st">'GDP.per.capita'</span>, <span class="st">'Social.support'</span>, <span class="st">'Life.expectancy'</span>, <span class="st">'Freedom'</span>, <span class="st">'Generosity'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
-<div id="fd5e845d" class="cell" data-execution_count="10">
+<div id="3391b8cc" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (2) 데이터 분석 및 시각화</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">## (2-1) 행복 점수와 기능의 상관관계</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">##       한 국가의 행복지수와 경제적(GDP), 법적 상태(Freedom)는 상관관계가 있는가?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="51b05758" class="cell" data-execution_count="11">
+<div id="46a453ec" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2020년 데이터 전처리</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df2020.copy()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df1.drop([<span class="st">'Social.support'</span>, <span class="st">'Life.expectancy'</span>, <span class="st">'Generosity'</span>], axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -599,7 +628,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="61e2d843" class="cell" data-execution_count="12">
+<div id="b3ea2921" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상관관계 : 2020년 데이터</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 행복지수와 GDP 간 상관계수는 0.78로, 강한 양의 상관관계임</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 행복지수와 Freedom 간 상관계수는 0.59로, 뚜렷한 양의 상관관계임</span></span>
@@ -612,7 +641,7 @@ Freedom           0.590597
 Name: Score, dtype: float64</code></pre>
 </div>
 </div>
-<div id="ce536a0b" class="cell" data-execution_count="13">
+<div id="458128eb" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히트맵 : 2020년 데이터</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(corr, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
@@ -625,7 +654,7 @@ Name: Score, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="0437a29f" class="cell" data-execution_count="14">
+<div id="0d31989b" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2021년 데이터 전처리</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df2021.copy()</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df2.drop([<span class="st">'Social.support'</span>, <span class="st">'Life.expectancy'</span>, <span class="st">'Generosity'</span>], axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -693,7 +722,7 @@ Name: Score, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="83d4d653" class="cell" data-execution_count="15">
+<div id="70bf73cb" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히트맵 : 2021년 데이터</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 행복지수와 GDP 간 상관계수는 0.79로, 강한 양의 상관관계임</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 헹복지수와 Freedom 간 상관계수는 0.61로, 뚜렷한 양의 상관관계임</span></span>
@@ -710,7 +739,7 @@ Name: Score, dtype: float64</code></pre>
 </div>
 <p><br></p>
 <section id="결과-및-시사점" class="level5">
-<h5 class="anchored" data-anchor-id="결과-및-시사점">결과 및 시사점</h5>
+<h5 class="anchored" data-anchor-id="결과-및-시사점"><strong>결과 및 시사점</strong></h5>
 <ul>
 <li>행복지수와 GDP 간 관계는?
 <ul>
@@ -729,16 +758,16 @@ Name: Score, dtype: float64</code></pre>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="7d4a0035" class="cell" data-execution_count="16">
+<div id="66f77335" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (2-2) 행복 점수와 사회적 상태의 상관관계</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">##       한 국가의 행복지수와 사회적 상태(Social.support)는 상관관계가 있는가?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3f0a05a8" class="cell" data-execution_count="17">
+<div id="1ce32e9f" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> df2020[[<span class="st">'Generosity'</span>, <span class="st">'Social.support'</span>, <span class="st">'Score'</span>]].copy()</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> df2021[[<span class="st">'Generosity'</span>, <span class="st">'Social.support'</span>, <span class="st">'Score'</span>]].copy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7555fc9d" class="cell" data-execution_count="18">
+<div id="d98f85d0" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히트맵 : 2020년 데이터</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>a1 <span class="op">=</span> x1.corr()</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
@@ -752,7 +781,7 @@ Name: Score, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="94942a9e" class="cell" data-execution_count="19">
+<div id="2c21ae5e" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히트맵 : 2021년 데이터</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>a2 <span class="op">=</span> x2.corr()</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
@@ -769,7 +798,7 @@ Name: Score, dtype: float64</code></pre>
 <p><br></p>
 </section>
 <section id="결과-및-시사점-1" class="level5">
-<h5 class="anchored" data-anchor-id="결과-및-시사점-1">결과 및 시사점</h5>
+<h5 class="anchored" data-anchor-id="결과-및-시사점-1"><strong>결과 및 시사점</strong></h5>
 <ul>
 <li>행복지수와 사회적 지지 간 관계는?
 <ul>
@@ -787,10 +816,10 @@ Name: Score, dtype: float64</code></pre>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="cee1a761" class="cell" data-execution_count="20">
+<div id="54be80bc" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (2-3) 행복 점수와 전체 변수의 상관관계</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0022408e" class="cell" data-execution_count="21">
+<div id="d53639a4" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 전체 상관계수 : 2020년 데이터</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> df2020.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>).corr()</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -807,7 +836,7 @@ Name: Score, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="a50fbc92" class="cell" data-execution_count="22">
+<div id="78fb4732" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 전체 상관계수 : 2021년 데이터</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> df2021.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>).corr()</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -827,7 +856,7 @@ Name: Score, dtype: float64</code></pre>
 <p><br></p>
 </section>
 <section id="결과-및-시사점-2" class="level5">
-<h5 class="anchored" data-anchor-id="결과-및-시사점-2">결과 및 시사점</h5>
+<h5 class="anchored" data-anchor-id="결과-및-시사점-2"><strong>결과 및 시사점</strong></h5>
 <ul>
 <li>행복지수에 가장 큰 영향을 미치는 요인은 경제적 여유(GDP, 0.79), 건강(0.77), 사회적 지지(0.76), 선택에 대한 자유도(0.61) 순으로 나타남</li>
 <li>기부 활동과 행복지수는 뚜렷한 관련이 없는 것으로 나타남</li>
@@ -840,59 +869,137 @@ Name: Score, dtype: float64</code></pre>
 </section>
 <section id="회귀분석" class="level2">
 <h2 class="anchored" data-anchor-id="회귀분석">8.2. 회귀분석</h2>
-<div id="e7c7becf" class="cell" data-execution_count="23">
+<ul>
+<li>회귀분석(regression analysis)
+<ul>
+<li>하나 이상의 독립변수(x)가 종속변수(y)에 미치는 영향력의 크기를 수학적 관계식으로 추정하는 통계 기법
+<ul>
+<li>독립변수(independent variable) : 다른 변수의 변화를 야기하는 변수</li>
+<li>종속변수(dependent variable) : 다른 변수의 영향으로 변화하는 변수</li>
+</ul></li>
+<li>독립변수의 특정 값에 대응하는 종속변수의 값을 예측할 수 있음</li>
+<li>독립변수 개수에 따른 구분
+<ul>
+<li>단순선형 회귀분석(simple linear regression) : 독립변수가 1개인 경우</li>
+<li>다중선형 회귀분석(multiple linear regression) : 독립변수가 2개인 경우</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><br></p>
+<section id="단순선형-회귀분석" class="level3">
+<h3 class="anchored" data-anchor-id="단순선형-회귀분석">8.2.1. 단순선형 회귀분석</h3>
+<ul>
+<li>단순선형 회귀분석
+<ul>
+<li>하나의 독립변수가 종속변수에 영향을 미치는 회귀모형
+<ul>
+<li>예 : 공부 시간(독립변수)에 따른 시험 성적(종속변수)의 변화</li>
+</ul></li>
+<li>단순선형 회귀모형 <span class="math display">\[y = \beta_0 + \beta_1x + \epsilon\]</span>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> : 절편(intercept)</li>
+<li><span class="math inline">\(\beta_1\)</span> : 기울기(slope), 독립변수가 1단위 증가할 때 y의 평균적인 변화량</li>
+<li><span class="math inline">\(\epsilon\)</span> : 오차(error)</li>
+</ul></li>
+<li>회귀분석의 목적은 주어진 데이터를 가장 잘 설명하는 회귀선을 찾는 것 <span class="math display">\[\hat{y} = b_0 + b_1x\]</span>
+<ul>
+<li>일반적으로 오차의 제곱합을 최소화하는 최소제곱추정법(OLS; Ordinary Least Squares)을 사용함</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li>잔차(residual) : 관측값과 예측값의 차이, <span class="math inline">\(y-\hat{y}\)</span></li>
+<li>결정계수 <span class="math inline">\(R^2\)</span>
+<ul>
+<li>회귀모형이 데이터를 얼마나 잘 설명하는지 나타내는 지표</li>
+<li>잔차의 크기가 작을수록 모형의 설명력이 높음</li>
+<li>결정계수는 0~1사이의 값을 가지며, 1에 가까울 때 예측의 정밀도가 높음</li>
+</ul></li>
+</ul>
+<p><br></p>
+<p><img src="./images/fig3-8.jpg" class="img-fluid"></p>
+<p><br></p>
+<div id="e5595e75" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 한글 깨짐 현상에 대한 해결 방법</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">'font'</span>, family<span class="op">=</span><span class="st">'Malgun Gothic'</span>)  <span class="co"># 또는 '맑은 고딕'</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">'font'</span>, family<span class="op">=</span><span class="st">'Malgun Gothic'</span>)</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>mpl.rcParams[<span class="st">'axes.unicode_minus'</span>] <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f6b4b240" class="cell" data-execution_count="24">
+<div id="97cfc36f" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># scikit-learn 설치하기</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install scikit-learn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e700ff15" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 공부시간 : 독립변수, 시험점수 : 종속변수</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [[<span class="dv">2</span>],[<span class="dv">4</span>],[<span class="dv">6</span>],[<span class="dv">8</span>],[<span class="dv">10</span>]]       <span class="co"># 공부시간</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> [[<span class="dv">81</span>],[<span class="dv">93</span>],[<span class="dv">90</span>],[<span class="dv">97</span>],[<span class="dv">100</span>]]  <span class="co"># 시험점수</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 산점도 그래프</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(x,y)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 학습시키기</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()      <span class="co"># 선형회귀분석 객체 생성하기</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 선형회귀분석 객체를 이용하여 학습시키기</span></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>model.fit(x,y)</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 예측하기</span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.predict([[<span class="dv">7</span>]])   <span class="co"># 7시간 학습</span></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'예상점수:</span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fda08402" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn의 linear_model 모듈에서 LinearRegression 클래스 불러오기</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="a5414d8c" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">## 공부 시간(독립변수)에 따른 시험 성적(종속변수)의 변화</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터프레임 생성</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'study_time'</span>: [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>],</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'score'</span>: [<span class="dv">81</span>, <span class="dv">93</span>, <span class="dv">90</span>, <span class="dv">97</span>, <span class="dv">100</span>]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 산점도 : 두 변수 간 상관관계 확인</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(data[<span class="st">'study_time'</span>], data[<span class="st">'score'</span>])</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Study Time (hours)'</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Score'</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 독립변수, 종속변수 분리</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co"># scikit-Learn에서 입력 데이터(feature)를 2차원 배열로 요구함</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">'study_time'</span>]]</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">'score'</span>]</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 선형 회귀모형 객체 생성 및 학습</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 7시간 공부했을 때, 시험 점수 예측</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>newdata <span class="op">=</span> pd.DataFrame({<span class="st">'study_time'</span>: [<span class="dv">7</span>]})</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>predicted_score <span class="op">=</span> model.predict(newdata)</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(predicted_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-26-output-1.png" width="582" height="411" class="figure-img"></p>
+<p><img src="3_2_regression_files/figure-html/cell-27-output-1.png" width="441" height="282" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>예상점수:[[94.3]]</code></pre>
+<pre><code>[94.3]</code></pre>
 </div>
 </div>
 <p><br></p>
-<section id="단순선형-회귀분석" class="level3">
-<h3 class="anchored" data-anchor-id="단순선형-회귀분석">8.2.1. 단순선형 회귀분석</h3>
+</section>
+<section id="실습-날씨-데이터-분석" class="level3">
+<h3 class="anchored" data-anchor-id="실습-날씨-데이터-분석">8.2.2. (실습) 날씨 데이터 분석</h3>
+<ul>
+<li>[데이터] 기상자료개방포털에서 제공하는 서울특별시의 기상 관측 데이터
+<ul>
+<li>기간 : 2010년 1월 ~ 2020년 12월</li>
+<li>변수 : 날짜, 지점, 평균기온(℃), 최저기온(℃), 최고기온(℃)</li>
+<li>[실습파일] <a href="./data/(2010-2020)_weather.csv">(2010-2020)_weather.csv</a></li>
+</ul></li>
+</ul>
 <p><br></p>
-<div id="b3b7f0e6" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>seoul <span class="op">=</span> pd.read_csv(<span class="st">'./data/(2010-2020) weather.csv'</span>, encoding<span class="op">=</span><span class="st">'cp949'</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>seoul.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<blockquote class="blockquote">
+<p><strong>2021년 8월 15일의 평균기온을 예측하면?</strong></p>
+</blockquote>
+<p><br></p>
+<div id="202dc363" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (1) 데이터 확인 및 전처리</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c7a4d98c" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>seoul <span class="op">=</span> pd.read_csv(<span class="st">'./data/(2010-2020)_weather.csv'</span>, encoding<span class="op">=</span><span class="st">'cp949'</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>seoul.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 
 
@@ -954,8 +1061,9 @@ Name: Score, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="4f3fbc1d" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>seoul.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="37d253d5" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 정보</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>seoul.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 4018 entries, 0 to 4017
@@ -971,9 +1079,10 @@ dtypes: float64(3), int64(1), object(1)
 memory usage: 157.1+ KB</code></pre>
 </div>
 </div>
-<div id="7d0f6b22" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>seoul.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div id="dcb81abd" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 요약 통계량 확인</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>seoul.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
 <div>
 
 
@@ -1050,135 +1159,18 @@ memory usage: 157.1+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="1ee75520" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 지점 변수 삭제</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>seoul.drop(<span class="st">'지점'</span>, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>seoul.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">날짜</th>
-<th data-quarto-table-cell-role="th">평균기온(℃)</th>
-<th data-quarto-table-cell-role="th">최저기온(℃)</th>
-<th data-quarto-table-cell-role="th">최고기온(℃)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2010-01-01</td>
-<td>-7.6</td>
-<td>-12.7</td>
-<td>-3.6</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2010-01-02</td>
-<td>-3.6</td>
-<td>-7.4</td>
-<td>0.2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2010-01-03</td>
-<td>-6.8</td>
-<td>-10.5</td>
-<td>-3.2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2010-01-04</td>
-<td>-5.9</td>
-<td>-8.0</td>
-<td>-3.4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2010-01-05</td>
-<td>-9.9</td>
-<td>-12.3</td>
-<td>-7.0</td>
-</tr>
-</tbody>
-</table>
-
+<div id="f36d6c80" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 열 삭제</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>seoul.drop(<span class="st">'지점'</span>, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div id="bc30232c" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 열 이름 변경</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>seoul.columns <span class="op">=</span> [<span class="st">'날짜'</span>, <span class="st">'평균기온'</span>, <span class="st">'최저기온'</span>, <span class="st">'최고기온'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="af1bcff4" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>seoul.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">날짜</th>
-<th data-quarto-table-cell-role="th">평균기온(℃)</th>
-<th data-quarto-table-cell-role="th">최저기온(℃)</th>
-<th data-quarto-table-cell-role="th">최고기온(℃)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2010-01-01</td>
-<td>-7.6</td>
-<td>-12.7</td>
-<td>-3.6</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2010-01-02</td>
-<td>-3.6</td>
-<td>-7.4</td>
-<td>0.2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2010-01-03</td>
-<td>-6.8</td>
-<td>-10.5</td>
-<td>-3.2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2010-01-04</td>
-<td>-5.9</td>
-<td>-8.0</td>
-<td>-3.4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2010-01-05</td>
-<td>-9.9</td>
-<td>-12.3</td>
-<td>-7.0</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div id="677e787b" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 이름 변경</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>seoul.columns <span class="op">=</span> [<span class="st">'날짜'</span>, <span class="st">'평균기온'</span>, <span class="st">'최저기온'</span>, <span class="st">'최고기온'</span>]</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>seoul.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
-<pre><code>Index(['날짜', '평균기온', '최저기온', '최고기온'], dtype='object')</code></pre>
-</div>
-</div>
-<div id="3413a710" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>seoul.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div id="1b72dcfa" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 결측값 확인</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>seoul.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>날짜      0
 평균기온    0
 최저기온    0
@@ -1186,35 +1178,20 @@ memory usage: 157.1+ KB</code></pre>
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="bb43b3bf" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측값을 포함하는 행 삭제</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>seoul.dropna(subset<span class="op">=</span>[<span class="st">'최고기온'</span>], axis<span class="op">=</span><span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="92f7955e" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 결측값이 포함된 행 삭제</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>seoul.dropna(axis<span class="op">=</span><span class="dv">0</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a8360f80" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>seoul.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
-Index: 4017 entries, 0 to 4017
-Data columns (total 4 columns):
- #   Column  Non-Null Count  Dtype  
----  ------  --------------  -----  
- 0   날짜      4017 non-null   object 
- 1   평균기온    4017 non-null   float64
- 2   최저기온    4017 non-null   float64
- 3   최고기온    4017 non-null   float64
-dtypes: float64(3), object(1)
-memory usage: 156.9+ KB</code></pre>
+<div id="2acf21ad" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 날짜 변수를 datetime 형식으로 변환</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>seoul[<span class="st">'날짜'</span>] <span class="op">=</span> pd.to_datetime(seoul[<span class="st">'날짜'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="009fcd86" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>seoul[<span class="st">'날짜'</span>] <span class="op">=</span> pd.to_datetime(seoul[<span class="st">'날짜'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="85ef0855" class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 추가</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>seoul[<span class="st">'연도'</span>] <span class="op">=</span> seoul[<span class="st">'날짜'</span>].dt.year</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>seoul[<span class="st">'월'</span>]<span class="op">=</span>seoul[<span class="st">'날짜'</span>].dt.month</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>seoul[<span class="st">'일'</span>]<span class="op">=</span>seoul[<span class="st">'날짜'</span>].dt.day</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>seoul.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="965a43a4" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 새로운 변수(연도, 월, 일) 생성</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>seoul[<span class="st">'연도'</span>] <span class="op">=</span> seoul[<span class="st">'날짜'</span>].dt.year</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>seoul[<span class="st">'월'</span>]<span class="op">=</span>seoul[<span class="st">'날짜'</span>].dt.month</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>seoul[<span class="st">'일'</span>]<span class="op">=</span>seoul[<span class="st">'날짜'</span>].dt.day</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>seoul.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <div>
 
@@ -1289,11 +1266,11 @@ memory usage: 156.9+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="9b7e1180" class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 필터링</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>conditions <span class="op">=</span> (seoul[<span class="st">'날짜'</span>].dt.month<span class="op">==</span><span class="dv">8</span>) <span class="op">&amp;</span> (seoul[<span class="st">'날짜'</span>].dt.day<span class="op">==</span><span class="dv">15</span>)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>seoul0815 <span class="op">=</span> seoul[conditions]</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>seoul0815</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="350c8696" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 8월 15일 데이터 선택</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>conditions <span class="op">=</span> (seoul[<span class="st">'월'</span>]<span class="op">==</span><span class="dv">8</span>) <span class="op">&amp;</span> (seoul[<span class="st">'일'</span>]<span class="op">==</span><span class="dv">15</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>seoul0815 <span class="op">=</span> seoul[conditions]</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>seoul0815</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <div>
 
@@ -1428,217 +1405,35 @@ memory usage: 156.9+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="39424e4c" class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>seoul0815.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
-Index: 11 entries, 226 to 3879
-Data columns (total 7 columns):
- #   Column  Non-Null Count  Dtype         
----  ------  --------------  -----         
- 0   날짜      11 non-null     datetime64[ns]
- 1   평균기온    11 non-null     float64       
- 2   최저기온    11 non-null     float64       
- 3   최고기온    11 non-null     float64       
- 4   연도      11 non-null     int32         
- 5   월       11 non-null     int32         
- 6   일       11 non-null     int32         
-dtypes: datetime64[ns](1), float64(3), int32(3)
-memory usage: 572.0 bytes</code></pre>
-</div>
-</div>
-<div id="e13fd540" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측값 확인</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>seoul0815.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
-<pre><code>날짜      0
-평균기온    0
-최저기온    0
-최고기온    0
-연도      0
-월       0
-일       0
-dtype: int64</code></pre>
-</div>
-</div>
-<div id="93dbc31d" class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 연도에 따른 평균기온 변화</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> seoul0815[[<span class="st">'연도'</span>]]</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> seoul0815[<span class="st">'평균기온'</span>]</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'연도'</span>)</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'평균기온'</span>)</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, Y)</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-41-output-1.png" width="434" height="283" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="64306da3" class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># jointplot 그리기</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>sns.jointplot(x<span class="op">=</span><span class="st">'연도'</span>, y <span class="op">=</span><span class="st">'평균기온'</span>, kind<span class="op">=</span><span class="st">'reg'</span>, data<span class="op">=</span>seoul0815)</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-42-output-1.png" width="564" height="566" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="529a7e73" class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 단순선형 회귀분석 : 2022년 8월 15일 기온 예측</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> seoul0815[[<span class="st">'연도'</span>]]</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> seoul0815[<span class="st">'평균기온'</span>]</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>model.fit(X, Y)</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>future <span class="op">=</span> pd.DataFrame({<span class="st">'연도'</span>: [<span class="dv">2022</span>]})</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.predict(future)</span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[27.50818182]</code></pre>
-</div>
-</div>
 <p><br></p>
-<ul>
-<li>fit() 메서드는 선형 회귀 모델에 필요한 두 가지 변수를 전달
-<ul>
-<li>기울기: line_fitter.coef_</li>
-<li>절편: line_fitter.intercept_</li>
-<li>이렇게 하면 새로운 X 값을 넣어 y값을 예측할 수 있게 됨</li>
-<li>싸이킷런 단순 선형회귀에서는 최소제곱법(Ordinary Least Squares)을 활용하기 때문</li>
-</ul></li>
-</ul>
-<p><br></p>
-<div id="8b84a8e3" class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>seoul0815.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
-Index: 11 entries, 226 to 3879
-Data columns (total 7 columns):
- #   Column  Non-Null Count  Dtype         
----  ------  --------------  -----         
- 0   날짜      11 non-null     datetime64[ns]
- 1   평균기온    11 non-null     float64       
- 2   최저기온    11 non-null     float64       
- 3   최고기온    11 non-null     float64       
- 4   연도      11 non-null     int32         
- 5   월       11 non-null     int32         
- 6   일       11 non-null     int32         
-dtypes: datetime64[ns](1), float64(3), int32(3)
-memory usage: 572.0 bytes</code></pre>
+<div id="c6179d89" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (2) 데이터 분석 및 시각화</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="c4d64bd8" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8월 15일 평균기온을 산점도, 회귀선 출력하기</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span>seoul0815[<span class="st">'연도'</span>]</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>seoul0815[<span class="st">'평균기온'</span>]</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>fp1 <span class="op">=</span> np.polyfit(x, y,<span class="dv">2</span>)</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> np.poly1d(fp1)</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>fx <span class="op">=</span> np.linspace(<span class="dv">2010</span>, <span class="dv">2020</span>)</span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(x,y)</span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>plt.plot(fx, f1(fx), ls<span class="op">=</span><span class="st">'dashed'</span>, lw<span class="op">=</span><span class="dv">3</span>, color<span class="op">=</span><span class="st">'g'</span>)</span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'연도'</span>)</span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'평균기온'</span>)</span>
-<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a89946ca" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 산점도 : 연도에 따른 평균기온 변화</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 독립변수, 종속변수 분리</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># scikit-Learn에서 입력 데이터(feature)를 2차원 배열로 요구함</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> seoul0815[[<span class="st">'연도'</span>]]</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> seoul0815[<span class="st">'평균기온'</span>]</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(X, y)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'연도'</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'평균기온'</span>)</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-45-output-1.png" width="434" height="283" class="figure-img"></p>
+<p><img src="3_2_regression_files/figure-html/cell-40-output-1.png" width="434" height="283" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="d84512fb" class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>fp1</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>f1</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>fx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="45">
-<pre><code>array([2010.        , 2010.20408163, 2010.40816327, 2010.6122449 ,
-       2010.81632653, 2011.02040816, 2011.2244898 , 2011.42857143,
-       2011.63265306, 2011.83673469, 2012.04081633, 2012.24489796,
-       2012.44897959, 2012.65306122, 2012.85714286, 2013.06122449,
-       2013.26530612, 2013.46938776, 2013.67346939, 2013.87755102,
-       2014.08163265, 2014.28571429, 2014.48979592, 2014.69387755,
-       2014.89795918, 2015.10204082, 2015.30612245, 2015.51020408,
-       2015.71428571, 2015.91836735, 2016.12244898, 2016.32653061,
-       2016.53061224, 2016.73469388, 2016.93877551, 2017.14285714,
-       2017.34693878, 2017.55102041, 2017.75510204, 2017.95918367,
-       2018.16326531, 2018.36734694, 2018.57142857, 2018.7755102 ,
-       2018.97959184, 2019.18367347, 2019.3877551 , 2019.59183673,
-       2019.79591837, 2020.        ])</code></pre>
-</div>
-</div>
-<div id="310dc4de" class="cell" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시본 모듈로 추세선 넣기</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))   </span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>sns.regplot(x<span class="op">=</span><span class="st">'연도'</span>, y<span class="op">=</span><span class="st">'평균기온'</span>, data<span class="op">=</span>seoul0815) </span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-47-output-1.png" width="434" height="283" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="2ed8b744" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>sns.jointplot(x<span class="op">=</span><span class="st">'연도'</span>, y<span class="op">=</span><span class="st">'평균기온'</span>, data<span class="op">=</span>seoul0815, kind<span class="op">=</span><span class="st">'reg'</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-48-output-1.png" width="564" height="566" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="fcdfd93a" class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>sns.pairplot(seoul0815, kind<span class="op">=</span><span class="st">'reg'</span>)</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-49-output-1.png" width="1417" height="1417" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><br></p>
-</section>
-<section id="다중선형-회귀분석" class="level3">
-<h3 class="anchored" data-anchor-id="다중선형-회귀분석">8.2.2. 다중선형 회귀분석</h3>
-<p><br></p>
-<div id="e77749be" class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>seoul.info()</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>seoul.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
-Index: 4017 entries, 0 to 4017
-Data columns (total 7 columns):
- #   Column  Non-Null Count  Dtype         
----  ------  --------------  -----         
- 0   날짜      4017 non-null   datetime64[ns]
- 1   평균기온    4017 non-null   float64       
- 2   최저기온    4017 non-null   float64       
- 3   최고기온    4017 non-null   float64       
- 4   연도      4017 non-null   int32         
- 5   월       4017 non-null   int32         
- 6   일       4017 non-null   int32         
-dtypes: datetime64[ns](1), float64(3), int32(3)
-memory usage: 204.0 KB</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="49">
+<div id="356d5062" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상관계수 : 연도와 평균기온의 상관관계</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 연도와 평균기온은 약한 양의 상관관계로 나타나, 단순선형 회귀모형을 적합할 수 있음</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>seoul0815[[<span class="st">'연도'</span>, <span class="st">'평균기온'</span>]].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
 <div>
 
 
@@ -1646,65 +1441,20 @@ memory usage: 204.0 KB</code></pre>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">날짜</th>
-<th data-quarto-table-cell-role="th">평균기온</th>
-<th data-quarto-table-cell-role="th">최저기온</th>
-<th data-quarto-table-cell-role="th">최고기온</th>
 <th data-quarto-table-cell-role="th">연도</th>
-<th data-quarto-table-cell-role="th">월</th>
-<th data-quarto-table-cell-role="th">일</th>
+<th data-quarto-table-cell-role="th">평균기온</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2010-01-01</td>
-<td>-7.6</td>
-<td>-12.7</td>
-<td>-3.6</td>
-<td>2010</td>
-<td>1</td>
-<td>1</td>
+<td data-quarto-table-cell-role="th">연도</td>
+<td>1.000000</td>
+<td>0.194953</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2010-01-02</td>
-<td>-3.6</td>
-<td>-7.4</td>
-<td>0.2</td>
-<td>2010</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2010-01-03</td>
-<td>-6.8</td>
-<td>-10.5</td>
-<td>-3.2</td>
-<td>2010</td>
-<td>1</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2010-01-04</td>
-<td>-5.9</td>
-<td>-8.0</td>
-<td>-3.4</td>
-<td>2010</td>
-<td>1</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2010-01-05</td>
-<td>-9.9</td>
-<td>-12.3</td>
-<td>-7.0</td>
-<td>2010</td>
-<td>1</td>
-<td>5</td>
+<td data-quarto-table-cell-role="th">평균기온</td>
+<td>0.194953</td>
+<td>1.000000</td>
 </tr>
 </tbody>
 </table>
@@ -1712,77 +1462,61 @@ memory usage: 204.0 KB</code></pre>
 </div>
 </div>
 </div>
-<div id="9c5cc6ed" class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> seoul0815[[<span class="st">'연도'</span>,<span class="st">'최저기온'</span>,<span class="st">'최고기온'</span>]]</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> seoul0815[<span class="st">'평균기온'</span>]</span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>model.fit(X, Y)</span>
-<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> pd.DataFrame({<span class="st">'연도'</span>: [<span class="dv">2022</span>], <span class="st">'최저기온'</span>: [<span class="dv">24</span>], <span class="st">'최고기온'</span>: [<span class="dv">33</span>]})</span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.predict(new_data)</span>
-<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a109aa56" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 단순선형 회귀분석 : 2021년 8월 15일 평균기온 예측</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 선형 회귀모형 객체 생성 및 학습</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 회귀식의 절편 및 기울기</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>intercept <span class="op">=</span> model.intercept_</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>slope <span class="op">=</span> model.coef_</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'회귀식: hat(y) = </span><span class="sc">{</span>model<span class="sc">.</span>intercept_<span class="sc">:.2f}</span><span class="ss"> + </span><span class="sc">{</span>model<span class="sc">.</span>coef_[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">*x'</span>)</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 결정계수</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>R2 <span class="op">=</span> model.score(X, y)</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'결정계수 : </span><span class="sc">{</span>R2<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2021년일 때, 평균기온 예측</span></span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>newdata <span class="op">=</span> pd.DataFrame({<span class="st">'연도'</span>: [<span class="dv">2022</span>]})</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>predicted_value <span class="op">=</span> model.predict(newdata)</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'2021년 8월 15일 평균기온 예측값 : </span><span class="sc">{</span>predicted_value[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[28.08381871]</code></pre>
+<pre><code>회귀식: hat(y) = -297.85 + 0.16*x
+결정계수 : 0.038
+2021년 8월 15일 평균기온 예측값 : 27.51</code></pre>
 </div>
 </div>
-<div id="ba577f90" class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">3</span>))</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 준비 : 속성(변수) 2가지 선택</span></span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> seoul[[<span class="st">'연도'</span>,<span class="st">'최저기온'</span>,<span class="st">'최고기온'</span>]]</span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> seoul[<span class="st">'평균기온'</span>]</span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 먼저 X와 Y변수를 받아 사이킷런의 train_test_split함수를 통해 7:3의 비율로 데이터를 분할한다.</span></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>x_train, x_test, y_train, y_test <span class="op">=</span> train_test_split(X,Y, train_size <span class="op">=</span> <span class="fl">0.7</span>, test_size <span class="op">=</span> <span class="fl">0.3</span>)</span>
-<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="co">#다중 선형 회귀 모델 생성</span></span>
-<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a>model.fit(x_train, y_train)</span>
-<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 테스트하기 : test셋의 일부 데이터를 가지고 모델의 예측결과가 얼마나 좋게 나타나는지 확인</span></span>
-<span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a>plt.plot(model.predict(x_test[:<span class="dv">50</span>]), label<span class="op">=</span><span class="st">'predict'</span>)</span>
-<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a>plt.plot(y_test[:<span class="dv">50</span>].values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), label<span class="op">=</span><span class="st">'real temp'</span>)</span>
-<span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="41e82469" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 산점도와 단순선형 회귀선</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))   </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>sns.regplot(x<span class="op">=</span><span class="st">'연도'</span>, y<span class="op">=</span><span class="st">'평균기온'</span>, data<span class="op">=</span>seoul0815)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-52-output-1.png" width="793" height="263" class="figure-img"></p>
+<p><img src="3_2_regression_files/figure-html/cell-43-output-1.png" width="434" height="283" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="c2e47a9c" class="cell" data-execution_count="52">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 전체 데이터를 이용해 값을 예측하고 실제 값과 비교하여 산점도 그리기</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">3</span>))</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>y_predict <span class="op">=</span> model.predict(x_test)</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(y_test, y_predict, alpha <span class="op">=</span> <span class="fl">0.4</span>)</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="3_2_regression_files/figure-html/cell-53-output-1.png" width="793" height="263" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="307e1c85" class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># score 메소드를 통해 다중선형회귀 모델의 성능을 측정</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.score(x_train,y_train))</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 결정계수 R²의 최댓값은 1이며 이 수치가 클수록 실제값과 예측값이 유사함을 의미한다.</span></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 우리가 모델링한 다중선형회귀모델은 약 0.99의 결정계수를 가지며 </span></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 이는 X변수들이 y변수에 미치는 영향이 99%로 X변수들이 평균기온값 변동의 99%를 설명할 수 있다는 뜻임</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0.99770231008393</code></pre>
-</div>
-</div>
+<p><br></p>
+<section id="결과-및-시사점-3" class="level5">
+<h5 class="anchored" data-anchor-id="결과-및-시사점-3"><strong>결과 및 시사점</strong></h5>
+<ul>
+<li>연도와 평균기온은 약한 양의 상관관계(r=0.195)로 나타나, 단순선형 회귀모형을 적합할 수 있음</li>
+<li>독립변수는 연도, 종속변수는 평균기온으로 단순선형 회귀분석을 실시한 결과, 모형의 설명력은 3.8%로 비교적 낮게 나타남</li>
+<li>적합된 회귀식 : <span class="math inline">\(\hat{y} = -297.85 + 0.16*x\)</span>
+<ul>
+<li>연도가 1년 증가할수록 8월 15일의 평균기온은 약 0.16℃ 상승하는 것으로 추정됨</li>
+</ul></li>
+<li>따라서 2021년 8월 15일의 평균기온은 27.51℃로 예측됨</li>
+</ul>
+<p><br></p>
 
 
+</section>
 </section>
 </section>
 
