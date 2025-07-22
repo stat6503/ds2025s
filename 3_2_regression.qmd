@@ -246,7 +246,7 @@ plt.show()
 
 <br>
 
-## 8.2. 회귀분석
+## 8.2. 단순선형 회귀분석
 + 회귀분석(regression analysis)
   + 하나 이상의 독립변수(x)가 종속변수(y)에 미치는 영향력의 크기를 수학적 관계식으로 추정하는 통계 기법
     + 독립변수(independent variable) : 다른 변수의 변화를 야기하는 변수
@@ -258,7 +258,6 @@ plt.show()
 
 <br>
 
-### 8.2.1. 단순선형 회귀분석
 + 단순선형 회귀분석
   + 하나의 독립변수가 종속변수에 영향을 미치는 회귀모형
     + 예 : 공부 시간(독립변수)에 따른 시험 성적(종속변수)의 변화
@@ -338,7 +337,7 @@ print(predicted_score)
 
 <br>
 
-### 8.2.2. (실습) 날씨 데이터 분석
+## 8.3. (실습) 날씨 데이터 분석
 + \[데이터\] 기상자료개방포털에서 제공하는 서울특별시의 기상 관측 데이터
   + 기간 : 2010년 1월 ~ 2020년 12월
   + 변수 : 날짜, 지점, 평균기온(℃), 최저기온(℃), 최고기온(℃)
@@ -486,4 +485,104 @@ plt.show()
 + 따라서 2021년 8월 15일의 평균기온은 27.51℃로 예측됨
 
 <br>
+
+<br>
+
+## 8.4. 다중선형 회귀분석
++ 다중선형 회귀분석
+  + 두 개 이상의 독립변수가 종속변수에 영향을 미치는 회귀모형 
+    + 예: 공부 시간, 수면 시간, 강의 출석률(독립변수들)에 따른 시험 성적(종속변수)의 변화
+  + 다중선형 회귀모형
+    $$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_p x_p + \epsilon$$
+    + $\beta_0$ : 절편(intercept)  
+    + $\beta_1, \beta_2, \dots, \beta_p$ : 각 독립변수의 기울기(slope)
+    + $\epsilon$ : 오차(error)
+
+<br>
+
+## 8.5. (실습) 캘리포니아 주택 가격 분석
++ \[데이터\] 
+  + 1990년 캘리포니아 지역의 주택 가격에 영향을 미치는 여러 특성(독립변수)과 주택 가격(종속변수)으로 구성된 데이터
+  + 총 약 20,000개의 관측값과 8개의 주요 독립변수로 구성됨 
+
+<br>
+
+| 변수       | 설명 |
+|------------|------|
+| MedInc     | 지역의 중위 소득 (단위: 만 달러) |
+| HouseAge   | 주택 연식 (건축 후 경과된 연도 수) |
+| AveRooms   | 가구당 평균 방 개수 |
+| AveBedrms  | 가구당 평균 침실 개수 |
+| Population | 지역 내 인구 수 |
+| AveOccup   | 가구당 평균 거주 인원 수 |
+| Latitude   | 위도 |
+| Longitude  | 경도 |
+| MedHouseVal | 종속변수: 주택의 중위 가격 (단위: \$100,000) |
+
+
+<br>
+
+```{python}
+# 데이터 불러오기
+from sklearn.datasets import fetch_california_housing
+california = fetch_california_housing()
+df = pd.DataFrame(data=california.data, columns=california.feature_names)
+df['MedHouseVal'] = california.target
+df.head()
+```
+
+```{python}
+# 상관분석
+corr = df.corr()
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr, annot=True, cmap='coolwarm')
+plt.title('Correlation Matrix')
+plt.show()
+```
+
+```{python}
+# 상관계수가 높은 독립변수 선택
+features = ['MedInc', 'AveRooms', 'AveOccup']
+target = 'MedHouseVal'
+
+X = df[features]
+y = df[target]
+```
+
+```{python}
+# 3. 훈련 데이터와 검증 데이터로 분할 (8:2 비율)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+
+```{python}
+#| scrolled: true
+# 선형 회귀모형 객체 생성 및 학습
+model = LinearRegression()
+model.fit(X_train, y_train)
+```
+
+```{python}
+# 예측 및 평가
+# MSE (Mean Squared Error, 평균제곱오차)
+# - 실제 값과 예측 값 사이의 오차를 제곱하여 평균 낸 값
+# - 값이 작을수록 예측이 실제에 가까움을 의미함
+# - 이상치에 민감하며, 큰 오차일수록 더 큰 패널티를 줌
+from sklearn.metrics import mean_squared_error, r2_score
+
+y_pred = model.predict(X_test)
+MSE = mean_squared_error(y_test, y_pred)
+R2 = r2_score(y_test, y_pred)
+
+print(f"MSE : {MSE:.4f}")
+print(f"결정계수 : {R2:.4f}")
+```
+
+```{python}
+coeff_df = pd.DataFrame({
+    'Feature': features,
+    'Coefficient': model.coef_
+})
+print(coeff_df)
+```
 
