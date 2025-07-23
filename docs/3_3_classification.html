@@ -261,28 +261,62 @@ window.Quarto = {
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>구분</th>
-<th>예측 <br>Positive</th>
-<th>예측 <br>Negative</th>
+<th style="text-align: center;">구분</th>
+<th style="text-align: center;">예측 <br>Positive</th>
+<th style="text-align: center;">예측 <br>Negative</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>실제 Positive</strong></td>
-<td>True Positive(TP)</td>
-<td>False Negative(FN)</td>
+<td style="text-align: center;"><strong>실제 Positive</strong></td>
+<td style="text-align: center;">True Positive(TP)</td>
+<td style="text-align: center;">False Negative(FN)</td>
 </tr>
 <tr class="even">
-<td><strong>실제 Negative</strong></td>
-<td>False Positive(FP)</td>
-<td>True Negative(TN)</td>
+<td style="text-align: center;"><strong>실제 Negative</strong></td>
+<td style="text-align: center;">False Positive(FP)</td>
+<td style="text-align: center;">True Negative(TN)</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
 <ul>
-<li>분류모델 평가지표 |지표|설명| |:——|:——————————| |정확도(accuracy)|전체 중에서 실제와 동일하게 예측한 비율, <span class="math inline">\(\frac{TP + TN}{TP + TN + FP + FN}\)</span>| |정밀도(precision)|모델이 양성이라고 예측한 것 중에서 실제로 양성인 비율, <span class="math inline">\(\frac{TP}{TP + FP}\)</span>| |재현율(recall, sensitivity)|실제 양성 중에서 모델이 양성이라고 예측한 비율, <span class="math inline">\(\frac{TP}{TP + FN}\)</span>| |특이도(specificity)|실제 음성 중에서 모델이 음성이라고 예측한 비율, <span class="math inline">\(\frac{TN}{TN + FP}\)</span>| |F1-score|정밀도와 재현율의 조화 평균|</li>
+<li>분류모델 평가지표</li>
 </ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 79%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">지표</th>
+<th style="text-align: left;">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">정확도(accuracy)</td>
+<td style="text-align: left;">전체 중에서 실제와 동일하게 예측한 비율, <span class="math inline">\(\frac{TP + TN}{TP + TN + FP + FN}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">정밀도(precision)</td>
+<td style="text-align: left;">모델이 양성이라고 예측한 것 중에서 실제로 양성인 비율, <span class="math inline">\(\frac{TP}{TP + FP}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">재현율(recall, sensitivity)</td>
+<td style="text-align: left;">실제 양성 중에서 모델이 양성이라고 예측한 비율, <span class="math inline">\(\frac{TP}{TP + FN}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">특이도(specificity)</td>
+<td style="text-align: left;">실제 음성 중에서 모델이 음성이라고 예측한 비율, <span class="math inline">\(\frac{TN}{TN + FP}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F1-score</td>
+<td style="text-align: left;">정밀도와 재현율의 조화 평균</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 <ul>
 <li>K-최근접 이웃(K-Nearest Neighbors; K-NN)
@@ -360,17 +394,17 @@ window.Quarto = {
 </ul></li>
 </ul>
 <p><br></p>
-<div id="ffd76b38" class="cell" data-execution_count="1">
+<div id="03968157" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (1) 데이터 확인 및 전처리</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b6801fb3" class="cell" data-execution_count="2">
+<div id="549e6328" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 라이브러리 불러오기</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2fa60731" class="cell" data-execution_count="3">
+<div id="86fada37" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./data/chap11_movie_genre_final.csv'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -461,7 +495,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="fbdae917" class="cell" data-execution_count="4">
+<div id="d025ba77" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 정보</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -501,7 +535,7 @@ dtypes: float64(1), int64(22), object(4)
 memory usage: 1007.4+ KB</code></pre>
 </div>
 </div>
-<div id="67912dd7" class="cell" data-execution_count="5">
+<div id="acb4fd33" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 결측값 확인</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 영화 장르를 특성(feature)으로 사용할 예정이므로,</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># director, cast 변수에 존재하는 결측값은 별도로 처리하지 않음</span></span>
@@ -538,10 +572,10 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><br></p>
-<div id="1a694ba3" class="cell" data-execution_count="6">
+<div id="a8a60c3d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (2) 데이터 탐색</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="07b3746f" class="cell" data-execution_count="7">
+<div id="f6d865e9" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># target 변수에 따른 영화 수</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Target'</span>)</span>
@@ -555,7 +589,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="6d9ead46" class="cell" data-execution_count="8">
+<div id="be94d505" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 영화 평균 평점 분포</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Average Movie Rating"</span>)</span>
@@ -569,7 +603,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="26e820e8" class="cell" data-execution_count="9">
+<div id="a8116f9d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 집계 : 장르별 영화 수 (오름차순 정렬)</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>genre_count <span class="op">=</span> df.loc[:, <span class="st">'Action'</span>:<span class="st">'TVMovie'</span>].<span class="bu">sum</span>()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>genre_count.sort_values(inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -598,7 +632,7 @@ Drama             2281
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="4e487ae5" class="cell" data-execution_count="10">
+<div id="ae7b0682" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 장르별 영화 수</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 가장 많은 영화 장르는 드라마이고, 다음으로는 코미디, 스릴러, 액션 등의 순임</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
@@ -612,7 +646,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="7a4deae1" class="cell" data-execution_count="11">
+<div id="cb534365" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상위 4개 장르에서 평균 평점 6.5 이상인 영화 수</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 드라마 장르의 53.0%가 평균 평점이 6.5 이상으로 나타나므로,</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 드라마 장르는 많이 제작되고 대중적 인기도 높다는 것을 알 수 있음</span></span>
@@ -623,19 +657,19 @@ dtype: int64</code></pre>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> genre_count[genre]</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    above_count <span class="op">=</span> <span class="bu">len</span>(df[mask])</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    percent <span class="op">=</span> above_count<span class="op">/</span>total<span class="op">*</span><span class="dv">100</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>genre<span class="sc">}</span><span class="ss"> 장르 영화 </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">편 중에서 평균 평점 </span><span class="sc">{</span>min_avg_rating<span class="sc">}</span><span class="ss"> 이상인 영화 수 : </span><span class="sc">{</span>above_count<span class="sc">}</span><span class="ss">편 (</span><span class="sc">{</span>percent<span class="sc">:.1f}</span><span class="ss">%)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>genre<span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">편 중 평균 평점 </span><span class="sc">{</span>min_avg_rating<span class="sc">}</span><span class="ss"> 이상 </span><span class="sc">{</span>above_count<span class="sc">}</span><span class="ss">편 (</span><span class="sc">{</span>percent<span class="sc">:.1f}</span><span class="ss">%)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Drama 장르 영화 2281편 중에서 평균 평점 6.5 이상인 영화 수 : 1208편 (53.0%)
-Comedy 장르 영화 1714편 중에서 평균 평점 6.5 이상인 영화 수 : 521편 (30.4%)
-Thriller 장르 영화 1270편 중에서 평균 평점 6.5 이상인 영화 수 : 415편 (32.7%)
-Action 장르 영화 1140편 중에서 평균 평점 6.5 이상인 영화 수 : 355편 (31.1%)</code></pre>
+<pre><code>Drama : 2281편 중 평균 평점 6.5 이상 1208편 (53.0%)
+Comedy : 1714편 중 평균 평점 6.5 이상 521편 (30.4%)
+Thriller : 1270편 중 평균 평점 6.5 이상 415편 (32.7%)
+Action : 1140편 중 평균 평점 6.5 이상 355편 (31.1%)</code></pre>
 </div>
 </div>
 <p><br></p>
-<div id="f1917705" class="cell" data-execution_count="12">
+<div id="018ed83d" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (3) K-NN을 이용한 분류</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="18c60c23" class="cell" data-execution_count="13">
+<div id="ace32acc" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련 데이터와 평가 데이터로 분할 (8:2 비율)</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># stratify=y 옵션 설정</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># → 분류 문제에서 각 클래스(calss)가 훈련 데이터와 평가 데이터에 비슷한 비율로 포함되도록 함</span></span>
@@ -646,9 +680,9 @@ Action 장르 영화 1140편 중에서 평균 평점 6.5 이상인 영화 수 : 
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'target'</span>]</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f0e36bd3" class="cell" data-execution_count="14">
+<div id="80603eb5" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 최적의 k 값 선택</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cv : 교차검증 폴드(fold) 수 (기본값 5)</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
@@ -663,27 +697,27 @@ Action 장르 영화 1140편 중에서 평균 평점 6.5 이상인 영화 수 : 
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    k_scores.append(scores.mean())</span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'k=</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">일 때 정확도 : </span><span class="sc">{</span>scores<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>k=1일 때 정확도 : 0.291
-k=3일 때 정확도 : 0.330
-k=5일 때 정확도 : 0.373
-k=7일 때 정확도 : 0.382
-k=9일 때 정확도 : 0.388
-k=11일 때 정확도 : 0.393
-k=13일 때 정확도 : 0.402
+<pre><code>k=1일 때 정확도 : 0.333
+k=3일 때 정확도 : 0.346
+k=5일 때 정확도 : 0.367
+k=7일 때 정확도 : 0.402
+k=9일 때 정확도 : 0.415
+k=11일 때 정확도 : 0.428
+k=13일 때 정확도 : 0.420
 k=15일 때 정확도 : 0.417
-k=17일 때 정확도 : 0.424
-k=19일 때 정확도 : 0.432</code></pre>
+k=17일 때 정확도 : 0.416
+k=19일 때 정확도 : 0.422</code></pre>
 </div>
 </div>
-<div id="b9c2be09" class="cell" data-execution_count="15">
+<div id="e67b2c92" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 성능이 가장 좋은 k 값 선택</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>best_k <span class="op">=</span> k_range[k_scores.index(<span class="bu">max</span>(k_scores))]</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"최적의 k 값은 </span><span class="sc">{</span>best_k<span class="sc">}</span><span class="ss">이며, 평균 정확도는 </span><span class="sc">{</span><span class="bu">max</span>(k_scores)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>최적의 k 값은 19이며, 평균 정확도는 0.432</code></pre>
+<pre><code>최적의 k 값은 11이며, 평균 정확도는 0.428</code></pre>
 </div>
 </div>
-<div id="07f1d5f6" class="cell" data-execution_count="16">
+<div id="77a7a8a6" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># K-NN 분류모델 생성 및 학습</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span>best_k)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>knn.fit(X_train, y_train)</span>
@@ -699,18 +733,18 @@ k=19일 때 정확도 : 0.432</code></pre>
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"정밀도 : </span><span class="sc">{</span>precision<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"재현율 : </span><span class="sc">{</span>recall<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>정확도 : 0.443
-정밀도 : 0.385
-재현율 : 0.443</code></pre>
+<pre><code>정확도 : 0.391
+정밀도 : 0.335
+재현율 : 0.391</code></pre>
 </div>
 </div>
-<div id="87f0da64" class="cell" data-execution_count="17">
+<div id="fc738430" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Action, Thriller 장르일 때, target 예측</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>newdata <span class="op">=</span> pd.DataFrame([[<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>]], columns<span class="op">=</span>X_train.columns)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> knn.predict(newdata)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Action, Thriller 장르일 때, target 예측값 : </span><span class="sc">{</span>y_pred[<span class="dv">0</span>]<span class="sc">:.0f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Action, Thriller 장르일 때, target 예측값 : 7</code></pre>
+<pre><code>Action, Thriller 장르일 때, target 예측값 : 6</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -720,8 +754,8 @@ k=19일 때 정확도 : 0.432</code></pre>
 <li>정확도는 43.8%로, 전체 영화 중 약 절반 이하만 정답 클래스를 올바르게 분류함</li>
 <li>정밀도는 37.8%로, 재현율은 43.8%로, 전체 클래스에 대한 평균적인 분류 성능이 낮은 편임</li>
 <li>세 지표가 모두 낮게 나타났으며, 이는 입력 데이터로 사용한 장르 정보만으로는 target을 효과적으로 구분하기 어려운 것으로 판단됨</li>
-<li>또한 target에서 클래스 불균형이 존재하여, 일부 클래스는 모델이 거의 예측하지 못했을 가능성도 있음</li>
-<li>따라서 모델 성능 개선을 위해 감독, 배우, 개봉 연도, 제작 국가 등의 추가적인 특성을 포함할 필요가 있음</li>
+<li>또한 클래스 불균형이 존재하여, 일부 클래스는 모델이 거의 예측하지 못했을 가능성도 있음</li>
+<li>따라서 모델 성능 개선을 위해 감독, 배우, 개봉 연도 등의 추가적인 특성을 포함할 필요가 있음</li>
 </ul>
 <p><br></p>
 </section>
@@ -741,10 +775,10 @@ k=19일 때 정확도 : 0.432</code></pre>
 <p><strong>선수의 기량을 보고 5년 이상 경력을 가졌는지 예측할 수 있을까?</strong></p>
 </blockquote>
 <p><br></p>
-<div id="6fce4852" class="cell" data-execution_count="18">
+<div id="d840ee5a" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (1) 데이터 확인 및 전처리</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5104995c" class="cell" data-execution_count="19">
+<div id="9d95a3b5" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./data/chap11_basketball_final.csv'</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -816,7 +850,7 @@ k=19일 때 정확도 : 0.432</code></pre>
 </div>
 </div>
 </div>
-<div id="2d7a106c" class="cell" data-execution_count="20">
+<div id="620f929f" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 정보</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -835,7 +869,7 @@ dtypes: float64(5), int64(1)
 memory usage: 62.9 KB</code></pre>
 </div>
 </div>
-<div id="f626a1ec" class="cell" data-execution_count="21">
+<div id="c7cedf4e" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 결측값 확인</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df.isna().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -849,10 +883,10 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><br></p>
-<div id="cef68dc8" class="cell" data-execution_count="22">
+<div id="4bf6ba1c" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (2) 데이터 탐색</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="58363a4d" class="cell" data-execution_count="23">
+<div id="4f54910c" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5년 이상 경력 여부에 따른 선수 분포</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Experience'</span>)</span>
@@ -868,11 +902,11 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="e7112e7b" class="cell" data-execution_count="24">
+<div id="cf127fcd" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5년 이상 경력 여부에 따른 평균 농구 기술</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df_mean <span class="op">=</span> df.groupby(<span class="st">'Target'</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a3abd190" class="cell" data-execution_count="25">
+<div id="36e3f56b" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5년 이상 경력 여부에 따른 평균 농구 기술 비교</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 경기 기여도가 높은 기술(리바운드, 어시스트, 스틸, 블록)은 경력이 5년 이상인 선수가 더 뛰었났음</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 하지만 턴오버 횟수도 경력이 5년 이상인 선수가 더 많은 것으로 나타남</span></span>
@@ -890,10 +924,10 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p><br></p>
-<div id="c4e359ea" class="cell" data-execution_count="26">
+<div id="ae60974d" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (3) K-NN을 이용한 분류</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b0d16bb2" class="cell" data-execution_count="27">
+<div id="539e5767" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련 데이터와 평가 데이터로 분할 (8:2 비율)</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'Rebounds'</span>,<span class="st">'Assists'</span>,<span class="st">'Steals'</span>,<span class="st">'Blocks'</span>,<span class="st">'Turnovers'</span>]]</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Target'</span>]</span>
@@ -901,7 +935,7 @@ dtype: int64</code></pre>
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3ee57a14" class="cell" data-execution_count="28">
+<div id="9d21c455" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 최적의 k 값 선택</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
@@ -927,7 +961,7 @@ k=17일 때 정확도 : 0.644
 k=19일 때 정확도 : 0.645</code></pre>
 </div>
 </div>
-<div id="37565b56" class="cell" data-execution_count="29">
+<div id="a9adbe0a" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 성능이 가장 좋은 k 값 선택</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>best_k <span class="op">=</span> k_range[k_scores.index(<span class="bu">max</span>(k_scores))]</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"최적의 k 값은 </span><span class="sc">{</span>best_k<span class="sc">}</span><span class="ss">이며, 평균 정확도는 </span><span class="sc">{</span><span class="bu">max</span>(k_scores)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -935,7 +969,7 @@ k=19일 때 정확도 : 0.645</code></pre>
 <pre><code>최적의 k 값은 13이며, 평균 정확도는 0.652</code></pre>
 </div>
 </div>
-<div id="fc1073de" class="cell" data-execution_count="30">
+<div id="882856ec" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># K-NN 분류모델 생성 및 학습</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span>best_k)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>knn.fit(X_train, y_train)</span>
@@ -956,7 +990,7 @@ k=19일 때 정확도 : 0.645</code></pre>
 재현율 : 0.811</code></pre>
 </div>
 </div>
-<div id="61d9cca6" class="cell" data-execution_count="31">
+<div id="0269b99e" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rebounds 3회, Assists 3회, Steals 2회, Blocks 2회, Turnovers 4회일 때,</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 5년 이상 경력 여부 예측</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>newdata <span class="op">=</span> pd.DataFrame([[<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>]], columns<span class="op">=</span>X_train.columns)</span>
@@ -974,7 +1008,7 @@ k=19일 때 정확도 : 0.645</code></pre>
 <li>정확도는 66.4%로, 3명의 중 2명은 경력을 올바르게 분류함</li>
 <li>정밀도는 70.3%로, 모델이 경력 5년 이상이라고 예측한 선수 중 약 70%가 실제로 경력이 많았음</li>
 <li>재현율은 81.1%로, 실제로 경력 5년 이상인 선수 대부분을 모델이 정확히 분류함</li>
-<li>모델 성능은 전반적으로 양호하며, 특히 높은 재현율을 통해 경력이 많은 선수를 잘 포착하는 경향을 보임</li>
+<li>모델 성능은 전반적으로 양호하며, 특히 높은 재현율을 통해 경력이 많은 선수를 잘 포착함</li>
 <li>다만 정확도와 정밀도는 개선 여지가 있으며, 이를 위해 득점, 평균 출전 시간, 포지션 등의 추가적인 특성을 고려해볼 수 있음</li>
 </ul>
 
