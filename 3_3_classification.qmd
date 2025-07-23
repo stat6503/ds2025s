@@ -2,35 +2,98 @@
 jupyter: python3
 ---
 
-<h1>9. 분류</h1>
+<h1>9. 지도학습 : 분류</h1>
 
 ## 9.1. K-최근접 이웃
 + 분류(classification)
-  + 지도학습의 한 종류로, 라벨(label)이 있는 데이터를 기반으로 각 데이터가 속하는 집단(category) 간의 관계를 학습함
-  + 학습된 모델은 새로운 데이터가 어떤 집단에 속하는지 자동으로 판별할 수 있음
-  + 대표적인 알고리즘으로는 k-최근접 이웃(K-NN), 의사결정트리(decision tree), 나이브 베이즈(naive bayes), 서포트 벡터 머신(SVM) 등이 있음
-  + 활용 사례: 스팸 문자 분류, 수능 점수 기반 등급 판별, 의료 진단(암 유무 판별), 이미지 속 객체 인식(강아지와 고양이 분류)  
+  + 지도학습의 한 종류로, 정답(label)이 범주형 변수일 때 사용됨
+  + 각 데이터가 속하는 집단(category) 간 관계를 학습함
+  + 학습된 모델은 새로운 데이터가 속하는 집단을 예측할 수 있음
 
 <br>
 
-+ K-최근접 이웃(K-Nearest Neighbors)
-  + 입력된 데이터로부터 거리가 가까운 k개의 기존 데이터 레이블을 참조하여 가장 많이 속한 라벨로 입력된 데이터를 라벨링하는 방법
-  + 일반적으로 k의 개수는 동점 상황을 만들지 않기 위해 홀수로 지정함
-  + 거리 계산에는 보통 유클리디안 거리(Euclidean distance)를 사용함
++ 혼동 행렬(confusion matrix)
 
-![](./images/fig3-9.jpg){width=50%}
+|구분|예측 <br>Positive|예측 <br>Negative|
+|-----------|----------------|----------------|
+|**실제 Positive**|True Positive(TP)|False Negative(FN)|
+|**실제 Negative**|False Positive(FP)|True Negative(TN)|
+
+<br>
+
++ 분류모델 평가지표
+|지표|설명|
+|:------|:------------------------------|
+|정확도(accuracy)|전체 중에서 실제와 동일하게 예측한 비율, $\frac{TP + TN}{TP + TN + FP + FN}$|
+|정밀도(precision)|모델이 양성이라고 예측한 것 중에서 실제로 양성인 비율, $\frac{TP}{TP + FP}$|
+|재현율(recall, sensitivity)|실제 양성 중에서 모델이 양성이라고 예측한 비율, $\frac{TP}{TP + FN}$|
+|특이도(specificity)|실제 음성 중에서 모델이 음성이라고 예측한 비율, $\frac{TN}{TN + FP}$|
+|F1-score|정밀도와 재현율의 조화 평균|
 
 <br>
 
-+ k의 수
-  + K-NN 알고리즘은 탐색할 이웃의 개수(k)에 따라 분류가 달라질 수 있음
-    + k가 너무 크면, 데이터의 세세한 패턴을 반영하지 못해 과소적합(underfitting)이 발생함
-    + k가 너무 작으면, 개별 데이터에 민감하게 반응하여 과적합(overfitting)이 발생함
-  + 일반적으로 최적의 k 값은 교차검증(cross-validation)을 통해 테스트 오차(test error)를 최소홯는 값으로 결정함
-
-![](./images/fig3-10.jpg){width=70%}
++ K-최근접 이웃(K-Nearest Neighbors; K-NN)
+  + 새로운 데이터가 입력되었을 때, 가장 가까운 k개의 이웃 데이터를 기준으로 분류하는 통계 기법
+    1. 새로운 데이터와 가장 거리가 가까운 k개의 데이터를 찾음
+    2. 해당 k개의 데이터가 가장 많이 속한 클래스(class)로 새로운 데이터를 분류함(다수결 원리)
+  + 일반적으로 k는 동점 상황을 피하기 위해 홀수로 설정함
+  + 거리 계산에는 주로 유클리디안 거리(Euclidean distance)를 사용함
 
 <br>
+
++ 예 : 천혜향과 레드향의 선호도 예측
+  + k=3일 때, 새로운 사람의 선호하는 맛(별 모양)과 가장 가까운 거리에 있는 3개의 데이터를 찾음
+  + 이웃 중 레드향을 좋아하는 사람이 2명, 천혜향을 좋아하는 사람이 1명이므로, 새로운 사람은 레드향을 선호하는 것으로 분류함
+
+<br>
+ 
+![](./images/fig3-9.jpg){width=70%}
+
+<br>
+
++ k 값
+  + K-NN 알고리즘은 탐색할 이웃의 개수(k)에 따라 분류 결과가 달라질 수 있음
+    + k가 너무 크면, 데이터의 세세한 패턴을 반영하지 못해 과소적합 발생
+    + k가 너무 작으면, 개별 데이터에 민감하게 반응하여 과대적합 발생
+  + 일반적으로 최적의 k 값은 교차검증을 통해 모형 성능이 가장 좋은 k 값으로 결정함
+
+<br>
+
++ 최적의 k 값 선택(하이퍼파라미터 튜닝; hyperparameter tunning)
+  1. 교차검증(cross-validation) 수행
+     + 데이터를 여러 조각(fold)으로 나누고, 각 조각을 번갈아가며 검증 데이터(test data)로 사용
+     + 각 반복에서 모델 평가지표(정확도, F1-score, 정밀도, 재현도 등)를 계산
+     + 보통 각 반복에서 산출한 모델 평가지표의 평균 값을 모델 성능의 추정값으로 사용
+  3. 여러 이웃 수 k 값에 대해 교차검증을 반복 수행하여 각 k 값별로 모델 성능의 추정값을 계산
+  4. 모델 성능이 가장 좋은 k 값을 최적의 값으로 선택
+
+<br>
+
+![](./images/fig3-10.png)
+
+<br>
+
++ 표준화 작업
+  + K-NN 알고리즘은 거리를 기반으로 하기 때문에, 데이터의 단위나 크기 차이가 크면 특정 특성(feature)이 크게 영향을 미쳐 엉뚱한 결과가 나올 수 있음
+  + 따라서 모든 특성이 비슷한 스케일(scale)로 반영되도록 표준화 작업이 필수적임
+  + 대표적인 표준화 방법은 다음과 같음
+    + z-점수 표준화 : 평균이 0, 표준편차가 1이 되도록 변환하는 방법, $x' = \frac{x-\mu}{\sigma}$
+    + 최대-최소 표준화 : 데이터의 0~1 범위로 변환하는 방법, $x' = \frac{x-min(x)}{max(x)-min(x)}$
+
+<br>
+
+<br>
+
+## 9.2. (실습) 인기 영화 분류
++ \[데이터\] 캐글에서 제공하는 영화 데이터
+  + 총 4,775개의 관측값과 27개의 변수로 구성됨
+  + \[실습파일\] [chap11_movie_genre_final.csv](./chap11_movie_genre_final.csv)
+
+<br>
+
+```{python}
+## (1) 데이터 확인 및 전처리
+```
 
 ```{python}
 # 라이브러리 불러오기
@@ -41,339 +104,300 @@ import seaborn as sns
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 448}
-# 원두맛에 대한 데이터 생성
-from sklearn.neighbors import KNeighborsClassifier
-x = [4, 5, 10, 4, 3, 11, 14 , 8, 10, 12] 
-y = [21, 19, 24, 17, 16, 25, 24, 22, 21, 21]
-classes = [0, 0, 1, 0, 0, 1, 1, 0, 1, 1]
-
-plt.style.use('default')
-plt.scatter(x, y, c=classes)
-plt.show()
-data = list(zip(x, y))
-print(data)
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 448}
-# k=1
-knn = KNeighborsClassifier(n_neighbors=1)
-knn.fit(data, classes)
-new_x = 8
-new_y = 21
-new_point = [(new_x, new_y)]
-prediction = knn.predict(new_point)
-print(prediction)
-plt.scatter(x + [new_x], y + [new_y], c=classes + [prediction[0]])
-plt.text(x=new_x-1.7, y=new_y-0.7, s=f"new point, class: {prediction[0]}")
-plt.show()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 430}
-# k=5
-knn = KNeighborsClassifier(n_neighbors=5)
-knn.fit(data, classes)
-prediction = knn.predict(new_point)
-print(prediction)
-plt.scatter(x + [new_x], y + [new_y], c=classes + [prediction[0]])
-plt.text(x=new_x-1.7, y=new_y-0.7, s=f"new point, class: {prediction[0]}")
-plt.show()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-# 교차검증으로 k찾기
-from sklearn.model_selection import cross_val_score
-
-knn=KNeighborsClassifier()
-scores=cross_val_score(knn,data,classes,cv=3, scoring='accuracy')
-
-for i in range(scores.size):
-    print(f"{i+1}번째 정확도: {scores[i]}")
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 394}
-# 표준화 예제 데이터 생성
-df = pd.DataFrame({'A' : np.arange(11), 'B' : np.arange(11) ** 2})
-df
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 394}
-# Standard Scaler
-from sklearn.preprocessing import StandardScaler
-standardScaler = StandardScaler()
-df_standardScaled = standardScaler.fit_transform(df)
-pd.DataFrame(df_standardScaled, columns = ['A_std', 'B_std'])
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 394}
-#MinMaxScaler
-from sklearn.preprocessing import MinMaxScaler
-minmaxScaler = MinMaxScaler()
-
-df_minmaxScaled = minmaxScaler.fit_transform(df)
-pd.DataFrame(df_minmaxScaled, columns = ['A_minmax', 'B_minmax'])
-```
-
-<br>
-
-## 9.2. (실습) 드라마 분류
-
-<br>
-
-```{python}
 #| scrolled: true
-# 11.2 드라마분류하기
+# 데이터 불러오기
 df = pd.read_csv('./data/chap11_movie_genre_final.csv')
-df.head(3)
+df.head(2)
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
+# 데이터 정보
 df.info()
 ```
 
 ```{python}
+# 데이터 전처리 : 결측값 확인
+# 영화 장르를 특성(feature)으로 사용할 예정이므로,
+# director, cast 변수에 존재하는 결측값은 별도로 처리하지 않음
+df.isna().sum()
+```
+
+<br>
+
+```{python}
+## (2) 데이터 탐색
+```
+
+```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 639}
-plt.figure(figsize=(8, 3))
-sns.histplot(df['target'], bins=20, kde=True)
-plt.title("movie count")
+# target 변수에 따른 영화 수
+plt.figure(figsize=(5, 3))
+plt.title('Distribution of Target')
+sns.histplot(df['target'], bins=10, kde=True)
 plt.show()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 639}
-plt.figure(figsize=(8, 3))
+# 영화 평균 평점 분포
+plt.figure(figsize=(5, 3))
+plt.title("Distribution of Average Movie Rating")
 sns.histplot(df['vote_average'], bins=20, kde=True)
-plt.title("vote_average")
 plt.show()
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
-print(df.columns)
+# 데이터 집계 : 장르별 영화 수 (오름차순 정렬)
+genre_count = df.loc[:, 'Action':'TVMovie'].sum()
+genre_count.sort_values(inplace=True)
+genre_count
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-count_list=[]
-genre_list=['Action', 'Adventure','Fantasy', 'ScienceFiction', 'Crime', 'Drama', 'Thriller', 'Animation','Family', 'Western', 'Comedy', 'Romance', 'Horror', 'Mystery','History', 'War', 'Music', 'Documentary', 'Foreign', 'TVMovie']
-
-for i in genre_list:
-  count_list.append(len(df[df[i]==1]))
-
-count_list
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 891}
+# 장르별 영화 수
+# 가장 많은 영화 장르는 드라마이고, 다음으로는 코미디, 스릴러, 액션 등의 순임
 plt.figure(figsize=(5, 5))
-plt.barh(genre_list,count_list,color=sns.color_palette('hls',20))
+plt.barh(genre_count.index, genre_count, color=sns.color_palette('hls',20))
 plt.show()
 ```
 
 ```{python}
-for i in range(len(genre_list)):
-  print(f'{genre_list[i]} : {count_list[i]}')
-```
-
-```{python}
 #| colab: {base_uri: https://localhost:8080/}
-temp = (df.Drama==1)&(df.vote_average>=6.5)
-df[temp]
-print(f'드라마 장르 영화 2281편 중 평점 6.5 이상:{len(df[temp])}편')
+# 상위 4개 장르에서 평균 평점 6.5 이상인 영화 수
+# 드라마 장르의 53.0%가 평균 평점이 6.5 이상으로 나타나므로,
+# 드라마 장르는 많이 제작되고 대중적 인기도 높다는 것을 알 수 있음
+top_genres = ['Drama', 'Comedy', 'Thriller', 'Action']
+min_avg_rating = 6.5
+for genre in top_genres:
+    mask = (df[genre] == 1) & (df['vote_average']>=min_avg_rating)
+    total = genre_count[genre]
+    above_count = len(df[mask])
+    percent = above_count/total*100
+    print(f'{genre} 장르 영화 {total}편 중에서 평균 평점 {min_avg_rating} 이상인 영화 수 : {above_count}편 ({percent:.1f}%)')
+```
+
+<br>
+
+```{python}
+## (3) K-NN을 이용한 분류
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
-temp = (df.Comedy==1)&(df.vote_average>=6.5)
-df[temp]
-print(f'코메디 장르 영화 1714편 중 평점 6.5 이상:{len(df[temp])}편')
-```
+# 훈련 데이터와 평가 데이터로 분할 (8:2 비율)
+# stratify=y 옵션 설정
+# → 분류 문제에서 각 클래스(calss)가 훈련 데이터와 평가 데이터에 비슷한 비율로 포함되도록 함
+#   클래스 불균형 문제를 완화하고 모델 성능을 안정적으로 평가하기 위함
+X = df[['Action', 'Adventure', 'Fantasy', 'ScienceFiction', 'Crime', 'Drama', 'Thriller',
+        'Animation', 'Family', 'Western', 'Comedy', 'Romance', 'Horror', 'Mystery',
+        'History', 'War', 'Music', 'Documentary', 'Foreign', 'TVMovie']]
+y = df['target']
 
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-temp = (df.Thriller==1)&(df.vote_average>=6.5)
-df[temp]
-print(f'스릴러 영화 1270편 중 평점 6.5 이상:{len(df[temp])}편')
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-temp = (df.Action==1)&(df.vote_average>=6.5)
-df[temp]
-print(f'액션 영화 1140편 중 평점 6.5 이상:{len(df[temp])}편')
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-1208/2218
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-521/1714
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-415/1270
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-355/1140
-```
-
-```{python}
 from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+```
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/}
+#| scrolled: true
+# 최적의 k 값 선택
+# cv : 교차검증 폴드(fold) 수 (기본값 5)
 from sklearn.neighbors import KNeighborsClassifier
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-x=df[['Action', 'Adventure', 'Fantasy', 'ScienceFiction', 'Crime', 'Drama', 'Thriller', 'Animation', 'Family', 'Western', 'Comedy', 'Romance', 'Horror', 'Mystery', 'History', 'War', 'Music', 'Documentary', 'Foreign', 'TVMovie']]
-y=df[['target']]
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split( x, y, test_size=0.2)
-print(x_train.shape)
-print(x_test.shape)
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
 from sklearn.model_selection import cross_val_score
-knn = KNeighborsClassifier()
-scores=cross_val_score(knn, x_train, y_train, cv=2, scoring='accuracy')
 
-for i in range(scores.size):
-    print(f"{i+1}번째 정확도: {scores[i]}")
+k_range = range(1, 21, 2)
+k_scores = []
+
+for k in k_range:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    scores = cross_val_score(knn, X_train, y_train, cv=2, scoring='accuracy')
+    k_scores.append(scores.mean())
+    print(f'k={k}일 때 정확도 : {scores.mean():.3f}')
+```
+
+```{python}
+# 모델 성능이 가장 좋은 k 값 선택
+best_k = k_range[k_scores.index(max(k_scores))]
+print(f"최적의 k 값은 {best_k}이며, 평균 정확도는 {max(k_scores):.3f}")
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-from sklearn.neighbors import KNeighborsClassifier
+# K-NN 분류모델 생성 및 학습
+knn = KNeighborsClassifier(n_neighbors=best_k)
+knn.fit(X_train, y_train)
 
-neigh=KNeighborsClassifier(n_neighbors=5)
-neigh.fit(x_train, y_train)
-print(neigh.classes_)
-print(f'거리계산방법: {neigh.effective_metric_}')
-print(f'샘플수: {neigh.n_samples_fit_}')
+# 분류모델 평가 : 정확도
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+y_pred = knn.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
+recall = recall_score(y_test, y_pred, average='weighted', zero_division=0)
+
+print(f"정확도 : {accuracy:.3f}")
+print(f"정밀도 : {precision:.3f}")
+print(f"재현율 : {recall:.3f}")
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-print(neigh.score(x_test,y_test))
+# Action, Thriller 장르일 때, target 예측
+newdata = pd.DataFrame([[1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0]], columns=X_train.columns)
+y_pred = knn.predict(newdata)
+print(f'Action, Thriller 장르일 때, target 예측값 : {y_pred[0]:.0f}')
 ```
 
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-new_x = [1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-new_df = pd.DataFrame([new_x], columns=x_train.columns)
-prediction = neigh.predict(new_df)
-prediction
-```
+<br>
 
-```{python}
-from sklearn.model_selection import cross_val_score
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn import datasets
-diabetes = datasets.load_diabetes()
-x = diabetes.data[:150]
-y = diabetes.target[:150]
-knn=KNeighborsClassifier()
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-scores=cross_val_score(knn,x,y,cv=3,scoring='accuracy')
-for i in range(scores.size):
-    print(f"{i+1}번째 정확도: {scores[i]}")
-```
+##### **결과 및 시사점**
++ 정확도는 43.8%로, 전체 영화 중 약 절반 이하만 정답 클래스를 올바르게 분류함
++ 정밀도는 37.8%로, 재현율은 43.8%로, 전체 클래스에 대한 평균적인 분류 성능이 낮은 편임
++ 세 지표가 모두 낮게 나타났으며, 이는 입력 데이터로 사용한 장르 정보만으로는 target을 효과적으로 구분하기 어려운 것으로 판단됨
++ 또한 target에서 클래스 불균형이 존재하여, 일부 클래스는 모델이 거의 예측하지 못했을 가능성도 있음
++ 따라서 모델 성능 개선을 위해 감독, 배우, 개봉 연도, 제작 국가 등의 추가적인 특성을 포함할 필요가 있음
 
 <br>
 
 ## 9.3. (실습) 농구선수 분류
++ \[데이터\] 농구선수 데이터
+  + 총 1,340개의 관측값과 6개의 변수로 구성됨
+  + Target 변수는 선수의 경력이 5년 이상이면 1, 5년 미만이면 0을 나타냄
+  + \[실습파일\] [chap11_basketball_final.csv](./chap11_basketball_final.csv)
 
 <br>
 
+> **선수의 기량을 보고 5년 이상 경력을 가졌는지 예측할 수 있을까?**
+ 
+<br>
+
+```{python}
+## (1) 데이터 확인 및 전처리
+```
+
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 206}
+# 데이터 불러오기
 df = pd.read_csv('./data/chap11_basketball_final.csv')
 df.head()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
+# 데이터 정보
 df.info()
 ```
 
 ```{python}
-df['Target'].value_counts()
+# 데이터 전처리 : 결측값 확인
+df.isna().sum()
+```
+
+<br>
+
+```{python}
+## (2) 데이터 탐색
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 425}
-# 경력별 선수의 수
+# 5년 이상 경력 여부에 따른 선수 분포
 plt.figure(figsize=(5, 3))
-sns.countplot(x=df['Target']) 
-plt.title("Player")
+plt.title('Distribution of Experience')
+sns.countplot(x=df['Target'])
+plt.xlabel('')
+plt.xticks([0, 1], ['under 5 years', '5 years or more'])
 plt.show()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-# 경력에 따른 농구 기술
-print(f"리바운드\n {df['Rebounds'].groupby(df['Target']).mean()}")
-print(f"어시스트\n {df['Assists'].groupby(df['Target']).mean()}")
-print(f"스틸\n {df['Steals'].groupby(df['Target']).mean()}")
-print(f"블록\n {df['Blocks'].groupby(df['Target']).mean()}")
-print(f"턴오버\n {df['Turnovers'].groupby(df['Target']).mean()}")
+# 5년 이상 경력 여부에 따른 평균 농구 기술
+df_mean = df.groupby('Target').mean()
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
-# 훈련데이터와 테스트데이터 분리
-x=df[['Rebounds','Assists','Steals','Blocks','Turnovers']]
-y=df[['Target']]
+#| scrolled: true
+# 5년 이상 경력 여부에 따른 평균 농구 기술 비교
+# 경기 기여도가 높은 기술(리바운드, 어시스트, 스틸, 블록)은 경력이 5년 이상인 선수가 더 뛰었났음
+# 하지만 턴오버 횟수도 경력이 5년 이상인 선수가 더 많은 것으로 나타남
+plt.figure(figsize=(8, 3))
+sns.heatmap(df_mean, annot=True, cmap='Oranges', square=True)
+plt.ylabel('Experience')
+plt.yticks([0.5, 1.5], ['under \n5 years', '5 years\n or more'], rotation=0)
+plt.show()
+```
+
+<br>
+
+```{python}
+## (3) K-NN을 이용한 분류
+```
+
+```{python}
+# 훈련 데이터와 평가 데이터로 분할 (8:2 비율)
+X = df[['Rebounds','Assists','Steals','Blocks','Turnovers']]
+y = df['Target']
+
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split( x, y, test_size=0.2)
-print(x_train.shape)
-print(x_test.shape)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-# 최적의 k찾기
-from sklearn.model_selection import cross_val_score
-knn=KNeighborsClassifier()
-scores=cross_val_score(knn,x,y,cv=5, scoring='accuracy')
-
-for i in range(scores.size):
-    print(f"{i+1}번째 정확도: {scores[i]}")
-```
-
-```{python}
-#| colab: {base_uri: https://localhost:8080/}
-# 모델 생성과 학습
+# 최적의 k 값 선택
 from sklearn.neighbors import KNeighborsClassifier
-neigh=KNeighborsClassifier(n_neighbors=7)
-neigh.fit(x_train, y_train)
-print(neigh.classes_)
-print(f'거리계산방법: {neigh.effective_metric_}')
-print(f'샘플수: {neigh.n_samples_fit_}')
+from sklearn.model_selection import cross_val_score
+
+k_range = range(1, 21, 2)
+k_scores = []
+
+for k in k_range:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    scores = cross_val_score(knn, X_train, y_train, cv=2, scoring='accuracy')
+    k_scores.append(scores.mean())
+    print(f'k={k}일 때 정확도 : {scores.mean():.3f}')
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
-print(neigh.score(x_test,y_test))
-new_x = [3,3,2,2,4]
-prediction = neigh.predict([new_x])
-print(prediction)
+# 모델 성능이 가장 좋은 k 값 선택
+best_k = k_range[k_scores.index(max(k_scores))]
+print(f"최적의 k 값은 {best_k}이며, 평균 정확도는 {max(k_scores):.3f}")
 ```
+
+```{python}
+# K-NN 분류모델 생성 및 학습
+knn = KNeighborsClassifier(n_neighbors=best_k)
+knn.fit(X_train, y_train)
+
+# 분류모델 평가 : 정확도
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+y_pred = knn.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+
+print(f"정확도 : {accuracy:.3f}")
+print(f"정밀도 : {precision:.3f}")
+print(f"재현율 : {recall:.3f}")
+```
+
+```{python}
+# Rebounds 3회, Assists 3회, Steals 2회, Blocks 2회, Turnovers 4회일 때,
+# 5년 이상 경력 여부 예측
+newdata = pd.DataFrame([[3, 3, 2, 2, 4]], columns=X_train.columns)
+y_pred = knn.predict(newdata)
+y_pred = pd.Series(y_pred).map({0: 'under 5 years', 1: '5 years and over'})
+print(f'Rebounds 3회, Assists 3회, Steals 2회, Blocks 2회, Turnovers 4회일 때, 예측값 : {y_pred[0]}')
+```
+
+<br>
+
+##### **결과 및 시사점**
++ 정확도는 66.4%로, 3명의 중 2명은 경력을 올바르게 분류함
++ 정밀도는 70.3%로, 모델이 경력 5년 이상이라고 예측한 선수 중 약 70%가 실제로 경력이 많았음
++ 재현율은 81.1%로, 실제로 경력 5년 이상인 선수 대부분을 모델이 정확히 분류함
++ 모델 성능은 전반적으로 양호하며, 특히 높은 재현율을 통해 경력이 많은 선수를 잘 포착하는 경향을 보임
++ 다만 정확도와 정밀도는 개선 여지가 있으며, 이를 위해 득점, 평균 출전 시간, 포지션 등의 추가적인 특성을 고려해볼 수 있음
 

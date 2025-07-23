@@ -31,7 +31,7 @@ jupyter: python3
 
 ### 8.1.2. (실습) 행복지수 데이터 분석
 + \[데이터\] 캐글에서 제공하는 전세계 행복지수 데이터
-  + 평가지표 : 1인당 GDP, 사회적 지지 정도, 건강한 기대수명, 인생 선택의 자유, 기부
+  + 1인당 GDP, 사회적 지지 정도, 건강한 기대수명, 인생 선택의 자유, 기부
   + \[실습파일\] [2020.csv](./data/2020.csv), [2021.csv](./data/2021.csv)
 
 <br>
@@ -83,15 +83,15 @@ df2021.drop(['upperwhisker', 'lowerwhisker', 'Dystopia'], axis=1, inplace=True)
 ```
 
 ```{python}
-# 열 이름 변경 : 공백을 .으로 대체
-#df2020.columns = df2020.columns.str.replace(' ','.')
-#df2021.columns = df2021.columns.str.replace(' ','.')
+# 열 이름 변경 : 공백을 _으로 대체
+#df2020.columns = df2020.columns.str.replace(' ','._')
+#df2021.columns = df2021.columns.str.replace(' ','_')
 ```
 
 ```{python}
 # 데이터 전처리 : 열 이름 변경
-df2020.columns = ['Country', 'Score', 'GDP.per.capita', 'Social.support', 'Life.expectancy', 'Freedom', 'Generosity']
-df2021.columns = ['Country', 'Score', 'GDP.per.capita', 'Social.support', 'Life.expectancy', 'Freedom', 'Generosity']
+df2020.columns = ['Country', 'Score', 'GDP_per_capita', 'Social_support', 'Life_expectancy', 'Freedom', 'Generosity']
+df2021.columns = ['Country', 'Score', 'GDP_per_capita', 'Social_support', 'Life_expectancy', 'Freedom', 'Generosity']
 ```
 
 <br>
@@ -106,13 +106,19 @@ df2021.columns = ['Country', 'Score', 'GDP.per.capita', 'Social.support', 'Life.
 #| colab: {base_uri: https://localhost:8080/, height: 455}
 # 2020년 데이터 전처리
 df1 = df2020.copy()
-df1.drop(['Social.support', 'Life.expectancy', 'Generosity'], axis=1, inplace=True)
+df1.drop(['Social_support', 'Life_expectancy', 'Generosity'], axis=1, inplace=True)
 df1.head()
 ```
 
 ```{python}
+# 산점도 : 2020년 데이터
+sns.pairplot(df1, height=2)
+plt.show()
+```
+
+```{python}
 #| colab: {base_uri: https://localhost:8080/}
-# 상관관계 : 2020년 데이터
+# 상관계수 : 2020년 데이터
 # 행복지수와 GDP 간 상관계수는 0.78로, 강한 양의 상관관계임
 # 행복지수와 Freedom 간 상관계수는 0.59로, 뚜렷한 양의 상관관계임
 corr = df1.select_dtypes(include='number').corr()
@@ -121,7 +127,7 @@ corr['Score'].sort_values(ascending=False)
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 396}
-# 히트맵 : 2020년 데이터
+# 상관분석 : 2020년 데이터
 plt.figure(figsize=(6, 4))
 sns.heatmap(corr, annot=True, cmap='Blues')
 plt.show()
@@ -131,13 +137,19 @@ plt.show()
 #| colab: {base_uri: https://localhost:8080/, height: 455}
 # 2021년 데이터 전처리
 df2 = df2021.copy()
-df2.drop(['Social.support', 'Life.expectancy', 'Generosity'], axis=1, inplace=True)
+df2.drop(['Social_support', 'Life_expectancy', 'Generosity'], axis=1, inplace=True)
 df2.head()
 ```
 
 ```{python}
+# 산점도 : 2021년 데이터
+sns.pairplot(df2, height=2, diag_kind='kde')
+plt.show()
+```
+
+```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 396}
-# 히트맵 : 2021년 데이터
+# 상관분석 : 2021년 데이터
 # 행복지수와 GDP 간 상관계수는 0.79로, 강한 양의 상관관계임
 # 헹복지수와 Freedom 간 상관계수는 0.61로, 뚜렷한 양의 상관관계임
 plt.figure(figsize=(6, 4))
@@ -150,7 +162,7 @@ plt.show()
 ##### **결과 및 시사점**
 + 행복지수와 GDP 간 관계는?
   + 상관계수는 2020년 0.78, 2021년 0.79로, 강한 양의 상관관계로 나타남
-  + 경제 성장은 보통 더 높은 소득과 향상된 생활 수준으로 이어지므로, 국민의 행복 수준도 높아지는 경향이 있음
+  + 경제 성장은 일반적으로 더 높은 소득과 향상된 생활 수준으로 이어지므로, 국민의 행복 수준도 높아지는 경향이 있음
   + 따라서 국민의 행복을 보장하기 위해, 국가의 GDP는 주요 우선순위 중 하나로 고려될 필요가 있음
 
 <br>
@@ -169,13 +181,13 @@ plt.show()
 
 ```{python}
 # 데이터 전처리
-x1 = df2020[['Generosity', 'Social.support', 'Score']].copy()
-x2 = df2021[['Generosity', 'Social.support', 'Score']].copy()
+x1 = df2020[['Generosity', 'Social_support', 'Score']].copy()
+x2 = df2021[['Generosity', 'Social_support', 'Score']].copy()
 ```
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 396}
-# 히트맵 : 2020년 데이터
+# 상관분석 : 2020년 데이터
 a1 = x1.corr()
 plt.figure(figsize=(6, 4))
 sns.heatmap(a1, annot=True)
@@ -184,7 +196,7 @@ plt.show()
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 396}
-# 히트맵 : 2021년 데이터
+# 상관분석 : 2021년 데이터
 a2 = x2.corr()
 plt.figure(figsize=(6, 4))
 sns.heatmap(a2, annot=True, cmap='GnBu')
@@ -197,7 +209,7 @@ plt.show()
 + 행복지수와 사회적 지지 간 관계는?
   + 상관계수는 2020년 0.77, 2021년 0.76으로, 강한 양의 상관관계로 나타남
   + 사회적 지지는 가족, 친구, 지인 등과 함께하는 관계에서 느끼는 정서적 지원에 대한 인식을 의미함
-  + 일상 생활에서 가깝게 지내는 사람들과의 관계에서 형성되므로, 사회적 지지는 행복 수준에 중요햔 요소임을 알 수 있음
+  + 일상 생활에서 가깝게 지내는 사람들과의 관계에서 형성되므로, 사회적 지지는 행복 수준에 중요한 요소임을 알 수 있음
 
 <br>
 
@@ -213,7 +225,7 @@ plt.show()
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 580}
-# 전체 상관계수 : 2020년 데이터
+# 상관분석 : 2020년 데이터
 corr = df2020.select_dtypes(include='number').corr()
 
 plt.figure(figsize=(8, 6))
@@ -225,7 +237,7 @@ plt.show()
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 580}
-# 전체 상관계수 : 2021년 데이터
+# 상관분석 : 2021년 데이터
 corr = df2021.select_dtypes(include='number').corr()
 
 plt.figure(figsize=(8, 6))
@@ -238,7 +250,7 @@ plt.show()
 <br>
 
 ##### **결과 및 시사점**
-+ 행복지수에 가장 큰 영향을 미치는 요인은 경제적 여유(GDP, 0.79), 건강(0.77), 사회적 지지(0.76), 선택에 대한 자유도(0.61) 순으로 나타남
++ 2021년 행복지수에 가장 큰 영향을 미치는 요인은 경제적 여유(GDP, 0.79), 건강(0.77), 사회적 지지(0.76), 선택에 대한 자유도(0.61) 순으로 나타남
 + 기부 활동과 행복지수는 뚜렷한 관련이 없는 것으로 나타남
 + 1인당 GDP와 건강한 기대수명은 강한 양의 상관관계(0.86)가 있으므로, 경제적으로 여유로운 사람들이 더 건강하게 사는 경향이 있음을 알 수 있음
 
@@ -247,36 +259,40 @@ plt.show()
 <br>
 
 ## 8.2. 단순선형 회귀분석
-+ 회귀분석(regression analysis)
-  + 하나 이상의 독립변수(x)가 종속변수(y)에 미치는 영향력의 크기를 수학적 관계식으로 추정하는 통계 기법
++ 회귀(regression)
+  + 지도학습의 한 종류로, 정답(label)이 수치형 변수일 때 사용됨
+  + 하나 이상의 독립변수(x)가 종속변수(y)에 미치는 영향력의 크기를 수학적 관계식(모델)으로 추정하는 통계 기법
     + 독립변수(independent variable) : 다른 변수의 변화를 야기하는 변수
     + 종속변수(dependent variable) : 다른 변수의 영향으로 변화하는 변수
-  + 독립변수의 특정 값에 대응하는 종속변수의 값을 예측할 수 있음
+  + 학습된 모델은 새로운 독립변수 값에 대해 종속변수의 값을 예측할 수 있음
   + 독립변수 개수에 따른 구분
-    + 단순선형 회귀분석(simple linear regression) : 독립변수가 1개인 경우
-    + 다중선형 회귀분석(multiple linear regression) : 독립변수가 2개인 경우
+    + 단순선형 회귀(simple linear regression) : 독립변수가 1개인 경우
+    + 다중선형 회귀(multiple linear regression) : 독립변수가 2개 이상인 경우
+
+<br>
+
++ 회귀모델 평가지표
+|지표|설명|
+|:---------|:------------------------------|
+|MSE(Mean Squared Error)|- 평균제곱오차로, 작을수록 좋음|
+|RMSE(Root Mean Squared Error)|- MSE의 양의 제곱근으로, 작을수록 좋음<br> -단위가 데이터와 동일하여 해석이 용이함|
+|MAE(Mean Absolute Error)|- 평균절대오차로, 작을수록 좋음 <br>- 이상값에 덜 민감함|
+|$R^2$ (결정계수)|- 모델이 데이터의 변동을 얼마나 잘 설명하는지 나타내는 지표 <br>- 0~1 사이의 값을 가지며, 1에 가까울수록 모델의 설명력이 높음|
 
 <br>
 
 + 단순선형 회귀분석
-  + 하나의 독립변수가 종속변수에 영향을 미치는 회귀모형
+  + 하나의 독립변수가 종속변수에 미치는 영향을 분석하는 통계 기법
     + 예 : 공부 시간(독립변수)에 따른 시험 성적(종속변수)의 변화
-  + 단순선형 회귀모형
+  + 단순선형 회귀모델
       $$y = \beta_0 + \beta_1x + \epsilon$$
     + $\beta_0$ : 절편(intercept)
-    + $\beta_1$ : 기울기(slope), 독립변수가 1단위 증가할 때 y의 평균적인 변화량
+    + $\beta_1$ : 기울기(slope)
     + $\epsilon$ : 오차(error)
   + 회귀분석의 목적은 주어진 데이터를 가장 잘 설명하는 회귀선을 찾는 것
-      $$\hat{y} = b_0 + b_1x$$
     + 일반적으로 오차의 제곱합을 최소화하는 최소제곱추정법(OLS; Ordinary Least Squares)을 사용함
-
-<br>
-
-+ 잔차(residual) : 관측값과 예측값의 차이, $y-\hat{y}$
-+ 결정계수 $R^2$
-  + 회귀모형이 데이터를 얼마나 잘 설명하는지 나타내는 지표
-  + 잔차의 크기가 작을수록 모형의 설명력이 높음
-  + 결정계수는 0~1사이의 값을 가지며, 1에 가까울 때 예측의 정밀도가 높음
+    $$\hat{y} = b_0 + b_1x$$
+  + 잔차(residual) : 관측값과 예측값의 차이, $y-\hat{y}$
 
 <br>
 
@@ -287,9 +303,7 @@ plt.show()
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
 # 한글 깨짐 현상에 대한 해결 방법
-import matplotlib.pyplot as plt
 import matplotlib as mpl
-
 plt.rc('font', family='Malgun Gothic')
 mpl.rcParams['axes.unicode_minus'] = False
 ```
@@ -300,7 +314,7 @@ mpl.rcParams['axes.unicode_minus'] = False
 ```
 
 ```{python}
-# sklearn의 linear_model 모듈에서 LinearRegression 클래스 불러오기
+# scikit-learn의 linear_model 모듈에서 LinearRegression 클래스 불러오기
 from sklearn.linear_model import LinearRegression
 ```
 
@@ -339,8 +353,8 @@ print(predicted_score)
 
 ## 8.3. (실습) 날씨 데이터 분석
 + \[데이터\] 기상자료개방포털에서 제공하는 서울특별시의 기상 관측 데이터
-  + 기간 : 2010년 1월 ~ 2020년 12월
-  + 변수 : 날짜, 지점, 평균기온(℃), 최저기온(℃), 최고기온(℃)
+  + 2010년 1월 ~ 2020년 12월
+  + 날짜, 지점, 평균기온(℃), 최저기온(℃), 최고기온(℃)
   + \[실습파일\] [(2010-2020)_weather.csv](./data/(2010-2020)_weather.csv)
 
 <br>
@@ -367,12 +381,6 @@ seoul.info()
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 300}
-# 요약 통계량 확인
-seoul.describe()
-```
-
-```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 206}
 # 데이터 전처리 : 열 삭제
 seoul.drop('지점', axis=1, inplace=True)
@@ -387,7 +395,7 @@ seoul.columns = ['날짜', '평균기온', '최저기온', '최고기온']
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
 # 데이터 전처리 : 결측값 확인
-seoul.isnull().sum()
+seoul.isna().sum()
 ```
 
 ```{python}
@@ -424,10 +432,16 @@ seoul0815
 ```
 
 ```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 300}
+# 요약 통계량
+seoul.describe()
+```
+
+```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 444}
 # 산점도 : 연도에 따른 평균기온 변화
 # 독립변수, 종속변수 분리
-# scikit-Learn에서 입력 데이터(feature)를 2차원 배열로 요구함
+# scikit-learn에서 입력 데이터(feature)를 2차원 배열로 요구함
 X = seoul0815[['연도']]
 y = seoul0815['평균기온']
 
@@ -447,7 +461,7 @@ seoul0815[['연도', '평균기온']].corr()
 ```{python}
 #| colab: {base_uri: https://localhost:8080/}
 # 단순선형 회귀분석 : 2021년 8월 15일 평균기온 예측
-# 선형 회귀모형 객체 생성 및 학습
+# 선형 회귀모델 생성 및 학습
 model = LinearRegression()
 model.fit(X, y)
 
@@ -462,8 +476,8 @@ print(f'결정계수 : {R2:.3f}')
 
 # 2021년일 때, 평균기온 예측
 newdata = pd.DataFrame({'연도': [2022]})
-predicted_value = model.predict(newdata)
-print(f'2021년 8월 15일 평균기온 예측값 : {predicted_value[0]:.2f}')
+y_pred = model.predict(newdata)
+print(f'2021년 8월 15일 평균기온 예측값 : {y_pred[0]:.2f}')
 ```
 
 ```{python}
@@ -490,9 +504,9 @@ plt.show()
 
 ## 8.4. 다중선형 회귀분석
 + 다중선형 회귀분석
-  + 두 개 이상의 독립변수가 종속변수에 영향을 미치는 회귀모형 
+  + 두 개 이상의 독립변수가 종속변수에 미치는 영향을 분석하는 통계 기법
     + 예: 공부 시간, 수면 시간, 강의 출석률(독립변수들)에 따른 시험 성적(종속변수)의 변화
-  + 다중선형 회귀모형
+  + 다중선형 회귀모델
     $$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_p x_p + \epsilon$$
     + $\beta_0$ : 절편(intercept)  
     + $\beta_1, \beta_2, \dots, \beta_p$ : 각 독립변수의 기울기(slope)
@@ -501,88 +515,150 @@ plt.show()
 <br>
 
 ## 8.5. (실습) 캘리포니아 주택 가격 분석
-+ \[데이터\] 
-  + 1990년 캘리포니아 지역의 주택 가격에 영향을 미치는 여러 특성(독립변수)과 주택 가격(종속변수)으로 구성된 데이터
-  + 총 약 20,000개의 관측값과 8개의 주요 독립변수로 구성됨 
++ \[데이터\] scikit-learn에서 제공하는 캘리포니아 주택 가격 데이터
+  + 1990년대 캘리포니아 지역의 주택 가격에 대한 데이터
+  + 총 20,640개의 관측값과 8개의 독립변수(feature), 1개의 종속변수(target)으로 구성됨
+  + `as_frame=True` 옵션을 사용하면 독립변수와 종속변수를 DataFrame 형태로 불러올 수 있음
+  + `as_frame=False` 옵션(기본값)을 사용하면 독립변수와 종속변수를 각각 넘파이 배열 형태로 별도로 제공함
 
 <br>
 
-| 변수       | 설명 |
-|------------|------|
-| MedInc     | 지역의 중위 소득 (단위: 만 달러) |
-| HouseAge   | 주택 연식 (건축 후 경과된 연도 수) |
-| AveRooms   | 가구당 평균 방 개수 |
-| AveBedrms  | 가구당 평균 침실 개수 |
-| Population | 지역 내 인구 수 |
-| AveOccup   | 가구당 평균 거주 인원 수 |
-| Latitude   | 위도 |
-| Longitude  | 경도 |
-| MedHouseVal | 종속변수: 주택의 중위 가격 (단위: \$100,000) |
-
+|변수|설명|
+|:------|:------------------------------|
+|MedInc|지역 중위 소득 (10,000 USD)|
+|HouseAge|주택 연식 (건축 후 경과된 연도 수)|
+|AveRooms|가구당 평균 방 개수|
+|AveBedrms|가구당 평균 침실 개수|
+|Population|지역 내 인구 수|
+|AveOccup|가구당 평균 거주 인원 수|
+|Latitude|위도|
+|Longitude|경도|
+|MedHouseVal|주택 중위 가격 (100,000 USD)|
 
 <br>
+
+```{python}
+## (1) 데이터 확인 및 전처리
+```
 
 ```{python}
 # 데이터 불러오기
 from sklearn.datasets import fetch_california_housing
-california = fetch_california_housing()
-df = pd.DataFrame(data=california.data, columns=california.feature_names)
-df['MedHouseVal'] = california.target
+data = fetch_california_housing(as_frame=True)
+df = data.frame
 df.head()
 ```
 
 ```{python}
+# 데이터 정보
+df.info()
+```
+
+```{python}
+# 데이터 전처리 : 결측값 확인
+df.isna().sum()
+```
+
+```{python}
+# 데이터 전처리 : 훈련 데이터와 평가 데이터로 분할 (7:3 비율)
+california = fetch_california_housing()
+X = california.data
+y = california.target
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+```
+
+<br>
+
+```{python}
+## (2) 데이터 분석 및 시각화
+```
+
+```{python}
+#| scrolled: true
+# 요약 통계량 확인
+df_train = pd.DataFrame(data=X_train, columns=california.feature_names)
+df_train['MedHouseVal'] = y_train
+df_train.describe()
+```
+
+```{python}
+# 산점도
+sns.pairplot(df_train, diag_kind='kde')
+plt.show()
+```
+
+```{python}
 # 상관분석
-corr = df.corr()
+corr_train = df_train.corr()
+upp_mat = np.triu(corr_train)
+
 plt.figure(figsize=(10, 8))
-sns.heatmap(corr, annot=True, cmap='coolwarm')
+sns.heatmap(corr_train, annot=True, mask=upp_mat, cmap='BrBG', vmin=-1, vmax=1)
 plt.title('Correlation Matrix')
 plt.show()
 ```
 
 ```{python}
-# 상관계수가 높은 독립변수 선택
-features = ['MedInc', 'AveRooms', 'AveOccup']
+# 상관관계가 강한 독립변수 선택
+# scikit-learn에서 입력 데이터(feature)를 2차원 배열로 요구함
+features = ['MedInc', 'HouseAge', 'AveRooms', 'Latitude']
 target = 'MedHouseVal'
 
-X = df[features]
-y = df[target]
+X_train = df_train[features]
+y_train = df_train[target]
 ```
 
 ```{python}
-# 3. 훈련 데이터와 검증 데이터로 분할 (8:2 비율)
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# 평가 데이터에서도 훈련 데이터에서 사용한 독립변수만 선택
+df_test = pd.DataFrame(data=X_test, columns=california.feature_names)
+df_test['MedHouseVal'] = y_test
+X_test = df_test[features]
 ```
 
 ```{python}
 #| scrolled: true
-# 선형 회귀모형 객체 생성 및 학습
+# 선형 회귀모델 생성 및 학습
 model = LinearRegression()
 model.fit(X_train, y_train)
-```
 
-```{python}
-# 예측 및 평가
-# MSE (Mean Squared Error, 평균제곱오차)
-# - 실제 값과 예측 값 사이의 오차를 제곱하여 평균 낸 값
-# - 값이 작을수록 예측이 실제에 가까움을 의미함
-# - 이상치에 민감하며, 큰 오차일수록 더 큰 패널티를 줌
+# 회귀모델 평가 : 결정계수, MSE
 from sklearn.metrics import mean_squared_error, r2_score
-
 y_pred = model.predict(X_test)
-MSE = mean_squared_error(y_test, y_pred)
 R2 = r2_score(y_test, y_pred)
+RMSE = np.sqrt(mean_squared_error(y_test, y_pred))
 
-print(f"MSE : {MSE:.4f}")
-print(f"결정계수 : {R2:.4f}")
+print(f"결정계수 : {R2:.3f}")
+print(f"RMSE : {RMSE:.3f}")
 ```
 
 ```{python}
-coeff_df = pd.DataFrame({
-    'Feature': features,
-    'Coefficient': model.coef_
-})
-print(coeff_df)
+# 회귀계수
+df_coef = pd.DataFrame({'Feature': features, 'Coefficient': model.coef_})
+print(df_coef)
 ```
+
+```{python}
+# statsmodels 라이브러리 설치
+#!pip install statsmodels
+```
+
+```{python}
+# [참고] 회귀계수의 유의성
+import statsmodels.api as sm
+
+X_train_const = sm.add_constant(X_train)
+ols_model = sm.OLS(y_train, X_train_const).fit()
+print(ols_model.summary())
+```
+
+<br>
+
+##### **결과 및 시사점**
++ 결정계수 $R^2$은 52.0%로 나타남
++ RMSE는 0.630으로, 주택 중위 가격의 실제값과 예측값이 평균적으로 약 6만 달러 차이가 있다는 것을 의미함
++ 훈련 데이터에서 주택 중위 가격의 평균은 약 20만 달러인 점을 고려하면, 모델의 평균 오차는 약 30% 수준임을 알 수 있음
++ 따라서 평균 오차가 비교적 큰 편이므로, 모델 성능 개선이 필요한 것으로 판단됨
++ 회귀계수를 살펴보면 지역 중위 소득, 주택 연식이 증가할수록 주택 중위 가격은 높아지며, 가구당 평균 거주 인원 수, 위도가 증가할수록 주택 중위가격은 낮아지는 것으로 나타남
 
