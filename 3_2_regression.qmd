@@ -586,7 +586,7 @@ df_train.describe()
 
 ```{python}
 # 산점도
-sns.pairplot(df_train, height=2.5, diag_kind='kde')
+sns.pairplot(df_train, height=10.8, plot_kws={'s': 10}, diag_kind='kde')
 plt.show()
 ```
 
@@ -595,7 +595,7 @@ plt.show()
 corr_train = df_train.corr()
 upp_mat = np.triu(corr_train)
 
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(8, 6))
 sns.heatmap(corr_train, annot=True, mask=upp_mat, cmap='BrBG', vmin=-1, vmax=1)
 plt.title('Correlation Matrix')
 plt.show()
@@ -661,5 +661,5 @@ print(ols_model.summary())
 + RMSE는 0.630으로, 주택 중위 가격의 실제값과 예측값이 평균적으로 약 6만 달러 차이가 있다는 것을 의미함
 + 훈련 데이터에서 주택 중위 가격의 평균은 약 20만 달러인 점을 고려하면, 모델의 평균 오차는 약 30% 수준임을 알 수 있음
 + 따라서 평균 오차가 비교적 큰 편이므로, 모델 성능 개선이 필요한 것으로 판단됨
-+ 회귀계수를 살펴보면 지역 중위 소득, 주택 연식이 증가할수록 주택 중위 가격은 높아지며, 가구당 평균 거주 인원 수, 위도가 증가할수록 주택 중위가격은 낮아지는 것으로 나타남
++ 회귀계수를 살펴보면 지역 중위 소득, 주택 연식이 증가할수록 주택 중위 가격은 높아지며, 가구당 평균 거주 인원 수, 위도가 증가할수록 주택 중위 가격은 낮아지는 것으로 나타남
 
