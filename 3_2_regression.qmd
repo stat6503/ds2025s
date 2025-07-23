@@ -586,7 +586,7 @@ df_train.describe()
 
 ```{python}
 # 산점도
-sns.pairplot(df_train, height=10.8, plot_kws={'s': 10}, diag_kind='kde')
+sns.pairplot(df_train, height=0.8, plot_kws={'s': 5}, diag_kind='kde')
 plt.show()
 ```
 
