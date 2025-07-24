@@ -7,7 +7,7 @@ website:
   navbar:
     left:
       - href: notice.qmd
-        text: [과제 공지]
+        text: "[과제 공지]"
       - text: Python Basic
         menu:
           - href: 1_1_environment.qmd

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – R&amp;E 활동</title>
+<title>공지 – R&amp;E 활동</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,6 +122,10 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./notice.html" aria-current="page"> 
+<span class="menu-text">[과제 공지]</span></a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-python-basic" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Python Basic</span>
@@ -156,15 +194,23 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#연구문제-타이타닉-생존자-분석" id="toc-연구문제-타이타닉-생존자-분석" class="nav-link active" data-scroll-target="#연구문제-타이타닉-생존자-분석">연구문제 : 타이타닉 생존자 분석</a></li>
+  <li><a href="#데이터" id="toc-데이터" class="nav-link" data-scroll-target="#데이터">데이터</a></li>
+  <li><a href="#분석-가이드라인" id="toc-분석-가이드라인" class="nav-link" data-scroll-target="#분석-가이드라인">분석 가이드라인</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">공지</h1>
 </div>
 
 
@@ -181,9 +227,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About this site</p>
+<ul>
+<li>과제 기한 : 2025년 7월 26일(토) 낮 12시까지</li>
+<li>제출 방법 : E-mail(stat6503@gamil.com)로 제출</li>
+<li>제출 파일 : GitHub Pages 주소 또는 <code>.ipynb</code> 파일</li>
+</ul>
+<p><br></p>
+<section id="연구문제-타이타닉-생존자-분석" class="level2">
+<h2 class="anchored" data-anchor-id="연구문제-타이타닉-생존자-분석">연구문제 : 타이타닉 생존자 분석</h2>
+<ul>
+<li>RMS 타이타닉은 영국의 화이트 스타 라인이 운영한 북대서양 횡단 여객선으로, 1912년 4월 10일 첫 출항하였다. 영국의 사우샘프턴을 떠나 미국의 뉴욕으로 향하던 중에 4월 15일 빙산과 충돌하여 침몰하였으며, 이로 인해 1,514명이 사망한 것으로 알려져 있다.</li>
+<li>타이타닉 데이터를 분석하여 <strong>생존에 영향을 준 요인을 파악</strong>하고, 이를 바탕으로 <strong>생존 여부를 예측</strong>하는 모델을 학습해보자.</li>
+</ul>
+<p><br></p>
+</section>
+<section id="데이터" class="level2">
+<h2 class="anchored" data-anchor-id="데이터">데이터</h2>
+<ul>
+<li>seaborn 라이브러리에서 제공하는 <strong>titanic</strong> 데이터 사용
+<ul>
+<li>survived: 생존 여부(0, 1)</li>
+<li>pclass: 객실 등급(1, 2, 3)</li>
+<li>sex: 성별</li>
+<li>age: 나이</li>
+<li>sibsp: 함께 탑승한 형제자매, 배우자 수</li>
+<li>parch: 함께 탑승한 부모, 자식 수</li>
+<li>fare: 요금</li>
+<li>embarked: 탑승 항구(S, C, Q)</li>
+<li>class: 객실 등급(First, Second, Third)</li>
+<li>who: 사람 구분(man, woman, child)</li>
+<li>adult_male: 성인 남자 여부(True, False)</li>
+<li>deck: 갑판</li>
+<li>embark_town: 탑승 항구(Southhampton, Cherbourg, Queenstown)</li>
+<li>alive: 생존여부(no, yes)</li>
+<li>alone: 1인 탑승 여부(True, False)</li>
+</ul></li>
+</ul>
+<p><br></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> sns.load_dataset(<span class="st">'titanic'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+</section>
+<section id="분석-가이드라인" class="level2">
+<h2 class="anchored" data-anchor-id="분석-가이드라인">분석 가이드라인</h2>
+<ul>
+<li>의미가 중복되는 변수는 하나만 선택하여 사용할 것</li>
+<li>결측값은 반드시 처리할 것</li>
+<li>데이터 탐색을 포함할 것</li>
+<li>학습 데이터와 평가 데이터로 분할하여 사용할 것</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

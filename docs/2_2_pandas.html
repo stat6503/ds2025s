@@ -125,6 +125,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./notice.html"> 
+<span class="menu-text">[과제 공지]</span></a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-python-basic" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Python Basic</span>
@@ -276,15 +280,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol></li>
 </ul>
 <p><br></p>
-<div id="d2b949c9" class="cell" data-execution_count="1">
+<div id="fd35a4eb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pandas 라이브러리 설치</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install pandas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f4c91365" class="cell" data-execution_count="2">
+<div id="1394a534" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pandas 라이브러리 불러오기</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="dbae4602" class="cell" data-execution_count="3">
+<div id="e397731f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터프레임 생성1</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: [<span class="st">'Jang'</span>, <span class="st">'Yang'</span>, <span class="st">'Oh'</span>],</span>
@@ -329,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cab076af" class="cell" data-execution_count="4">
+<div id="6b549920" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터프레임 생성2</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./data/exam.csv'</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -523,7 +527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>데이터 분석 시 가장 먼저 데이터의 전반적인 구조를 파악해야 함</li>
 </ul>
 <p><br></p>
-<div id="b70d0352" class="cell" data-execution_count="5">
+<div id="df195281" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"./data/music.csv"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -695,7 +699,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1f920eb1" class="cell" data-execution_count="6">
+<div id="fe057d11" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 변수 속성</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -716,7 +720,7 @@ dtypes: int64(1), object(7)
 memory usage: 964.0+ bytes</code></pre>
 </div>
 </div>
-<div id="0c510dab" class="cell" data-execution_count="7">
+<div id="5e75dbeb" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 앞부분/뒷부분</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.head()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># df.tail()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -800,7 +804,7 @@ memory usage: 964.0+ bytes</code></pre>
 </div>
 </div>
 </div>
-<div id="5af9b858" class="cell" data-execution_count="8">
+<div id="d013f709" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 요약 통계량 : 수치형 변수</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -853,7 +857,7 @@ memory usage: 964.0+ bytes</code></pre>
 </div>
 </div>
 </div>
-<div id="46ce7902" class="cell" data-execution_count="9">
+<div id="d35d09a4" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 요약 통계량 : 문자형 변수</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df.describe(include<span class="op">=</span><span class="st">'object'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -920,14 +924,14 @@ memory usage: 964.0+ bytes</code></pre>
 </div>
 </div>
 </div>
-<div id="038c69ec" class="cell" data-execution_count="10">
+<div id="8963a80c" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 인덱스</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df.index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>RangeIndex(start=0, stop=13, step=1)</code></pre>
 </div>
 </div>
-<div id="6fb3f18c" class="cell" data-execution_count="11">
+<div id="d633dadb" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
@@ -936,7 +940,7 @@ memory usage: 964.0+ bytes</code></pre>
       dtype='object')</code></pre>
 </div>
 </div>
-<div id="ee2ccf09" class="cell" data-execution_count="12">
+<div id="86ad62de" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 각 열의 자료형</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
@@ -951,7 +955,7 @@ type            object
 dtype: object</code></pre>
 </div>
 </div>
-<div id="b6a18a60" class="cell" data-execution_count="13">
+<div id="3ffe60a8" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 정렬 : 오름차순(기본)</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">'release_date'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -1122,7 +1126,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="caa54610" class="cell" data-execution_count="14">
+<div id="95ded7c3" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 빈도</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cnt <span class="op">=</span> df[<span class="st">'agency'</span>].value_counts()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(cnt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1184,7 +1188,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="c9f18ca6" class="cell" data-execution_count="15">
+<div id="46f25379" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 고유값</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'agency'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -1208,7 +1212,7 @@ dtype: object</code></pre>
 <li>하나의 열만 선택하는 경우, <code>(데이터프레임 이름).(열 이름)</code> 형식으로도 접근할 수 있음</li>
 </ul>
 <p><br></p>
-<div id="377ddd37" class="cell" data-execution_count="16">
+<div id="004b628a" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 선택1</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./data/weather.csv'</span>, encoding<span class="op">=</span><span class="st">'cp949'</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'평균기온'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1246,7 +1250,7 @@ dtype: object</code></pre>
 Name: 평균기온, dtype: float64</code></pre>
 </div>
 </div>
-<div id="a4332d5b" class="cell" data-execution_count="17">
+<div id="c814f9be" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 선택2</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'최저기온'</span>, <span class="st">'최고기온'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
@@ -1434,7 +1438,7 @@ Name: 평균기온, dtype: float64</code></pre>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="b146a000" class="cell" data-execution_count="18">
+<div id="e57cb22d" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 선택3</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df.loc[:, [<span class="st">'날짜'</span>, <span class="st">'최고기온'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
@@ -1606,7 +1610,7 @@ Name: 평균기온, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="b31604a0" class="cell" data-execution_count="19">
+<div id="65eee5e0" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 행 선택1</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">0</span>:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
@@ -1658,7 +1662,7 @@ Name: 평균기온, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="9d327c60" class="cell" data-execution_count="20">
+<div id="fbc781e1" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 행 선택2 : 날짜 데이터를 인덱스로 지정 후, 특정 날짜에 해당하는 행 선택</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df.index <span class="op">=</span> df[<span class="st">'날짜'</span>]</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="st">'2022-06-05'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1670,7 +1674,7 @@ Name: 평균기온, dtype: float64</code></pre>
 Name: 2022-06-05, dtype: object</code></pre>
 </div>
 </div>
-<div id="e92505db" class="cell" data-execution_count="21">
+<div id="a95f278e" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 헹 선택3 : 조건을 만족하는 행 선택</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[<span class="st">'평균기온'</span>]<span class="op">&gt;=</span><span class="dv">25</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df.loc[mask]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1775,7 +1779,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 <li>조건이 2개 이상인 경우, 각 조건을 <code>()</code>로 묶고 논리 연산자(<code>&amp;</code>, <code>|</code>, <code>~</code>)를 사용함</li>
 </ul>
 <p><br></p>
-<div id="10e55eb2" class="cell" data-execution_count="22">
+<div id="fbb7002a" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 부울 인덱싱1 : 조건을 만족하는 행 선택</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[<span class="st">'최고기온'</span>]<span class="op">&gt;=</span><span class="dv">30</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df[mask]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1849,7 +1853,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="bc2a2bb1" class="cell" data-execution_count="23">
+<div id="b601d023" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 부울 인덱싱2 : 조건을 만족하는 행과 특정 열 선택</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[<span class="st">'최고기온'</span>]<span class="op">&gt;=</span><span class="dv">30</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df[mask][[<span class="st">'최저기온'</span>, <span class="st">'최고기온'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1907,7 +1911,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="15229c69" class="cell" data-execution_count="24">
+<div id="e2698bf6" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 불 인덱싱3 : 제일 더웠던 날 선택</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[<span class="st">'최고기온'</span>]<span class="op">==</span>df[<span class="st">'최고기온'</span>].<span class="bu">max</span>()</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df[mask]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1946,7 +1950,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="6a0c4f60" class="cell" data-execution_count="25">
+<div id="18cbc5e3" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [Note] 특정 조건을 만족하는 데이터 선택</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>df.query(<span class="st">'최고기온-최저기온&gt;=10'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
@@ -2045,7 +2049,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="39ffe811" class="cell" data-execution_count="26">
+<div id="6ae4510c" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"./data/music.csv"</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2217,7 +2221,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="ddb55098" class="cell" data-execution_count="27">
+<div id="149bbd7c" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 여러 개의 열 삭제</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df.drop(columns <span class="op">=</span> [<span class="st">'sortation'</span>, <span class="st">'agency'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2225,7 +2229,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 <pre><code>Index(['title', 'singer', 'personnel', 'release_date', 'genre', 'type'], dtype='object')</code></pre>
 </div>
 </div>
-<div id="a19c9c9c" class="cell" data-execution_count="28">
+<div id="daddd59a" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 열 이름 변경</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> [<span class="st">'노래제목'</span>, <span class="st">'가수'</span>, <span class="st">'인원수'</span>, <span class="st">'발매일'</span>, <span class="st">'장르'</span>, <span class="st">'유형'</span>]</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2297,7 +2301,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="3009e517" class="cell" data-execution_count="29">
+<div id="6d4ec159" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 발매일 변수를 datetime 형식으로 변환</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'발매일'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'발매일'</span>])</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2311,7 +2315,7 @@ Name: 2022-06-05, dtype: object</code></pre>
 dtype: object</code></pre>
 </div>
 </div>
-<div id="6c88f129" class="cell" data-execution_count="30">
+<div id="09a7a665" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 새로운 열 생성</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'연도'</span>] <span class="op">=</span> df[<span class="st">'발매일'</span>].dt.year</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'월'</span>] <span class="op">=</span> df[<span class="st">'발매일'</span>].dt.month</span>
@@ -2412,7 +2416,7 @@ dtype: object</code></pre>
 <li>통계량을 산출하는 메소드 <code>mean()</code>, <code>std()</code>, <code>var()</code>, <code>max()</code>, <code>min()</code>, <code>mode()</code> 등과 함께 사용됨</li>
 </ul>
 <p><br></p>
-<div id="78d6fade" class="cell" data-execution_count="31">
+<div id="846af86a" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 그룹핑1</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>newdata <span class="op">=</span> df.groupby([<span class="st">'장르'</span>]).count()</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(newdata[<span class="st">'노래제목'</span>])</span>
@@ -2455,7 +2459,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="91040235" class="cell" data-execution_count="32">
+<div id="0c4a7791" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 그룹핑2</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>newdata <span class="op">=</span> df.groupby([<span class="st">'장르'</span>])[<span class="st">'인원수'</span>].mean()</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(newdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2521,7 +2525,7 @@ dtype: object</code></pre>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="846914bc" class="cell" data-execution_count="33">
+<div id="88009c90" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"./data/train.csv"</span>)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2720,7 +2724,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="58d518de" class="cell" data-execution_count="34">
+<div id="42509ec9" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측값 확인</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'Embarked'</span>].isna()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
@@ -2782,7 +2786,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="551b1454" class="cell" data-execution_count="35">
+<div id="bcf5bf5a" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 각 열별 결측값 개수 확인</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 부울형은 산술 연산 시 True는 1, False는 0으로 계산되므로</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># isna() 결과에 sum()을 적용하면 결측값 개수가 계산됨</span></span>
@@ -2803,7 +2807,7 @@ Embarked         2
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="bcfa8efa" class="cell" data-execution_count="36">
+<div id="2609bece" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측값이 포함된 열 삭제</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>df.drop(<span class="st">'Cabin'</span>, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2813,7 +2817,7 @@ dtype: int64</code></pre>
       dtype='object')</code></pre>
 </div>
 </div>
-<div id="17e3787d" class="cell" data-execution_count="37">
+<div id="c1782cd8" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측값이 포함된 행 삭제</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>df.dropna(axis<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
@@ -2999,7 +3003,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="046a9d0f" class="cell" data-execution_count="38">
+<div id="4c642544" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측값을 최빈값으로 대체</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>embarked_mode <span class="op">=</span> df[<span class="st">'Embarked'</span>].mode()[<span class="dv">0</span>]</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Embarked'</span>] <span class="op">=</span> df[<span class="st">'Embarked'</span>].fillna(embarked_mode)</span>
@@ -3019,7 +3023,7 @@ Embarked         0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="48d4ae1f" class="cell" data-execution_count="39">
+<div id="9ceb7f76" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측값을 평균으로 대체</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>age_mean <span class="op">=</span> df[<span class="st">'Age'</span>].mean()</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Age'</span>] <span class="op">=</span> df[<span class="st">'Age'</span>].fillna(age_mean)</span>

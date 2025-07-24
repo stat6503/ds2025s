@@ -122,6 +122,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./notice.html"> 
+<span class="menu-text">[과제 공지]</span></a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-python-basic" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Python Basic</span>
@@ -408,7 +412,7 @@ This text is displayed verbatim / preformatted
 <li>Quarto 프로젝트 생성
 <ul>
 <li>Anaconda Prompt에서 Quarto 프로젝트를 생성할 폴더로 이동 : <code>cd "C:\Users\user"</code></li>
-<li>Quarto 프로젝트 생성 : <code>quarto create-project ml-project --type website</code></li>
+<li>Quarto 프로젝트(ml-project) 생성 : <code>quarto create-project ml-project --type website</code></li>
 </ul></li>
 <li>Quarto 프로젝트 작성
 <ul>
@@ -421,10 +425,10 @@ This text is displayed verbatim / preformatted
 <ul>
 <li>Anaconda Prompt에서 Quarto 프로젝트 폴더로 이동 : <code>cd ml-project</code></li>
 <li>.qmd 파일로 변환(선택) : <code>quarto convert myproject.ipynb -o myproject.qmd</code></li>
-<li>HTML 파일 생성 : <code>quarto render</code></li>
 <li>웹사이트 미리보기 : <code>quarto preview</code></li>
 </ul></li>
 </ul></li>
+<li>HTML 파일 생성 : <strong><code>quarto render</code></strong></li>
 </ol></li>
 </ul>
 <p><br></p>
@@ -450,10 +454,10 @@ This text is displayed verbatim / preformatted
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 </section>
-<section id="git-pages-배포" class="level3">
-<h3 class="anchored" data-anchor-id="git-pages-배포">1.3.3. Git Pages 배포</h3>
+<section id="github-pages-배포" class="level3">
+<h3 class="anchored" data-anchor-id="github-pages-배포">1.3.3. GitHub Pages 배포</h3>
 <ul>
-<li>Git Pages
+<li>GitHub Pages
 <ul>
 <li>GitHub에서 HTML 문서를 무료로 웹사이트 형태로 배포할 수 있는 서비스</li>
 <li>설정이 간단하며, Git과 통합되어 버전 관리와 팀 작업에 효율적임</li>
@@ -461,7 +465,7 @@ This text is displayed verbatim / preformatted
 </ul>
 <p><br></p>
 <ul>
-<li>Git Pages 배포
+<li>GitHub Pages 최초 배포 (처음 한 번만 설정)
 <ol type="1">
 <li>GitHub 계정 및 저장소(repository) 생성</li>
 <li>Git 설치
@@ -469,51 +473,54 @@ This text is displayed verbatim / preformatted
 <li><a href="https://gitforwindows.org/">Git 다운로드</a></li>
 <li>Anaconda Prompt에서 설치 확인 : <code>git --version</code></li>
 </ul></li>
-<li>Git 사용자 정보 설정(공용 컴퓨터에서 local 설정)
+<li>Git 사용자 정보 설정(개인 컴퓨터에서 global 설정)
 <ul>
-<li>Quarto 프로젝트 폴더로 이동 : <code>cd ml-project</code></li>
-<li><code>git config user.name "Name"</code></li>
-<li><code>git config user.email "address@email.com"</code></li>
-<li>설정 확인 : <code>git config --local --list</code></li>
+<li>Quarto 프로젝트 폴더(ml-project)로 이동 : <code>cd ml-project</code>
+<ul>
+<li><code>git config --global user.name "Name"</code></li>
+<li><code>git config --global user.email "address@email.com"</code></li>
+<li>설정 확인 : <code>git config --global --list</code></li>
 </ul></li>
-<li>Git Pages 배포
+</ul></li>
+<li>GitHub Pages 배포
 <ul>
 <li>Git 초기화 : <code>git init</code></li>
 <li>기본 branch를 main으로 변경 : <code>git branch -m master main</code></li>
 <li>파일 추가 : <code>git add -A</code></li>
-<li>변경 내용 저장 : <code>git commit -m "Initial commit"</code></li>
-<li>GitHub 원격 저장소 연결 : <code>git remote add origin https://github.com/stat6503/ml-project.git</code></li>
+<li>최초 커밋 : <code>git commit -m "Initial commit"</code></li>
+<li>GitHub 원격 저장소 연결 : <code>git remote add origin https://github.com/&lt;your-username&gt;/&lt;your-repository&gt;.git</code></li>
 <li>원격 저장소 연결 확인 : <code>git remote -v</code></li>
 <li>GitHub에 업로드 : <code>git push -u origin main</code></li>
 <li>GitHub 설정 수정
 <ul>
-<li>GitHub → Repository → Setting → Pages → Branch: <code>main</code>, Folder: <code>/docs</code></li>
+<li>GitHub → Repository → Settings → Pages → Branch: <code>main</code>, Folder: <code>/docs</code></li>
 </ul></li>
 </ul></li>
-<li>Git Pages 확인
+<li>GitHub Pages 확인
 <ul>
-<li>https://stat6503.github.io/ml-project</li>
+<li>https://&lt;your-username&gt;.github.io/&lt;your-repository&gt;</li>
 </ul></li>
 </ol></li>
 </ul>
 <p><br></p>
 <ul>
-<li>개인 컴퓨터에서 Git 사용자 정보 설정
-<ul>
-<li>Anaconda Prompt, Git Bash에서</li>
-<li><code>git config --global user.name "Name"</code></li>
-<li><code>git config --global user.email "address@email.com"</code></li>
-<li>설정 확인 : <code>git config --global --list</code></li>
-</ul></li>
+<li>문서 업데이트 및 GitHub Pages 재배포 (수정할 때마다)
+<ol type="1">
+<li>Anaconda Prompt에서 Quarto 프로젝트 폴더(ml-project)로 이동 : <code>cd ml-project</code></li>
+<li>HTML 파일 생성 : <code>quarto render</code></li>
+<li>변경 파일 추가 : <code>git add -A</code></li>
+<li>커밋 : <code>git commit -m "Update"</code></li>
+<li>GitHub에 업로드 : <code>git push</code></li>
+</ol></li>
 </ul>
 <p><br></p>
 <ul>
-<li>공용 컴퓨터에서 개인 정보 삭제
+<li>[참고] 공용 컴퓨터에서 개인 정보 삭제
 <ul>
 <li>Anaconda Prompt에서 Quarto 프로젝트 폴더로 이동 : <code>cd ml-project</code>
 <ul>
-<li><code>git config --unset user.name</code></li>
-<li><code>git config --unset user.email</code></li>
+<li><code>git config --global --unset user.name</code></li>
+<li><code>git config --global --unset user.email</code></li>
 <li><code>git credential-manager clear</code></li>
 </ul></li>
 <li>Quarto 프로젝트 폴더 삭제</li>
