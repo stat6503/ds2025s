@@ -176,7 +176,7 @@ This text is displayed verbatim / preformatted
      + Anaconda Prompt에서 설치 확인 : `quarto --version`
   2. Quarto 프로젝트 생성
      + Anaconda Prompt에서 Quarto 프로젝트를 생성할 폴더로 이동 : `cd "C:\Users\user"`
-     + Quarto 프로젝트 생성 : `quarto create-project ml-project --type website`
+     + Quarto 프로젝트(ml-project) 생성 : `quarto create-project ml-project --type website`
   3. Quarto 프로젝트 작성
      + `_quarto.yml` 수정
        + [HTML Theming](https://quarto.org/docs/output-formats/html-themes.html)
@@ -184,8 +184,8 @@ This text is displayed verbatim / preformatted
      + .ipynb 파일을 .qmd 파일로 변환
        + Anaconda Prompt에서 Quarto 프로젝트 폴더로 이동 : `cd ml-project`
        + .qmd 파일로 변환(선택) : `quarto convert myproject.ipynb -o myproject.qmd`
-       + HTML 파일 생성 : `quarto render`
        + 웹사이트 미리보기 : `quarto preview`
+   4. HTML 파일 생성 : **`quarto render`**
 
 <br>
 
@@ -212,50 +212,51 @@ format:
 
 <br>
 
-### 1.3.3. Git Pages 배포
-+ Git Pages
+### 1.3.3. GitHub Pages 배포
++ GitHub Pages
   + GitHub에서 HTML 문서를 무료로 웹사이트 형태로 배포할 수 있는 서비스
   + 설정이 간단하며, Git과 통합되어 버전 관리와 팀 작업에 효율적임
 
 <br>
 
-+ Git Pages 배포
++ GitHub Pages 최초 배포 (처음 한 번만 설정)
   1. GitHub 계정 및 저장소(repository) 생성
   2. Git 설치
      + [Git 다운로드](https://gitforwindows.org/)
      + Anaconda Prompt에서 설치 확인 : `git --version`
-  3. Git 사용자 정보 설정(공용 컴퓨터에서 local 설정)
-     + Quarto 프로젝트 폴더로 이동 : `cd ml-project`
-     + `git config user.name "Name"`
-     + `git config user.email "address@email.com"`
-     + 설정 확인 : `git config --local --list`
-  4. Git Pages 배포
+  3. Git 사용자 정보 설정(개인 컴퓨터에서 global 설정)
+     + Quarto 프로젝트 폴더(ml-project)로 이동 : `cd ml-project`
+       + `git config --global user.name "Name"`
+       + `git config --global user.email "address@email.com"`
+       + 설정 확인 : `git config --global --list`
+  4. GitHub Pages 배포
      + Git 초기화 : `git init`
      + 기본 branch를 main으로 변경 : `git branch -m master main`
      + 파일 추가 : `git add -A`
-     + 변경 내용 저장 : `git commit -m "Initial commit"`
-     + GitHub 원격 저장소 연결 : `git remote add origin https://github.com/stat6503/ml-project.git`
+     + 최초 커밋 : `git commit -m "Initial commit"`
+     + GitHub 원격 저장소 연결 : `git remote add origin https://github.com/<your-username>/<your-repository>.git`
      + 원격 저장소 연결 확인 : `git remote -v`
      + GitHub에 업로드 : `git push -u origin main`
      + GitHub 설정 수정
-       + GitHub → Repository → Setting → Pages → Branch: `main`, Folder: `/docs`
-  5. Git Pages 확인
-     + https://stat6503.github.io/ml-project
+       + GitHub → Repository → Settings → Pages → Branch: `main`, Folder: `/docs`
+  5. GitHub Pages 확인
+     + https://\<your-username\>.github.io/\<your-repository\>
 
 <br>
 
-+ 개인 컴퓨터에서 Git 사용자 정보 설정
-  + Anaconda Prompt, Git Bash에서
-  + `git config --global user.name "Name"`
-  + `git config --global user.email "address@email.com"`
-  + 설정 확인 : `git config --global --list`
++ 문서 업데이트 및 GitHub Pages 재배포 (수정할 때마다)
+  1. Anaconda Prompt에서 Quarto 프로젝트 폴더(ml-project)로 이동 : `cd ml-project`
+  2. HTML 파일 생성 : `quarto render`
+  3. 변경 파일 추가 : `git add -A`
+  4. 커밋 : `git commit -m "Update"`
+  5. GitHub에 업로드 : `git push`
 
 <br>
 
-+ 공용 컴퓨터에서 개인 정보 삭제
++ \[참고\] 공용 컴퓨터에서 개인 정보 삭제
   + Anaconda Prompt에서 Quarto 프로젝트 폴더로 이동 : `cd ml-project`
-    + `git config --unset user.name`
-    + `git config --unset user.email`
+    + `git config --global --unset user.name`
+    + `git config --global --unset user.email`
     + `git credential-manager clear`
   + Quarto 프로젝트 폴더 삭제
 

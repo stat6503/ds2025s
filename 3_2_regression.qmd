@@ -274,11 +274,11 @@ plt.show()
 + 회귀모델 평가지표
 
 |지표|설명|
-|:---------:|:------------------------------|
-|MSE(Mean Squared Error)|- 평균제곱오차로, 작을수록 좋음|
-|RMSE(Root Mean Squared Error)|- MSE의 양의 제곱근으로, 작을수록 좋음<br> -단위가 데이터와 동일하여 해석이 용이함|
-|MAE(Mean Absolute Error)|- 평균절대오차로, 작을수록 좋음 <br>- 이상값에 덜 민감함|
-|$R^2$ (결정계수)|- 모델이 데이터의 변동을 얼마나 잘 설명하는지 나타내는 지표 <br>- 0~1 사이의 값을 가지며, 1에 가까울수록 모델의 설명력이 높음|
+|:---------------:|:------------------------------|
+|MSE <br>(Mean Squared Error)|- 평균제곱오차로, 작을수록 좋음|
+|RMSE <br>(Root Mean Squared Error)|- MSE의 양의 제곱근으로, 작을수록 좋음<br> - 단위가 데이터와 동일하여 해석이 용이함|
+|MAE <br>(Mean Absolute Error)|- 평균절대오차로, 작을수록 좋음 <br>- 이상값에 덜 민감함|
+|$R^2$ <br>(결정계수)|- 모델이 데이터의 변동을 얼마나 잘 설명하는지 나타내는 지표 <br>- 0~1 사이의 값을 가지며, 1에 가까울수록 모델의 설명력이 높음|
 
 <br>
 
@@ -560,11 +560,16 @@ df.info()
 df.isna().sum()
 ```
 
+<br>
+
 ```{python}
-# 데이터 전처리 : 훈련 데이터와 평가 데이터로 분할 (7:3 비율)
-california = fetch_california_housing()
-X = california.data
-y = california.target
+## (2) 학습/평가 데이터 분할
+```
+
+```{python}
+# 데이터 전처리 : 학습/평가 데이터 분할 (7:3 비율)
+X = data.data
+y = data.target
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
@@ -573,18 +578,32 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 <br>
 
 ```{python}
-## (2) 데이터 분석 및 시각화
+## (3) 데이터 탐색
 ```
 
 ```{python}
 #| scrolled: true
 # 요약 통계량 확인
-df_train = pd.DataFrame(data=X_train, columns=california.feature_names)
-df_train['MedHouseVal'] = y_train
+df_train = pd.concat([X_train, y_train], axis=1)
 df_train.describe()
 ```
 
 ```{python}
+# 중위 주택 가격에 대한 분포
+plt.figure(figsize=(5, 3))
+sns.histplot(df_train['MedHouseVal'], color='forestgreen')
+plt.show()
+```
+
+```{python}
+# 중위 주택 가격에 대한 분포
+plt.figure(figsize=(5, 2))
+sns.boxplot(x='MedHouseVal', color='tomato', data=df_train)
+plt.show()
+```
+
+```{python}
+#| scrolled: true
 # 산점도
 sns.pairplot(df_train, height=0.8, plot_kws={'s': 5}, diag_kind='kde')
 plt.show()
@@ -601,21 +620,17 @@ plt.title('Correlation Matrix')
 plt.show()
 ```
 
+<br>
+
+```{python}
+## (4) 회귀모델 학습
+```
+
 ```{python}
 # 상관관계가 강한 독립변수 선택
 # scikit-learn에서 입력 데이터(feature)를 2차원 배열로 요구함
 features = ['MedInc', 'HouseAge', 'AveRooms', 'Latitude']
-target = 'MedHouseVal'
-
 X_train = df_train[features]
-y_train = df_train[target]
-```
-
-```{python}
-# 평가 데이터에서도 훈련 데이터에서 사용한 독립변수만 선택
-df_test = pd.DataFrame(data=X_test, columns=california.feature_names)
-df_test['MedHouseVal'] = y_test
-X_test = df_test[features]
 ```
 
 ```{python}
@@ -624,20 +639,8 @@ X_test = df_test[features]
 model = LinearRegression()
 model.fit(X_train, y_train)
 
-# 회귀모델 평가 : 결정계수, MSE
-from sklearn.metrics import mean_squared_error, r2_score
-y_pred = model.predict(X_test)
-R2 = r2_score(y_test, y_pred)
-RMSE = np.sqrt(mean_squared_error(y_test, y_pred))
-
-print(f"결정계수 : {R2:.3f}")
-print(f"RMSE : {RMSE:.3f}")
-```
-
-```{python}
-# 회귀계수
-df_coef = pd.DataFrame({'Feature': features, 'Coefficient': model.coef_})
-print(df_coef)
+# 회귀계수(regression coefficient)
+pd.DataFrame({'Featurs': features, 'Coefficient': model.coef_})
 ```
 
 ```{python}
@@ -657,9 +660,41 @@ print(ols_model.summary())
 <br>
 
 ##### **결과 및 시사점**
++ 독립변수가 중위 주택 가격에 미치는 영향은 다음과 같음
+  + 지역 중위 소득이 1만 달러 증가할 때, 중위 주택 가격은 약 4만 3천 달러 증가하는 것으로 나타남. 이는 경제적으로 여유로운 가구일수록 더 비싼 주택에 거주하는 경향이 있음
+  + 주택 연식이 1년 증가하면, 중위 주택 가격은 약 1,693달러 상승하는 것으로 나타남
+  + 가구당 평균 방 개수가 1개 늘어날수록, 중위 주택 가격은 약 1,950달러 감소하는 경향이 있음
+  + 위도가 1도 증가하면, 중위 주택 가격은 약 4,507달러 하락함. 이는 일반적으로 갤리포니아주 남부 지역에 대도시가 집중되어 있어, 해당 지역의 주택 가격이 반영된 것으로 해석됨
+
+<br>
+
+```{python}
+## (5) 회귀모델 평가
+```
+
+```{python}
+# 평가 데이터에서도 학습 데이터에서 사용한 독립변수만 선택
+X_test = X_test[features]
+
+# 평가 데이터의 예측값
+y_pred = model.predict(X_test)
+```
+
+```{python}
+# 회귀모델 평가 : RMSE, 결정계수
+from sklearn.metrics import mean_squared_error, r2_score
+RMSE = np.sqrt(mean_squared_error(y_test, y_pred))
+R2 = r2_score(y_test, y_pred)
+
+print(f'RMSE : {RMSE:.3f}')
+print(f'결정계수 : {R2:.3f}')
+```
+
+<br>
+
+##### **결과 및 시사점**
 + 결정계수 $R^2$은 52.0%로 나타남
-+ RMSE는 0.630으로, 주택 중위 가격의 실제값과 예측값이 평균적으로 약 6만 달러 차이가 있다는 것을 의미함
-+ 훈련 데이터에서 주택 중위 가격의 평균은 약 20만 달러인 점을 고려하면, 모델의 평균 오차는 약 30% 수준임을 알 수 있음
++ RMSE는 0.794로, 주택 중위 가격의 실제값과 예측값이 평균적으로 약 8만 달러 차이가 있다는 것을 의미함
++ 학습 데이터에서 주택 중위 가격의 평균은 약 20만 달러인 점을 고려하면, 모델의 평균 오차는 약 25% 수준임을 알 수 있음
 + 따라서 평균 오차가 비교적 큰 편이므로, 모델 성능 개선이 필요한 것으로 판단됨
-+ 회귀계수를 살펴보면 지역 중위 소득, 주택 연식이 증가할수록 주택 중위 가격은 높아지며, 가구당 평균 거주 인원 수, 위도가 증가할수록 주택 중위 가격은 낮아지는 것으로 나타남
 

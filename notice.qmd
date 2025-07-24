@@ -1,0 +1,55 @@
+---
+title: 공지
+jupyter: python3
+---
+
++ 과제 기한 : 2025년 7월 26일(토) 낮 12시까지
++ 제출 방법 : E-mail(stat6503@gamil.com)로 제출
++ 제출 파일 : GitHub Pages 주소 또는 `.ipynb` 파일
+
+<br>
+
+
+## 연구문제 : 타이타닉 생존자 분석
++ RMS 타이타닉은 영국의 화이트 스타 라인이 운영한 북대서양 횡단 여객선으로, 1912년 4월 10일 첫 출항하였다. 영국의 사우샘프턴을 떠나 미국의 뉴욕으로 향하던 중에 4월 15일 빙산과 충돌하여 침몰하였으며, 이로 인해 1,514명이 사망한 것으로 알려져 있다.
++ 타이타닉 데이터를 분석하여 **생존에 영향을 준 요인을 파악**하고, 이를 바탕으로 **생존 여부를 예측**하는 모델을 학습해보자.
+
+<br>
+
+## 데이터
++ seaborn 라이브러리에서 제공하는 **titanic** 데이터 사용
+  + survived: 생존 여부(0, 1)
+  + pclass: 객실 등급(1, 2, 3)
+  + sex: 성별
+  + age: 나이
+  + sibsp: 함께 탑승한 형제자매, 배우자 수
+  + parch: 함께 탑승한 부모, 자식 수
+  + fare: 요금
+  + embarked: 탑승 항구(S, C, Q)
+  + class: 객실 등급(First, Second, Third)
+  + who: 사람 구분(man, woman, child)
+  + adult_male: 성인 남자 여부(True, False)
+  + deck: 갑판
+  + embark_town: 탑승 항구(Southhampton, Cherbourg, Queenstown)
+  + alive: 생존여부(no, yes)
+  + alone: 1인 탑승 여부(True, False)
+
+<br>
+
+``` python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = sns.load_dataset('titanic')
+```
+
+<br>
+
+## 분석 가이드라인
++ 의미가 중복되는 변수는 하나만 선택하여 사용할 것
++ 결측값은 반드시 처리할 것
++ 데이터 탐색을 포함할 것
++ 학습 데이터와 평가 데이터로 분할하여 사용할 것
+

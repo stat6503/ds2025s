@@ -6,6 +6,8 @@ website:
   title: "R&E 활동"
   navbar:
     left:
+      - href: notice.qmd
+        text: [과제 공지]
       - text: Python Basic
         menu:
           - href: 1_1_environment.qmd
@@ -30,7 +32,7 @@ website:
             text: (2) 지도학습：회귀
           - href: 3_3_classification.qmd
             text: (3) 지도학습：분류
-
+            
 format:
   html:
     theme:
