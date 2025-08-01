@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#히스토그램" id="toc-히스토그램" class="nav-link" data-scroll-target="#히스토그램">6.3. 히스토그램</a></li>
   <li><a href="#상자수염-그래프" id="toc-상자수염-그래프" class="nav-link" data-scroll-target="#상자수염-그래프">6.4. 상자수염 그래프</a></li>
   <li><a href="#카운트-플롯count-plot" id="toc-카운트-플롯count-plot" class="nav-link" data-scroll-target="#카운트-플롯count-plot">6.5. 카운트 플롯(count plot)</a></li>
-  <li><a href="#히트맵heatmap" id="toc-히트맵heatmap" class="nav-link" data-scroll-target="#히트맵heatmap">6.5. 히트맵(heatmap)</a></li>
+  <li><a href="#히트맵heatmap" id="toc-히트맵heatmap" class="nav-link" data-scroll-target="#히트맵heatmap">6.6. 히트맵(heatmap)</a></li>
   <li><a href="#기타-시각화" id="toc-기타-시각화" class="nav-link" data-scroll-target="#기타-시각화">6.7. 기타 시각화</a></li>
   </ul>
 </nav>
@@ -266,20 +266,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="막대-그래프" class="level2">
 <h2 class="anchored" data-anchor-id="막대-그래프">6.2. 막대 그래프</h2>
 <p><br></p>
-<div id="4084cfc9" class="cell" data-execution_count="1">
+<div id="847ad657" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seaborn 라이브러리 설치</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install seaborn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="32bf90ed" class="cell" data-execution_count="2">
+<div id="15097fe6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seaborn 라이브러리 불러오기</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b61920e3" class="cell" data-execution_count="3">
+<div id="4743601d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c7c2692f" class="cell" data-execution_count="4">
+<div id="b7fb79e5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 불러오기</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./data/05_data1.csv'</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -423,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="64e8e5f8" class="cell" data-execution_count="5">
+<div id="07282c00" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 라벨 매핑(label mapping)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># replace() 함수는 명시되지 않은 값을 그대로 유지하지만,</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># map() 함수는 명시되지 않은 값을 NaN으로 처리함</span></span>
@@ -501,7 +501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="637be891" class="cell" data-execution_count="6">
+<div id="12e5d4aa" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 집계 :성별 음주 여부별 빈도</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>drinking <span class="op">=</span> data6.groupby([<span class="st">'gender'</span>, <span class="st">'drinking'</span>])[<span class="st">'drinking'</span>].count()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>drinking <span class="op">=</span> drinking.to_frame(name<span class="op">=</span><span class="st">'count'</span>)</span>
@@ -551,7 +551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="e85f9c79" class="cell" data-execution_count="7">
+<div id="b0508ede" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 집계 :성별 흡연 상태별 빈도</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>smoking <span class="op">=</span> data6.groupby([<span class="st">'gender'</span>, <span class="st">'smoking'</span>])[<span class="st">'smoking'</span>].count()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>smoking <span class="op">=</span> smoking.to_frame(name<span class="op">=</span><span class="st">'count'</span>)</span>
@@ -613,7 +613,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="efc3eec1" class="cell" data-execution_count="8">
+<div id="bb05530c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 막대 그래프 : 성별에 따른 음주 여부, 흡연 상태 분포</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>area1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
@@ -635,7 +635,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="d7bc1c8f" class="cell" data-execution_count="9">
+<div id="47a90443" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 집계 :성별 흡연 상태별 평균 몸무게</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mean_weight <span class="op">=</span> data6.groupby([<span class="st">'gender'</span>, <span class="st">'smoking'</span>])[<span class="st">'weight'</span>].mean()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mean_weight <span class="op">=</span> mean_weight.to_frame(name<span class="op">=</span><span class="st">'mean'</span>)</span>
@@ -697,7 +697,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="78b27d65" class="cell" data-execution_count="10">
+<div id="eb3ca13c" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 막대 그래프 : 성별과 흡연 상태에 따른 평균 몸무게</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'gender'</span>, y<span class="op">=</span><span class="st">'mean'</span>, hue<span class="op">=</span><span class="st">'smoking'</span>, data<span class="op">=</span>mean_weight)</span>
@@ -715,7 +715,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="히스토그램" class="level2">
 <h2 class="anchored" data-anchor-id="히스토그램">6.3. 히스토그램</h2>
 <p><br></p>
-<div id="21192ea3" class="cell" data-execution_count="11">
+<div id="39a02c46" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 성별에 따라 데이터 분리</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>maledata <span class="op">=</span> data6.copy()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>maledata <span class="op">=</span> maledata.loc[maledata[<span class="st">'gender'</span>]<span class="op">==</span><span class="st">'M'</span>,:]</span>
@@ -723,7 +723,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>femaledata <span class="op">=</span> data6.copy()</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>femaledata <span class="op">=</span> femaledata.loc[femaledata[<span class="st">'gender'</span>]<span class="op">==</span><span class="st">'F'</span>,:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0e7dcf6e" class="cell" data-execution_count="12">
+<div id="06a923fa" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히스토그램 : 성별에 따른 몸무게 분포</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Weight'</span>)</span>
@@ -742,7 +742,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="97740ec2" class="cell" data-execution_count="13">
+<div id="dfec98ad" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히스토그램 &amp; 커널 밀도 추정(KDE) : 성별에 따른 허리둘레 분포</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Waist with KDE'</span>)</span>
@@ -766,7 +766,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="상자수염-그래프" class="level2">
 <h2 class="anchored" data-anchor-id="상자수염-그래프">6.4. 상자수염 그래프</h2>
 <p><br></p>
-<div id="c9edf20f" class="cell" data-execution_count="14">
+<div id="cfa74867" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상자수염 그래프 : 성별 및 음주 여부에 따른 몸무게 분포</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Weight By Gender and Drinking'</span>)</span>
@@ -780,7 +780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="8a0331df" class="cell" data-execution_count="15">
+<div id="cf17b205" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상자수염 그래프 : 성별 및 흡연 상태에 따른 몸무게 분포</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Weight By Gender and Smoking'</span>)</span>
@@ -794,6 +794,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p><br></p>
 </section>
 <section id="카운트-플롯count-plot" class="level2">
 <h2 class="anchored" data-anchor-id="카운트-플롯count-plot">6.5. 카운트 플롯(count plot)</h2>
@@ -802,7 +803,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>데이터의 범주별 분포를 직관적으로 파악할 수 있음</li>
 </ul>
 <p><br></p>
-<div id="953392b6" class="cell" data-execution_count="16">
+<div id="ca9d7a06" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 카운트 플롯1 : 음주 여부에 따른 성별 분포</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Gender and Drinking'</span>)</span>
@@ -817,7 +818,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="acc84478" class="cell" data-execution_count="17">
+<div id="339ee655" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 카운트 플롯2 : 흡연 상태에 따른 성별 분포</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Gender and Smoking'</span>)</span>
@@ -833,9 +834,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p><br></p>
 </section>
 <section id="히트맵heatmap" class="level2">
-<h2 class="anchored" data-anchor-id="히트맵heatmap">6.5. 히트맵(heatmap)</h2>
+<h2 class="anchored" data-anchor-id="히트맵heatmap">6.6. 히트맵(heatmap)</h2>
 <ul>
 <li>행과 열로 이루어진 2차원 행렬 데이터를 색상으로 시각화함</li>
 <li>두 범주형 변수 간의 관계나 상관관계를 나타낼 때 사용</li>
@@ -843,13 +845,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>예 : 상관행렬, 교차표 등</li>
 </ul>
 <p><br></p>
-<div id="f55db2af" class="cell" data-execution_count="18">
+<div id="0061e6f7" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 8개 건강 지표 선택</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>data8 <span class="op">=</span> data.copy()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>data8 <span class="op">=</span> data8.loc[:, [<span class="st">'height'</span>, <span class="st">'weight'</span>, <span class="st">'waist'</span>,</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'systolic'</span>, <span class="st">'diastolic'</span>, <span class="st">'cholesterol'</span>, <span class="st">'HDL'</span>, <span class="st">'LDL'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="62740330" class="cell" data-execution_count="19">
+<div id="db1ef1a2" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 히트맵 : 8개의 건강 지표 간 상관관계</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 상관계수는 -1에서 +1 사이의 값을 가지므로,</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># vmin=-1, vmax=1 옵션 설정으로 색상 범위의 균형을 맞춤</span></span>
@@ -900,7 +902,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p><br></p>
-<div id="65cafa2a" class="cell" data-execution_count="20">
+<div id="db6e3d7b" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 스트립 플롯 : 키와 몸무게, 성별의 관계</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Height vs Weight by Gender - Strip Plot'</span>)</span>
@@ -916,12 +918,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="b0973a19" class="cell" data-execution_count="21">
+<div id="ee9e0fc4" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리 : 남성, 여성 각각 100개 데이터 선택</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>maledata100 <span class="op">=</span> maledata.head(<span class="dv">100</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>femaledata100 <span class="op">=</span> femaledata.head(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="61be055c" class="cell" data-execution_count="22">
+<div id="a8ba1ce7" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 스웜 플롯 : 키와 몸무게, 성별의 관계</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Height vs Weight by Gender - Swarm Plot'</span>)</span>
@@ -937,7 +939,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="b190ecee" class="cell" data-execution_count="23">
+<div id="32cc35bf" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 바이올린 플롯1 : 성별 및 음주 여부별 몸무게(120 미만) 분포</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Weight By Gender and Drinking (Under 120kg)'</span>)</span>
@@ -951,7 +953,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="4d03e169" class="cell" data-execution_count="24">
+<div id="d3491833" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 바이올린 플롯2 : 성별 및 음주 여부별 허리둘레(150 미만) 분포</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Waist By Gender and Drinking (Under 150cm)'</span>)</span>
